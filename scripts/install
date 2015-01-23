@@ -1,0 +1,8 @@
+#!/bin/bash
+
+printf "Downloading dotfiles\n"
+git clone --recursive https://github.com/joncui1101/dotfiles.git ~/dotfiles
+
+~/dotfiles/scripts/create-symlinks
+
+printf "Installation complete\n"

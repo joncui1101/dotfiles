@@ -1,0 +1,16 @@
+#!/bin/bash
+
+cd ~/dotfiles
+
+printf "Updating repository\n"
+result=$(git fetch)
+if [ -n "$result" ]; then
+    git pull origin master
+fi
+
+printf "Updating submodules\n"
+git pull --recurse-submodules
+
+~/dotfiles/scripts/create-symlinks
+
+printf "Update complete\n"
