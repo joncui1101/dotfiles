@@ -41,7 +41,6 @@ Plugin 'tpope/vim-repeat'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'bkad/CamelCaseMotion'
 Plugin 'justinmk/vim-sneak'
-Plugin 'Lokaltog/vim-easymotion'
 
 " Tags
 Plugin 'majutsushi/tagbar'
@@ -234,6 +233,9 @@ set foldlevelstart=99 " Open all folds by default
 " Remove the default mode
 set noshowmode
 
+" Default to highlight search
+set hlsearch
+
 " Keep undo history across sessions, by storing in file.
 " Only works all the time.
 if has('persistent_undo')
@@ -264,10 +266,10 @@ function! ToggleCopy()
     endif
 endfunction
 
-" Next buffer
+" Next Buffer
 nnoremap <silent> <Leader>l :bn<CR>
 
-" Previous buffer
+" Previous Buffer
 nnoremap <silent> <Leader>h :bp<CR>
 
 "================================================================================
@@ -286,15 +288,6 @@ nnoremap <BS> :set hlsearch! hlsearch?<CR>
 
 " Remap colon to semicolon for go into command mode easier
 noremap ; :
-
-" Change into blackhole register to not clobber last yank
-" nnoremap c "_c
-
-" Delete into blackhole register to not clobber last yank
-" nnoremap d "_d
-
-" dd retains its original behavior of yanking one line
-" nnoremap dd dd
 
 " Q closes the window
 nnoremap Q :q<CR>
@@ -328,6 +321,9 @@ xmap <Tab> >
 
 " Unindent
 xmap <S-Tab> <
+
+" Swap deleted item with selected item
+vnoremap <C-X> <Esc>`.``gvP``P`
 
 "================================================================================
 " Airline Settings (AS)
@@ -379,20 +375,26 @@ let g:tagbar_show_linenumbers = 1
 " Syntastic Settings (SS)
 "================================================================================
 
-let g:syntastic_php_checkers=['php', 'phpcs', 'phpmd']
+let g:syntastic_php_checkers        = ['php', 'phpcs', 'phpmd']
 
-let g:syntastic_mode_map = { 'mode': 'active',
-                           \ 'active_filetypes': ['php'],
-                           \ 'passive_filetypes': [] }
+let g:syntastic_mode_map            = { 'mode': 'active',
+                                      \ 'active_filetypes': ['php'],
+                                      \ 'passive_filetypes': [] }
 
 " Mark syntax errors with :signs
-let g:syntastic_enable_signs=1
+let g:syntastic_enable_signs        = 1
 
 " Automatically jump to the error when saving the file
-let g:syntastic_auto_jump=0
+let g:syntastic_auto_jump           = 0
 
 " Show the error list automatically
-let g:syntastic_auto_loc_list=1
+let g:syntastic_auto_loc_list       = 1
+
+" Don't care about warnings
+let g:syntastic_quiet_messages      = { 'level': 'warnings'  }
+
+" Check syntax when buffers are first loaded
+let g:syntastic_check_on_open       = 1
 
 "================================================================================
 " Auto-Pairs Settings (APS)
@@ -404,23 +406,15 @@ let g:AutoPairsFlyMode = 1
 " Sneak Settings (SS)
 "================================================================================
 
-nmap \ <Plug>SneakNext
-xmap \ <Plug>VSneakNext
-nmap <BAR> <Plug>SneakPrevious
-xmap <BAR> <Plug>VSneakPrevious
+let g:sneak#steak = 1
+
+nmap <leader>s <Plug>SneakNext
+xmap <leader>s <Plug>SneakNext
+nmap <leader>S <Plug>SneakPrevious
+xmap <leader>S <Plug>SneakPrevious
 
 "================================================================================
-" EasyMotion Settings (ES)
-"================================================================================
-
-" Remap the leader key for easy motion
-let g:EasyMotion_leader_key = '<Leader>e'
-
-" Keys used for motion targets
-let g:EasyMotion_keys = 'asdfghjklqwertyuiopzxcvbnm1234567890'
-
-"================================================================================
-" UltiSnips Settings (US)
+" YouCompleteMe Settings (YS)
 "================================================================================
 
 let g:ycm_complete_in_comments_and_strings = 1
