@@ -6,6 +6,6 @@ if [[ ! -z $(grunt 2> /dev/null) ]]; then
     eval "$(grunt --completion=bash)"
 fi
 
-export DOTDIR="/Users/Jonathan/dotfiles"
+export DOTDIR=$HOME"/dotfiles"
 
 [ -n "$PS1" ] && source $DOTDIR/bash/bash_profile

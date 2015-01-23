@@ -1,4 +1,4 @@
-export DOTDIR="/Users/Jonathan/dotfiles"
+export DOTDIR=$HOME"/dotfiles"
 
 if [ ! -n "$ZSH" ]; then
     ZSH=$DOTDIR/zsh

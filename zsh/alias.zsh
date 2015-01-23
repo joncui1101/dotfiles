@@ -1,1 +1,1 @@
-source /Users/Jonathan/dotfiles/aliases/aliases.sh
+source $DOTDIR/aliases/aliases.sh
