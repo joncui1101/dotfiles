@@ -1,4 +1,6 @@
-export PATH=$(brew --prefix coreutils)/libexec/gnubin:$HOME/.cask/bin:/Users/jcui/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin
+export DOTDIR=$HOME"/dotfiles"
+
+export PATH=$(brew --prefix coreutils)/libexec/gnubin:$HOME/.cask/bin:$HOME/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin
 
 # Load the shell dotfiles
 [ -r $DOTDIR/bash/bash_prompt ] && source $DOTDIR/bash/bash_prompt
