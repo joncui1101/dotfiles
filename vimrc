@@ -53,7 +53,10 @@ Plugin 'bling/vim-bufferline'
 Plugin 'chriskempson/base16-vim'
 
 " Save Vim Sessions
-Plugin 'tpope/vim-obsession'
+" Plugin 'tpope/vim-obsession'
+
+" Comment Plugin
+Plugin 'tpope/vim-commentary'
 
 call vundle#end()
 
