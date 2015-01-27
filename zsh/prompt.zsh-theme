@@ -23,13 +23,17 @@ function preexec {
         git*)
         __EXECUTED_GIT_COMMAND=1
         ;;
+        v*)
+        __EXECUTED_VIM=1
+        ;;
     esac
 }
 
 function precmd {
-    if [ -n "$__EXECUTED_GIT_COMMAND" ] || [ -z "$GIT_BRANCH" ]; then
+    if [ -n "$__EXECUTED_GIT_COMMAND" ] || [ -n "$__EXECUTED_VIM" ] || [ -z "$GIT_BRANCH" ]; then
         update_current_git_vars
         unset __EXECUTED_GIT_COMMAND
+        unset __EXECUTED_VIM
     fi
 }
 
