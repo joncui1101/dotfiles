@@ -80,10 +80,10 @@ git_info() {
         fi
         STATUS="$BRANCH_COLOR$STATUS%{$reset_color%}$SYMBOLS"
         if [[ -n "$GIT_AHEAD" ]]; then
-            STATUS="$STATUS %{${GREEN}%}+$GIT_AHEAD%{$reset_color%}"
+            STATUS="$STATUS%{${GREEN}%}[+$GIT_AHEAD]%{$reset_color%}"
         fi
         if [[ -n "$GIT_BEHIND" ]]; then
-            STATUS="$STATUS %{${RED}%}-$GIT_BEHIND%{$reset_color%}"
+            STATUS="$STATUS%{${RED}%}[-$GIT_BEHIND]%{$reset_color%}"
         fi
 
         echo " on $STATUS%{$reset_color%}"
