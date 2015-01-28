@@ -275,6 +275,12 @@ nnoremap <silent> <Leader>l :bn<CR>
 " Previous Buffer
 nnoremap <silent> <Leader>h :bp<CR>
 
+" First Buffer
+nnoremap <silent> <Leader>k :bf<CR>
+
+" Last Buffer
+nnoremap <silent> <Leader>j :bl<CR>
+
 "================================================================================
 " Normal Mode Key Mappings (NK)
 "================================================================================
@@ -294,9 +300,6 @@ noremap ; :
 
 " Q closes the window
 nnoremap Q :q<CR>
-
-" <Leader>1: Toggle between paste mode
-nnoremap <silent> <Leader>1 :set paste!<cr>
 
 "================================================================================
 " Insert Mode Key Mappings (IK)
