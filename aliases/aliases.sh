@@ -3,6 +3,9 @@ source $DOTDIR/functions.sh
 source $DOTDIR/aliases/dir_aliases.sh
 source $DOTDIR/aliases/vim_aliases.sh
 source $DOTDIR/aliases/git_aliases.sh
+if [[ -a $HOME/work_aliases.sh ]]; then
+    source $HOME/work_aliases.sh
+fi
 
 # Update Dotfiles
 alias upvim='~/dotfiles/scripts/update'
