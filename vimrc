@@ -33,7 +33,7 @@ Plugin 'scrooloose/syntastic'
 Plugin 'tpope/vim-fugitive'
 
 " Snippets
-Plugin 'SirVer/ultisnips'
+" Plugin 'SirVer/ultisnips'
 
 " Text Objects
 Plugin 'tpope/vim-surround'

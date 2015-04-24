@@ -4,6 +4,7 @@ autoload -U promptinit && promptinit
 export LANG="en_US.UTF-8"
 export LANGUAGE=$LANG
 export LC_ALL=$LANG
+export TERM=xterm-256color
 
 # history
 setopt APPEND_HISTORY
