@@ -43,7 +43,7 @@ Plugin 'bkad/CamelCaseMotion'
 Plugin 'justinmk/vim-sneak'
 
 " Tags
-Plugin 'majutsushi/tagbar'
+" Plugin 'majutsushi/tagbar'
 
 " Status line
 Plugin 'bling/vim-airline'
@@ -51,9 +51,6 @@ Plugin 'bling/vim-bufferline'
 
 " Color Themes
 Plugin 'chriskempson/base16-vim'
-
-" Save Vim Sessions
-" Plugin 'tpope/vim-obsession'
 
 " Comment Plugin
 Plugin 'tpope/vim-commentary'
