@@ -5,6 +5,7 @@
 set nocompatible
 set termencoding=utf-8
 set term=xterm-256color
+let base16colorspace=256  " Access colors present in 256 colorspace"
 
 " 256bit terminal
 set t_Co=256
