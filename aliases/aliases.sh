@@ -15,7 +15,7 @@ alias rm='rm -i '
 alias o='open '
 alias oo='open .'
 alias ks=kill-ssh
-alias sb=source-config
+alias so=source-config
 alias cl='clear'
 
 # Push and pop directories on directory stack

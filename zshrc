@@ -8,6 +8,10 @@ export TERM=xterm-256color
 BASE16_SHELL="$HOME/dotfiles/color-schemes/shell/base16-flat.dark.sh"
 [[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
 
+# Vi mode
+bindkey -v
+bindkey -M viins 'jj' vi-cmd-mode
+
 # history
 setopt APPEND_HISTORY
 # for sharing history between zsh processes
