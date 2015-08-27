@@ -10,12 +10,11 @@ let base16colorspace=256  " Access colors present in 256 colorspace"
 " 256bit terminal
 set t_Co=256
 
-
 " Needed for vundle, will be turned on after vundle inits
 filetype off
 
 set rtp+=~/dotfiles/vim/bundle/vundle/
-call vundle#begin()
+call vundle#begin('$HOME/dotfiles/vim/bundle')
 
 " Let Vundle manage Vundle
 Plugin 'gmarik/vundle'
