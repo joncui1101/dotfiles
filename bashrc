@@ -1,10 +1,8 @@
-export PLATFORM=`uname`
-
-if [[ $PLATFORM == 'Darwin' && ! -z $(grunt 2> /dev/null) ]]; then
+if [[ $OSTYPE == *darwin* && ! -z $(grunt 2> /dev/null) ]]; then
     eval "$(grunt --completion=bash)"
 fi
 
-if [[ $PLATFORM == 'Linux' ]]; then
+if [[ $OSTYPE == *linux* ]]; then
     if ! pgrep ssh-agent > /dev/null; then
         ssh-agent > ~/.ssh-agent-thing
     fi

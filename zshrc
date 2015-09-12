@@ -4,7 +4,11 @@ autoload -U promptinit && promptinit
 export LANG="en_US.UTF-8"
 export LANGUAGE=$LANG
 export LC_ALL=$LANG
-export TERM=xterm-256color
+if [[ $OSTYPE == *linux* ]]; then
+    export TERM=rxvt-unicode-256color
+else
+    export TERM=xterm-256color
+fi
 BASE16_SHELL="$HOME/dotfiles/color-schemes/shell/base16-flat.dark.sh"
 [[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
 

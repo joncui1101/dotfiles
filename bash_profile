@@ -1,6 +1,6 @@
 export DOTDIR=$HOME"/dotfiles"
 
-if [[ $PLATFORM == 'Darwin' ]]; then
+if [[ $OSTYPE == *darwin* ]]; then
     export PATH=$(brew --prefix coreutils)/libexec/gnubin:$HOME/.cask/bin
 
     # If possible, add tab completion for many more commands
@@ -12,7 +12,7 @@ fi
 export PATH=$HOME/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin
 
 # Start startx
-[[ $PLATFORM == 'Linux' && -z $DISPLAY && $XDG_VTNR -eq 1 ]] && exec startx
+[[ $OSTYPE == *linux* && -z $DISPLAY && $XDG_VTNR -eq 1 ]] && exec startx
 
 # Load the shell dotfiles
 [ -r $DOTDIR/bash/bash_prompt ] && source $DOTDIR/bash/bash_prompt
