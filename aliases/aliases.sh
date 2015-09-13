@@ -7,6 +7,12 @@ if [[ -a $HOME/work_aliases.sh ]]; then
     source $HOME/work_aliases.sh
 fi
 
+if [[ $OSTYPE == *linux* ]]; then
+    source $DOTDIR/aliases/arch_aliases.sh
+else
+    source $DOTDIR/aliases/mac_aliases.sh
+fi
+
 # Update Dotfiles
 alias upvim='~/dotfiles/scripts/update'
 
@@ -38,20 +44,6 @@ export LS_COLORS='no=00:fi=00:di=00;34:ln=01;36:pi=40;33:so=01;35:do=01;35:bd=40
 # Enable aliases to be sudo'ed
 alias sudo='sudo '
 
-# Update homebrew
-alias upbrew='brew update; brew upgrade; brew cleanup;'
-
-# Recursively delete `.DS_STORE` files
-alias cleanup='find . -type f -name "*.DS_Store" -ls -delete'
-
-# Empty the Trash on all mounted volumes and the main HDD
-# Also, clear Apple's System Logs to improve shell startup speed
-alias emptytrash='sudo rm -rfv /Volumes/*/.Trashes; sudo rm -rfv ~/.Trash; sudo rm -rfv /private/var/log/asl/*.asl'
-
-# Show/hide hidden files in Finder
-alias show='defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder'
-alias hide='defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder'
-
 # Editor Aliases
 alias emacs='emacs '
 alias v='vim '
@@ -66,6 +58,3 @@ alias history='fc -il 1'
 # Show top 5 cpu intensive processes
 alias pcf='ps aux | sort -rk 3,3 | head -n 6'
 alias pmf='ps aux | sort -rk 4,4 | head -n 6'
-
-# Update Xresources
-alias upx='xrdb -merge /home/jhcui/.Xresources'
