@@ -1,6 +1,6 @@
 #!/bin/bash
 printf "Creating symlinks\n"
-for file in {vim,vimrc,bashrc,bash_profile,tmux.conf,zshrc,zshenv}; do
+for file in {vim,vimrc,bashrc,bash_profile,tmux.conf,zshrc,zshenv,zprofile}; do
     if [ ! -L ~/."$file" ]; then
         printf " - Creating symlink for $file\n"
         ln -s ~/dotfiles/"$file" ~/."$file"
