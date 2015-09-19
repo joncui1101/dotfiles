@@ -6,6 +6,7 @@ export LANGUAGE=$LANG
 export LC_ALL=$LANG
 if [[ $OSTYPE == *linux* ]]; then
     export TERM=rxvt-unicode-256color
+    export SUDO_EDITOR=rvim
 else
     export TERM=xterm-256color
 fi
