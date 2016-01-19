@@ -20,7 +20,7 @@ call vundle#begin('$HOME/dotfiles/vim/bundle')
 Plugin 'gmarik/vundle'
 
 " Fuzzy search
-Plugin 'kien/ctrlp.vim'
+Plugin 'ctrlpvim/ctrlp.vim'
 
 " Code completion
 Plugin 'ervandew/supertab'
@@ -176,7 +176,11 @@ set noswapfile
 
 " Text display settings
 set autoindent
-set nowrap
+set wrap
+set linebreak
+set nolist
+set textwidth=0
+set wrapmargin=0
 
 " Min # of screen lines above and below cursor
 set scrolloff=10
