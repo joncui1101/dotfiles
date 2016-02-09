@@ -30,3 +30,4 @@ for config_file ($ZSH/*.zsh*); do
     source $config_file
 done
 unset $config_file
+export PATH="/usr/local/sbin:$PATH"

@@ -55,6 +55,9 @@ Plugin 'chriskempson/base16-vim'
 " Comment Plugin
 Plugin 'tpope/vim-commentary'
 
+" Emmet Plugin
+Plugin 'mattn/emmet-vim'
+
 call vundle#end()
 
 "================================================================================
