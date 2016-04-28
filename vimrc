@@ -24,7 +24,7 @@ Plugin 'ctrlpvim/ctrlp.vim'
 
 " Code completion
 Plugin 'ervandew/supertab'
-Plugin 'Valloric/YouCompleteMe'
+" Plugin 'Valloric/YouCompleteMe'
 
 " Syntax checker
 Plugin 'scrooloose/syntastic'
