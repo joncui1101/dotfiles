@@ -305,6 +305,9 @@ noremap ; :
 " Q closes the window
 nnoremap Q :q<CR>
 
+" <Leader>1: Toggle between paste mode
+nnoremap <silent> <Leader>1 :set paste!<cr>
+
 "================================================================================
 " Insert Mode Key Mappings (IK)
 "================================================================================
@@ -319,12 +322,6 @@ inoremap jj <Esc>
 " Make < > shifts keep selection
 xnoremap < <gv
 xnoremap > >gv
-
-" Paste in visual mode should not replace register with deleted text
-" xnoremap p "_dP
-
-" Delete into blackhold register to not clobber last yank
-" xnoremap d "_d
 
 " Indent
 xmap <Tab> >
@@ -446,3 +443,9 @@ autocmd vimrc BufEnter *.snippets setf snippets
 
 " Use actual tabs instead of spaces in snippet files
 autocmd vimrc FileType snippets set noexpandtab
+
+"================================================================================
+" CamelCaseMotion Settings (CCMS)
+"================================================================================
+
+call camelcasemotion#CreateMotionMappings('<leader>')
