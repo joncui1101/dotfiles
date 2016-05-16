@@ -3,9 +3,10 @@ source $DOTDIR/functions.sh
 source $DOTDIR/aliases/dir_aliases.sh
 source $DOTDIR/aliases/vim_aliases.sh
 source $DOTDIR/aliases/git_aliases.sh
-if [[ -a $HOME/work_aliases.sh ]]; then
-    source $HOME/work_aliases.sh
+if [[ -d $HOME/work_dot ]]; then
+    source $HOME/work_dot/*
 fi
+
 
 if [[ $OSTYPE == *linux* ]]; then
     source $DOTDIR/aliases/arch_aliases.sh

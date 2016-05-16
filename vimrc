@@ -46,7 +46,8 @@ Plugin 'justinmk/vim-sneak'
 " Plugin 'majutsushi/tagbar'
 
 " Status line
-Plugin 'bling/vim-airline'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 Plugin 'bling/vim-bufferline'
 
 " Color Themes
@@ -81,7 +82,6 @@ endif
 "================================================================================
 
 set background=dark
-" colorscheme solarized
 colorscheme base16-flat
 
 "================================================================================
@@ -108,7 +108,7 @@ augroup MyAutoCmd
 augroup END
 
 " Reload vimrc when edited
-autocmd MyAutoCmd BufWritePost .vimrc source ~/.vimrc
+autocmd MyAutoCmd BufWritePost .vimrc nested :source ~/.vimrc
 
 augroup MyAutoCmd
     autocmd FileWritePre   * :retab
@@ -336,10 +336,6 @@ vnoremap <C-X> <Esc>`.``gvP``P`
 " Airline Settings (AS)
 "================================================================================
 
-if !exists('g:airline_symbols')
-    let g:airline_symbols = {}
-endif
-
 " Enable enhanced tabline
 let g:airline#extensions#tabline#enabled = 1
 
@@ -347,11 +343,6 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#bufferline#enabled = 1
 
 let g:airline_powerline_fonts = 1
-let g:airline_left_sep = ''
-let g:airline_right_sep = ''
-let g:airline_symbols.branch = ''
-let g:airline_symbols.readonly = ''
-let g:airline_symbols.linenr = ''
 
 "================================================================================
 " Bufferline Settings (BS)

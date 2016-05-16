@@ -3,6 +3,6 @@
 printf "Downloading dotfiles\n"
 git clone --recursive https://github.com/joncui/dotfiles.git ~/dotfiles
 
-~/dotfiles/scripts/create-symlinks
+~/dotfiles/bin/create-symlinks
 
 printf "Installation complete\n"
