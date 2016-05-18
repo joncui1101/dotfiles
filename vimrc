@@ -22,9 +22,8 @@ Plugin 'gmarik/vundle'
 " Fuzzy search
 Plugin 'ctrlpvim/ctrlp.vim'
 
-" Code completion
-Plugin 'ervandew/supertab'
-" Plugin 'Valloric/YouCompleteMe'
+" Code Completion
+Plugin 'Valloric/YouCompleteMe'
 
 " Syntax checker
 Plugin 'scrooloose/syntastic'
@@ -32,13 +31,9 @@ Plugin 'scrooloose/syntastic'
 " Git
 Plugin 'tpope/vim-fugitive'
 
-" Snippets
-" Plugin 'SirVer/ultisnips'
-
 " Text Objects
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-repeat'
-Plugin 'jiangmiao/auto-pairs'
 Plugin 'bkad/CamelCaseMotion'
 Plugin 'justinmk/vim-sneak'
 
@@ -58,6 +53,9 @@ Plugin 'tpope/vim-commentary'
 
 " Emmet Plugin
 Plugin 'mattn/emmet-vim'
+
+" Search
+Plugin 'rking/ag.vim'
 
 call vundle#end()
 
