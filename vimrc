@@ -438,3 +438,8 @@ autocmd vimrc FileType snippets set noexpandtab
 "================================================================================
 
 call camelcasemotion#CreateMotionMappings('<leader>')
+
+"================================================================================
+" CtrlP (CPS)
+"================================================================================
+let g:ctrlp_working_path_mode = 'aw'

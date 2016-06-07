@@ -51,7 +51,7 @@ function update_current_git_vars() {
     unset GIT_BEHIND
 
     git rev-parse --is-inside-work-tree &>/dev/null || return
-    GIT_BRANCH=$(command git symbolic-ref HEAD 2> /dev/null | awk -F'/' '{print $3}')
+    GIT_BRANCH=$(command git symbolic-ref --short HEAD 2> /dev/null)
     GIT_CHANGED=$(command git diff --name-status | grep -v "^U" | wc -l | tr -d ' ')
     GIT_STAGED=$(command git diff --staged --name-status | grep -v "^U" | wc -l | tr -d ' ')
     GIT_CONFLICT=$(command git diff --name-only --diff-filter=U | wc -l | tr -d ' ')
