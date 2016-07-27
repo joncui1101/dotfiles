@@ -14,3 +14,4 @@ zstyle ':completion:*:*:*:*:*' menu select
 
 # activate approximate completion, but only after regular completion (_complete)
 zstyle ':completion:::::' completer _complete _approximate
+source /Users/jonathan.cui/tools/arcanist/resources/shell/bash-completion

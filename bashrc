@@ -12,3 +12,5 @@ if [[ $OSTYPE == *linux* ]]; then
 fi
 
 [ -n "$PS1" ] && source $HOME/dotfiles/bash_profile
+
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting

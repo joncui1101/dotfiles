@@ -1,5 +1,5 @@
 # Git aliases
-
+alias g='git '
 alias gm='git merge origin/master --no-ff --no-commit'
 alias go='git checkout '
 alias gcf='git checkout -- '
@@ -10,7 +10,7 @@ alias gbr='git branch -r '
 alias gc='git commit '
 alias gca='git commit -a '
 alias gdn='git diff -w --numstat '
-alias gf='git fetch --all -p '
+alias gf='git fetch -p '
 alias gp='git push origin '
 alias gu='git pull origin '
 alias gt='git tag '

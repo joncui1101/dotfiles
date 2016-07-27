@@ -12,7 +12,9 @@ else
     export WORKON_HOME=$HOME/.virtualenvs
     export PROJECT_HOME=$HOME/Repos
     source /usr/local/bin/virtualenvwrapper_lazy.sh
+    source ~/.profile
 fi
+
 BASE16_SHELL="$HOME/dotfiles/color-schemes/shell/base16-flat.dark.sh"
 [[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
 
@@ -32,3 +34,5 @@ for config_file ($ZSH/*.zsh*); do
     source $config_file
 done
 unset $config_file
+
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting

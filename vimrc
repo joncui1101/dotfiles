@@ -57,6 +57,9 @@ Plugin 'mattn/emmet-vim'
 " Search
 Plugin 'rking/ag.vim'
 
+" Close quotes, parens, brackets, etc
+Plugin 'Raimondi/delimitMate'
+
 call vundle#end()
 
 "================================================================================
@@ -443,3 +446,8 @@ call camelcasemotion#CreateMotionMappings('<leader>')
 " CtrlP (CPS)
 "================================================================================
 let g:ctrlp_working_path_mode = 'aw'
+
+"================================================================================
+" delimitMate Settings (dMS)
+"================================================================================
+let delimitMate_expand_cr = 1
