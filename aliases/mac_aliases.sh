@@ -9,5 +9,5 @@ alias cleanup='find . -type f -name "*.DS_Store" -ls -delete'
 alias emptytrash='sudo rm -rfv /Volumes/*/.Trashes; sudo rm -rfv ~/.Trash; sudo rm -rfv /private/var/log/asl/*.asl'
 
 # Show/hide hidden files in Finder
-alias show='defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder'
-alias hide='defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder'
+alias showF='defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder'
+alias hideF='defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder'
