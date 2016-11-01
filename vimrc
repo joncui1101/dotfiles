@@ -158,7 +158,7 @@ set laststatus=2
 " Command-line auto completion
 set wildmenu
 set wildmode=list:longest,full " Complete longest common string, then each full match
-set wildignore=*/.DS_Store,*/.git/*,*/.idea/* " Stuff to ignore when tab completing
+set wildignore=*/.DS_Store,*/.git/*,*/.idea/*,*/node_modules/* " Stuff to ignore when tab completing
 
 " Show the position on the bottom right
 set ruler
