@@ -4,7 +4,9 @@
 
 set nocompatible
 set termencoding=utf-8
-set term=xterm-256color
+if !has('nvim')
+    set term=xterm-256color
+endif
 let base16colorspace=256  " Access colors present in 256 colorspace"
 
 " 256bit terminal

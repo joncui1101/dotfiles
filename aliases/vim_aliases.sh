@@ -1,7 +1,7 @@
 # Vim Aliases
 
-alias vrc='vim ~/dotfiles/vimrc'
-alias brc='vim ~/dotfiles/bashrc'
-alias bp='vim ~/dotfiles/bash_prompt'
-alias bpf='vim ~/dotfiles/bash_profile'
-alias va='vim ~/dotfiles/aliases/aliases'
+alias vrc='v ~/dotfiles/vimrc'
+alias brc='v ~/dotfiles/bashrc'
+alias bp='v ~/dotfiles/bash_prompt'
+alias bpf='v ~/dotfiles/bash_profile'
+alias va='v ~/dotfiles/aliases/aliases'
