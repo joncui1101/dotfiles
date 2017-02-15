@@ -1,5 +1,6 @@
 export DOTDIR=$HOME"/dotfiles"
-export PATH="/usr/local/sbin:/usr/local/bin:$PATH"
+export GOPATH=$HOME/go
+export PATH="/usr/local/sbin:/usr/local/bin:$PATH:$GOPATH/bin:/usr/local/opt/go/libexec/bin"
 
 if [ ! -n "$ZSH" ]; then
     ZSH=$DOTDIR/zsh

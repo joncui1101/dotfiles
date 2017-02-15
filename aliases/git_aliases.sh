@@ -1,9 +1,9 @@
 # Git aliases
 alias g='git '
 alias gm='git merge origin/master --no-ff --no-commit'
-alias go='git checkout '
-alias gcb='go -b '
-alias gcf='go -- '
+alias gco='git checkout '
+alias gcb='gco -b '
+alias gcf='gco -- '
 alias gs='git st -sb'
 alias ga='git add '
 alias gb='git branch '

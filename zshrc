@@ -33,6 +33,6 @@ setopt HIST_IGNORE_DUPS
 for config_file ($ZSH/*.zsh*); do
     source $config_file
 done
-unset $config_file
+unset config_file
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
