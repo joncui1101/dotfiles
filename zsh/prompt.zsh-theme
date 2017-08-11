@@ -20,7 +20,7 @@ function getUsername {
 ## Function definitions
 function preexec {
     case "$2" in
-        git*)
+        g*)
         __EXECUTED_GIT_COMMAND=1
         ;;
         v*)

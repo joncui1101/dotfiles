@@ -28,3 +28,4 @@ done
 unset config_file
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+export PATH="/usr/local/opt/node@6/bin:$PATH"
