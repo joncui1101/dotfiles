@@ -1,0 +1,21 @@
+[user]
+    name = Jonathan Cui
+    email = jonathan.cui@hulu.com
+[core]
+    editor = /usr/local/bin/nvim
+[pull]
+    rebase = preserve
+[merge]
+    ff = false
+    tool = sublime
+[alias]
+    fe = fetch -p
+    co = checkout
+    ci = commit
+    st = status
+    br = branch
+    hist = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue) <%an>%Creset' --abbrev-commit
+    rbc = rebase --continue
+[mergetool "sublime"]
+    cmd = subl -w $MERGED
+    trustExitCode = false

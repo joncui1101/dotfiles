@@ -1,0 +1,345 @@
+"================================================================================
+" Plugin manager
+"================================================================================
+
+let base16colorspace=256  " Access colors present in 256 colorspace"
+
+let g:loaded_python_provider = 1
+let g:python3_host_prog = '/usr/local/bin/python3'
+
+call plug#begin('~/.local/share/nvim/plugged')
+
+" Fuzzy search
+Plug 'ctrlpvim/ctrlp.vim'
+
+" Code Completion
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'Shougo/neco-vim'
+Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
+" Plug 'Shougo/neopairs.vim'
+
+" Syntax checker
+Plug 'scrooloose/syntastic'
+
+" Git
+Plug 'tpope/vim-fugitive'
+
+" Text Objects
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
+Plug 'bkad/CamelCaseMotion'
+Plug 'justinmk/vim-sneak'
+
+" Status line
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'bling/vim-bufferline'
+
+" Color Themes
+Plug 'chriskempson/base16-vim'
+
+" Comment Plugin
+Plug 'tpope/vim-commentary'
+
+" Emmet Plugin
+Plug 'mattn/emmet-vim'
+
+" Search
+Plug 'rking/ag.vim'
+
+call plug#end()
+
+"================================================================================
+" Custom Functions (CF)
+"================================================================================
+
+" Removes trailing spaces
+function! TrimWhiteSpace()
+    if &modifiable
+        %s/\s\+$//e
+    endif
+endfunction
+
+" Clear highlighting
+if maparg('<C-L>', 'n') ==# ''
+    nnoremap <silent> <C-L> :nohlsearch<CR><C-L>
+endif
+
+"================================================================================
+" Colorscheme (CS)
+"================================================================================
+
+set background=dark
+colorscheme base16-flat
+
+"================================================================================
+" Auto Commands (AC)
+"================================================================================
+
+autocmd BufEnter * set formatoptions-=ro
+
+" Set augroup
+augroup MyAutoCmd
+    autocmd!
+augroup END
+
+augroup initvim
+    autocmd!
+augroup END
+
+" Delete trailing whitespace
+augroup MyAutoCmd
+    autocmd FileWritePre   * :call TrimWhiteSpace()
+    autocmd FileAppendPre  * :call TrimWhiteSpace()
+    autocmd FilterWritePre * :call TrimWhiteSpace()
+    autocmd BufWritePre    * :call TrimWhiteSpace()
+augroup END
+
+" Reload init.vim when edited
+autocmd MyAutoCmd BufWritePost init.vim nested :source ~/.config/nvim/init.vim
+
+augroup MyAutoCmd
+    autocmd FileWritePre   * :retab
+    autocmd FileAppendPre  * :retab
+    autocmd FilterWritePre * :retab
+    autocmd BufWritePre    * :retab
+augroup END
+
+"================================================================================
+" General Settings (GS)
+"================================================================================
+
+" Enable mouse
+set mouse=a
+
+" Allow changing buffer without saving it first
+set hidden
+
+" Give one virtual space at the end of line
+set virtualedit=onemore
+
+" Command-line auto completion
+set wildmenu
+set wildmode=list:longest,full " Complete longest common string, then each full match
+set wildignore=*/.DS_Store,*/.git/*,*/.idea/*,*/node_modules/* " Stuff to ignore when tab completing
+
+" Case insensitive search
+set ignorecase
+set smartcase
+
+" Turn backup off
+set nobackup
+set nowritebackup
+set noswapfile
+
+" Break line at character specified by 'breakat'
+set linebreak
+
+" Min # of screen lines above and below cursor
+set scrolloff=10
+
+" Min # of screen columns to keep to the left and right of the cursor
+set sidescrolloff=20
+
+" Min width of number column
+set numberwidth=1
+
+" Auto complete setting
+set completeopt=longest,menuone
+
+" Always show tabs
+set showtabline=2
+
+" No annoying sound on errors
+set vb
+
+" Show line number
+set number
+
+" Show relative line number
+set relativenumber
+
+" Use spaces instead of tabs
+set expandtab
+
+" 1 tab == 4 spaces
+set shiftwidth=4
+set tabstop=4
+let softtabstop=4
+
+" Set to auto write file
+set autowriteall
+
+" Match braces/brackets/etc
+set showmatch
+
+" Round indent to multiple of shiftwidth
+set shiftround
+
+set foldenable " Enable folds by default
+set foldmethod=syntax " Fold via syntax of files
+set foldlevelstart=99 " Open all folds by default
+
+" Remove the default mode
+set noshowmode
+
+" Keep undo history across sessions, by storing in file.
+" Only works all the time.
+if has('persistent_undo')
+    silent !mkdir ~/.vimbackups > /dev/null 2>&1
+    set undodir=~/.vimbackups
+    set undofile
+endif
+
+"================================================================================
+" Leader Key Mappings (LK)
+"================================================================================
+
+" Map leader to comma
+let mapleader = ","
+
+" Toggle between paste mode; useful for pasting large items
+nnoremap <silent> <Leader>1 :set paste!<CR>
+
+" Toggle copy mode; useful for copying text from files
+nnoremap <silent> <Leader>2 :call ToggleCopy()<CR>
+function! ToggleCopy()
+    if &mouse == 'a'
+        set mouse=
+        set nonu
+    else
+        set mouse=a
+        set nu
+    endif
+endfunction
+
+" Next Buffer
+nnoremap <silent> <Leader>l :bn<CR>
+
+" Previous Buffer
+nnoremap <silent> <Leader>h :bp<CR>
+
+" First Buffer
+nnoremap <silent> <Leader>k :bf<CR>
+
+" Last Buffer
+nnoremap <silent> <Leader>j :bl<CR>
+
+"================================================================================
+" Normal Mode Key Mappings (NK)
+"================================================================================
+
+" Inserts a new line in normal mode
+nmap <S-Enter> O<Esc>
+nmap <CR> o<Esc>
+
+" Inserts new line at cursor (undoes what J does)
+nnoremap K i<CR><Esc>h
+
+" Backspace: toggle search highlight
+nnoremap <BS> :set hlsearch! hlsearch?<CR>
+
+" Remap colon to semicolon for go into command mode easier
+noremap ; :
+
+" Q closes the window
+nnoremap Q :q<CR>
+
+" <Leader>1: Toggle between paste mode
+nnoremap <silent> <Leader>1 :set paste!<cr>
+
+"================================================================================
+" Insert Mode Key Mappings (IK)
+"================================================================================
+
+" Escape from insert mode
+inoremap jj <Esc>
+
+"================================================================================
+" Visual Mode Key Mappings (VK)
+"================================================================================
+
+" Make < > shifts keep selection
+xnoremap < <gv
+xnoremap > >gv
+
+" Indent
+xmap <Tab> >
+
+" Unindent
+xmap <S-Tab> <
+
+" Swap deleted item with selected item
+vnoremap <C-X> <Esc>`.``gvP``P`
+
+"================================================================================
+" Airline Settings (AS)
+"================================================================================
+
+" Enable enhanced tabline
+let g:airline#extensions#tabline#enabled = 1
+
+" Enable bufferline integration
+let g:airline#extensions#bufferline#enabled = 1
+
+let g:airline_powerline_fonts = 1
+
+"================================================================================
+" Bufferline Settings (BS)
+"================================================================================
+
+let g:bufferline_echo = 0
+
+"================================================================================
+" Syntastic Settings (SS)
+"================================================================================
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1 " Show the error list automatically
+let g:syntastic_check_on_open = 1 " Check syntax when buffers are first loaded
+let g:syntastic_check_on_wq = 0 " Disable check for :wq, :x, etc
+let g:syntastic_enable_signs        = 1 " Mark syntax errors with :signs
+let g:syntastic_auto_jump           = 0 " Don't automatically jump to the error when saving the file
+
+" Don't care about warnings
+let g:syntastic_quiet_messages      = { 'level': 'warnings'  }
+
+"================================================================================
+" Sneak Settings (SS)
+"================================================================================
+
+let g:sneak#steak = 1
+
+nmap <leader>s <Plug>SneakNext
+xmap <leader>s <Plug>SneakNext
+nmap <leader>S <Plug>SneakPrevious
+xmap <leader>S <Plug>SneakPrevious
+
+"================================================================================
+" CamelCaseMotion Settings (CCMS)
+"================================================================================
+
+call camelcasemotion#CreateMotionMappings('<leader>')
+
+"================================================================================
+" CtrlP (CPS)
+"================================================================================
+let g:ctrlp_working_path_mode = 'aw'
+
+"================================================================================
+" deoplete Settings (dS)
+"================================================================================
+
+" Use deoplete.
+let g:deoplete#enable_at_startup = 1
+
+" Use smartcase.
+let g:deoplete#enable_smart_case = 1
+
+" Ternjs Config
+let g:tern_request_timeout = 1
+let g:tern_show_signature_in_pum = '0'
+
+let g:tern#filetypes = [ 'jsx', 'javascript.jsx', 'vue' ]
+
+let g:neopairs#enable = 1
