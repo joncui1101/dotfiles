@@ -19,7 +19,7 @@ Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
 " Plug 'Shougo/neopairs.vim'
 
 " Syntax checker
-Plug 'scrooloose/syntastic'
+Plug 'w0rp/ale'
 
 " Git
 Plug 'tpope/vim-fugitive'
@@ -291,20 +291,6 @@ let g:airline_powerline_fonts = 1
 let g:bufferline_echo = 0
 
 "================================================================================
-" Syntastic Settings (SS)
-"================================================================================
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1 " Show the error list automatically
-let g:syntastic_check_on_open = 1 " Check syntax when buffers are first loaded
-let g:syntastic_check_on_wq = 0 " Disable check for :wq, :x, etc
-let g:syntastic_enable_signs        = 1 " Mark syntax errors with :signs
-let g:syntastic_auto_jump           = 0 " Don't automatically jump to the error when saving the file
-
-" Don't care about warnings
-let g:syntastic_quiet_messages      = { 'level': 'warnings'  }
-
-"================================================================================
 " Sneak Settings (SS)
 "================================================================================
 
@@ -343,3 +329,25 @@ let g:tern_show_signature_in_pum = '0'
 let g:tern#filetypes = [ 'jsx', 'javascript.jsx', 'vue' ]
 
 let g:neopairs#enable = 1
+
+"================================================================================
+" Ale (AleS)
+"================================================================================
+
+" Customize error and warning string.
+let g:ale_echo_msg_error_str = 'E'
+let g:ale_echo_msg_warning_str = 'W'
+
+" Set message format.
+let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+
+" Never lint on text change.
+let g:ale_lint_on_text_changed = 'never'
+
+" Disable lint on enter.
+let g:ale_lint_on_enter = 0
+
+" Whitelist linters.
+let g:ale_linters = {
+\   'javascript': ['eslint'],
+\}
