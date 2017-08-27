@@ -1,22 +1,3 @@
-function getHost {
-    prefix=" at %{${CYAN%}%}"
-    if [[ ! -z $HOSTNAME ]]; then
-        echo "$prefix$HOSTNAME[4]$HOSTNAME[6,12]";
-    elif [[ $HOST = "jcui-pro" ]]; then
-        echo "${prefix}mbp"
-    else
-        echo "";
-    fi
-}
-
-function getUsername {
-    if [[ $USERNAME == "jcui" ]]; then
-        echo "jon"
-    else
-        echo $USERNAME
-    fi
-}
-
 ## Function definitions
 function preexec {
     case "$2" in
@@ -96,7 +77,7 @@ ZSH_THEME_GIT_PROMPT_STAGED="%{${YELLOW}%}^%{$reset_color%}"
 ZSH_THEME_GIT_PROMPT_CHANGED="%{${MAGENTA}%}~%{$reset_color%}"
 ZSH_THEME_GIT_PROMPT_CONFLICTS="%{${RED}%}*%{$reset_color%}"
 
-PROMPT='${BLUE}$(getUsername)%{$reset_color%}$(getHost)%{$reset_color%} in %{${YELLOW%}%}${PWD/#$HOME/~}%{$reset_color%}$(git_info)%{$reset_color%}%b
+PROMPT='${BLUE}jon%{$reset_color%} in %{${YELLOW%}%}${PWD/#$HOME/~}%{$reset_color%}$(git_info)%{$reset_color%}%b
  $ '
 
 RPROMPT='[%D{%L:%M:%S %p}]'
