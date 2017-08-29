@@ -10,7 +10,8 @@ let g:python3_host_prog = '/usr/local/bin/python3'
 call plug#begin('~/.local/share/nvim/plugged')
 
 " Fuzzy search
-Plug 'ctrlpvim/ctrlp.vim'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 
 " Code Completion
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -308,11 +309,6 @@ xmap <leader>S <Plug>SneakPrevious
 call camelcasemotion#CreateMotionMappings('<leader>')
 
 "================================================================================
-" CtrlP (CPS)
-"================================================================================
-let g:ctrlp_working_path_mode = 'aw'
-
-"================================================================================
 " deoplete Settings (dS)
 "================================================================================
 
@@ -351,3 +347,8 @@ let g:ale_lint_on_enter = 0
 let g:ale_linters = {
 \   'javascript': ['eslint'],
 \}
+
+"================================================================================
+" FZF (FzfS)
+"================================================================================
+nnoremap <silent> <C-p> :Files<CR>
