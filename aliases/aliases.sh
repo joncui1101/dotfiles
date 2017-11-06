@@ -9,7 +9,7 @@ fi
 
 
 if [[ $OSTYPE == *linux* ]]; then
-    source $DOTDIR/aliases/arch_aliases.sh
+    source $DOTDIR/aliases/fed_aliases.sh
 else
     source $DOTDIR/aliases/mac_aliases.sh
 fi
