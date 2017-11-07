@@ -8,10 +8,6 @@ function source-config {
             echo "Sourcing zshrc"
             source $DOTDIR/zshrc
         ;;
-        */bash)
-            echo "Sourcing bashrc"
-            source $DOTDIR/bashrc
-        ;;
     esac
 }
 

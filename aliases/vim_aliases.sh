@@ -1,7 +1,6 @@
 # Vim Aliases
 
-alias vrc='v ~/dotfiles/vimrc'
-alias brc='v ~/dotfiles/bashrc'
-alias bp='v ~/dotfiles/bash_prompt'
-alias bpf='v ~/dotfiles/bash_profile'
+alias zrc='v ~/dotfiles/zshrc'
+alias zp='v ~/dotfiles/zsh/prompt.zsh-theme'
+alias zenv='v ~/dotfiles/zshenv'
 alias va='v ~/dotfiles/aliases/aliases'

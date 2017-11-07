@@ -45,9 +45,6 @@ Plug 'tpope/vim-commentary'
 " Emmet Plugin
 Plug 'mattn/emmet-vim'
 
-" Search
-Plug 'rking/ag.vim'
-
 call plug#end()
 
 "================================================================================

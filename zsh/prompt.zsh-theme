@@ -44,40 +44,33 @@ function update_current_git_vars() {
 git_info() {
     precmd
     if [[ -n "$GIT_BRANCH" ]]; then
-        STATUS="$GIT_BRANCH"
-        SYMBOLS=""
-        BRANCH_COLOR="%{${GREEN}%}"
+        SYMBOLS="%{$reset_color%}"
+        BRANCH_COLOR="%{$GREEN%}"
         if [[ "$GIT_STAGED" != "0" ]]; then
-            SYMBOLS="$SYMBOLS$ZSH_THEME_GIT_PROMPT_STAGED"
-            BRANCH_COLOR="%{${YELLOW}%}"
+            SYMBOLS+="%{$YELLOW%}^%{$reset_color%}"
+            BRANCH_COLOR="%{$YELLOW%}"
         fi
         if [[ "$GIT_CHANGED" != "0" ]]; then
-            SYMBOLS="$SYMBOLS$ZSH_THEME_GIT_PROMPT_CHANGED"
-            BRANCH_COLOR="%{${MAGENTA}%}"
+            SYMBOLS+="%{$MAGENTA%}~%{$reset_color%}"
+            BRANCH_COLOR="%{$MAGENTA%}"
         fi
         if [[ "$GIT_CONFLICT" != "0" ]]; then
-            SYMBOLS="$SYMBOLS$ZSH_THEME_GIT_PROMPT_CONFLICT"
-            BRANCH_COLOR="%{${RED}%}"
+            SYMBOLS+="%{$RED%}*%{$reset_color%}"
+            BRANCH_COLOR="%{$RED%}"
         fi
-        STATUS="$BRANCH_COLOR$STATUS%{$reset_color%}$SYMBOLS"
+        STATUS="$BRANCH_COLOR$GIT_BRANCH$SYMBOLS"
         if [[ -n "$GIT_AHEAD" ]]; then
-            STATUS="$STATUS%{${GREEN}%}[+$GIT_AHEAD]%{$reset_color%}"
+            STATUS+="%{$GREEN%}[+$GIT_AHEAD]%{$reset_color%}"
         fi
         if [[ -n "$GIT_BEHIND" ]]; then
-            STATUS="$STATUS%{${RED}%}[-$GIT_BEHIND]%{$reset_color%}"
+            STATUS+="%{$RED%}[-$GIT_BEHIND]%{$reset_color%}"
         fi
 
-        echo " on $STATUS%{$reset_color%}"
+        echo " on $STATUS"
     fi
 }
 
-ZSH_THEME_GIT_PROMPT_PREFIX="("
-ZSH_THEME_GIT_PROMPT_SUFFIX=")"
-ZSH_THEME_GIT_PROMPT_STAGED="%{${YELLOW}%}^%{$reset_color%}"
-ZSH_THEME_GIT_PROMPT_CHANGED="%{${MAGENTA}%}~%{$reset_color%}"
-ZSH_THEME_GIT_PROMPT_CONFLICTS="%{${RED}%}*%{$reset_color%}"
-
-PROMPT='${BLUE}jon%{$reset_color%} in %{${YELLOW%}%}${PWD/#$HOME/~}%{$reset_color%}$(git_info)%{$reset_color%}%b
+PROMPT='%{$BLUE%}崔%{$reset_color%} in %{$YELLOW%}%{${PWD/#$HOME/~}%}%{$reset_color%}$(git_info)%b
  $ '
 
 RPROMPT='[%D{%L:%M:%S %p}]'
