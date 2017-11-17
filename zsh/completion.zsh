@@ -8,6 +8,8 @@ setopt auto_menu # get menu behavior when you hit tab again on ambiguous complet
 setopt complete_in_word # completion takes place at the cursor position in the word
 setopt always_to_end # cursor moves to end of word after it is completed
 setopt no_complete_aliases # complete aliases
+unsetopt correct_all # disable autocorrect
+setopt correct # spelling correction for commands
 
 compdef g=git
 

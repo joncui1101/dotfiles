@@ -1,15 +1,7 @@
-export DOTDIR=$HOME"/dotfiles"
+export DOTDIR=$HOME/dotfiles
 export GOPATH=$HOME/go
-export PATH="/usr/local/sbin:/usr/local/bin:$PATH:$GOPATH/bin:/usr/local/opt/go/libexec/bin"
-
-if [ ! -n "$ZSH" ]; then
-    ZSH=$DOTDIR/zsh
-fi
+export ZSH=$DOTDIR/zsh
+export PATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/sbin:/usr/local/bin:$HOME/.cargo/bin:$GOPATH/bin:/usr/local/opt/go/libexec/bin:/usr/local/opt/node@6/bin:/Library/Frameworks/Python.framework/Versions/2.7/bin:$DOTDIR/bin
 
 skip_global_compinit=1
 
-if [[ $OSTYPE == *darwin* ]]; then
-    export PATH=$(brew --prefix coreutils)/libexec/gnubin:$HOME/.cask/bin:/Users/jcui/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:$DOTDIR/bin:/$HOME/tools/arcanist/bin
-else
-    export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:$DOTDIR/bin
-fi
