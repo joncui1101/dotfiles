@@ -48,6 +48,7 @@ alias sudo='sudo '
 # Editor Aliases
 alias emacs='emacs '
 alias v='nvim '
+alias sv='sudo -E nvim '
 
 # Tmux Aliases
 alias tn='tmux new -s jcui'
