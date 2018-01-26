@@ -154,9 +154,6 @@ set vb
 " Show line number
 set number
 
-" Show relative line number
-set relativenumber
-
 " Use spaces instead of tabs
 set expandtab
 
@@ -279,8 +276,6 @@ let g:airline#extensions#tabline#enabled = 1
 
 " Enable bufferline integration
 let g:airline#extensions#bufferline#enabled = 1
-
-let g:airline_powerline_fonts = 1
 
 "================================================================================
 " Bufferline Settings (BS)
