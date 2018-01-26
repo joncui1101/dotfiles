@@ -5,10 +5,7 @@ export LANG="en_US.UTF-8"
 export LANGUAGE=$LANG
 export LC_ALL=$LANG
 if [[ $OSTYPE == *linux* ]]; then
-    export TERM=rxvt-unicode-256color
     export SUDO_EDITOR=rvim
-else
-    export TERM=xterm-256color
 fi
 
 BASE16_SHELL="$HOME/dotfiles/color-schemes/shell/base16-flat.dark.sh"

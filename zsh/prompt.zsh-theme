@@ -70,6 +70,8 @@ git_info() {
     fi
 }
 
+setopt TRANSIENT_RPROMPT
+
 PROMPT='%{$BLUE%}崔%{$reset_color%} in %{$YELLOW%}%{${PWD/#$HOME/~}%}%{$reset_color%}$(git_info)%b
  $ '
 
