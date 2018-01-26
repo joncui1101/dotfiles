@@ -6,6 +6,9 @@ let base16colorspace=256  " Access colors present in 256 colorspace"
 
 let g:loaded_python_provider = 1
 let g:python3_host_prog = '/usr/local/bin/python3'
+let g:python3_host_skip_check = 1
+
+let g:loaded_ruby_provider = 1
 
 call plug#begin('~/.local/share/nvim/plugged')
 
@@ -15,9 +18,21 @@ Plug 'junegunn/fzf.vim'
 
 " Code Completion
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'Shougo/neco-vim'
+
+" Auto insert pairs
+Plug 'Shougo/neopairs.vim'
+
+" Javascript Completion
 Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
-" Plug 'Shougo/neopairs.vim'
+
+" Vimscript completion
+Plug 'Shougo/neco-vim'
+
+" Java Completion
+Plug 'artur-shaik/vim-javacomplete2'
+
+" Go Completion
+Plug 'zchee/deoplete-go', { 'do': 'make' }
 
 " Syntax checker
 Plug 'w0rp/ale'
@@ -102,6 +117,8 @@ augroup MyAutoCmd
     autocmd FilterWritePre * :retab
     autocmd BufWritePre    * :retab
 augroup END
+
+autocmd FileType java setlocal omnifunc=javacomplete#Complete
 
 "================================================================================
 " General Settings (GS)
@@ -310,11 +327,18 @@ let g:deoplete#enable_at_startup = 1
 " Use smartcase.
 let g:deoplete#enable_smart_case = 1
 
-" Ternjs Config
+"================================================================================
+" File Completion Settings (FCS)
+"================================================================================
+
+" Javascript
 let g:tern_request_timeout = 1
 let g:tern_show_signature_in_pum = '0'
 
 let g:tern#filetypes = [ 'jsx', 'javascript.jsx', 'vue' ]
+
+" Go
+let g:deoplete#sources#go#gocode_binary = $GOPATH.'/bin/gocode'
 
 let g:neopairs#enable = 1
 
