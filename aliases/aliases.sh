@@ -14,15 +14,12 @@ else
     source $DOTDIR/aliases/mac_aliases.sh
 fi
 
-# Update Dotfiles
-alias upvim='~/dotfiles/scripts/update'
-
 # CLI Aliases
 alias rm='rm -i '
 alias o='open '
 alias oo='open .'
 alias ks=kill-ssh
-alias so=source-config
+alias so='source $DOTDIR/zshrc'
 alias cl='clear'
 
 # Push and pop directories on directory stack
@@ -46,7 +43,6 @@ export LS_COLORS='no=00:fi=00:di=00;34:ln=01;36:pi=40;33:so=01;35:do=01;35:bd=40
 alias sudo='sudo '
 
 # Editor Aliases
-alias emacs='emacs '
 alias v='nvim '
 alias sv='sudo -E nvim '
 
