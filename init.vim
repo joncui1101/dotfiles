@@ -31,8 +31,13 @@ Plug 'Shougo/neco-vim'
 " Java Completion
 Plug 'artur-shaik/vim-javacomplete2'
 
-" Go Completion
-Plug 'zchee/deoplete-go', { 'do': 'make' }
+" Go Plugins
+" Plug 'nsf/gocode', { 'rtp': 'nvim', 'do': '~/.config/nvim/plugged/gocode/nvim/symlink.sh' }
+" Plug 'zchee/deoplete-go', { 'do': 'make' }
+Plug 'fatih/vim-go'
+
+" Vue Plugins
+Plug 'posva/vim-vue'
 
 " Syntax checker
 Plug 'w0rp/ale'
@@ -85,6 +90,9 @@ endif
 set background=dark
 colorscheme base16-flat
 
+highlight Normal ctermbg=None
+highlight NonText ctermbg=None
+
 "================================================================================
 " Auto Commands (AC)
 "================================================================================
@@ -119,6 +127,9 @@ augroup MyAutoCmd
 augroup END
 
 autocmd FileType java setlocal omnifunc=javacomplete#Complete
+
+autocmd FileType vue setlocal shiftwidth=2 tabstop=2 softtabstop=2
+autocmd FileType javascript setlocal shiftwidth=2 tabstop=2 softtabstop=2
 
 "================================================================================
 " General Settings (GS)

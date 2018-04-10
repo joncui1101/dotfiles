@@ -5,4 +5,4 @@ alias zp='v ~/dotfiles/zsh/prompt.zsh-theme'
 alias zenv='v ~/dotfiles/zshenv'
 alias va='v ~/dotfiles/aliases/aliases'
 
-alias vf='v $(fzf)'
+alias vf='v $(fd --type f | fzf)'
