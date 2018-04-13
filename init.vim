@@ -20,7 +20,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 
 " Auto insert pairs
-Plug 'Shougo/neopairs.vim'
+Plug 'jiangmiao/auto-pairs'
 
 " Javascript Completion
 Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
@@ -350,8 +350,6 @@ let g:tern#filetypes = [ 'jsx', 'javascript.jsx', 'vue' ]
 
 " Go
 let g:deoplete#sources#go#gocode_binary = $GOPATH.'/bin/gocode'
-
-let g:neopairs#enable = 1
 
 "================================================================================
 " Ale (AleS)
