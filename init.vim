@@ -34,7 +34,10 @@ Plug 'artur-shaik/vim-javacomplete2'
 " Go Plugins
 " Plug 'nsf/gocode', { 'rtp': 'nvim', 'do': '~/.config/nvim/plugged/gocode/nvim/symlink.sh' }
 " Plug 'zchee/deoplete-go', { 'do': 'make' }
-Plug 'fatih/vim-go'
+Plug 'fatih/vim-go', {'do': ':GoInstallBinaries'}
+
+" HTML Plugins
+Plug 'mattn/emmet-vim'
 
 " Vue Plugins
 Plug 'posva/vim-vue'
@@ -127,9 +130,10 @@ augroup MyAutoCmd
 augroup END
 
 autocmd FileType java setlocal omnifunc=javacomplete#Complete
-
 autocmd FileType vue setlocal shiftwidth=2 tabstop=2 softtabstop=2
 autocmd FileType javascript setlocal shiftwidth=2 tabstop=2 softtabstop=2
+autocmd FileType go nmap <leader>r <Plug>(go-run)
+autocmd FileType go nmap <leader>b <Plug>(go-build)
 
 "================================================================================
 " General Settings (GS)
