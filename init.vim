@@ -32,8 +32,8 @@ Plug 'Shougo/neco-vim'
 Plug 'artur-shaik/vim-javacomplete2'
 
 " Go Plugins
-" Plug 'nsf/gocode', { 'rtp': 'nvim', 'do': '~/.config/nvim/plugged/gocode/nvim/symlink.sh' }
-" Plug 'zchee/deoplete-go', { 'do': 'make' }
+Plug 'nsf/gocode', { 'rtp': 'nvim', 'do': '~/.local/share/nvim/plugged/gocode/nvim/symlink.sh' }
+Plug 'zchee/deoplete-go', { 'do': 'make' }
 Plug 'fatih/vim-go', {'do': ':GoInstallBinaries'}
 
 " HTML Plugins
@@ -141,8 +141,10 @@ autocmd FileType go nmap <leader>b <Plug>(go-build)
 " General Settings (GS)
 "================================================================================
 
-" Enable mouse
-set mouse=a
+" Enable mouse if possible
+if has('mouse')
+    set mouse=a
+endif
 
 " Allow changing buffer without saving it first
 set hidden
