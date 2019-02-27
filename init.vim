@@ -61,6 +61,7 @@ Plug 'bling/vim-bufferline'
 
 " Color Themes
 Plug 'chriskempson/base16-vim'
+Plug 'rakr/vim-one'
 
 " Comment Plugin
 Plug 'tpope/vim-commentary'
@@ -384,4 +385,21 @@ let g:ale_linters = {
 "================================================================================
 " FZF (FzfS)
 "================================================================================
-nnoremap <silent> <C-p> :Files<CR>
+nnoremap <c-p> :FZF<CR>
+
+"================================================================================
+" Golang
+"================================================================================
+let g:airline#extensions#ale#enabled = 1
+let g:go_addtags_transform = "camelcase"
+let g:go_auto_sameids = 1
+let g:go_auto_type_info = 1
+let g:go_fmt_command = "goimports"
+let g:go_highlight_build_constraints = 1
+let g:go_highlight_extra_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_types = 1
