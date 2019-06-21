@@ -8,7 +8,7 @@ if [[ $OSTYPE == *linux* ]]; then
     export SUDO_EDITOR=rvim
 fi
 
-BASE16_SHELL="$HOME/dotfiles/color-schemes/shell/base16-flat.dark.sh"
+BASE16_SHELL="$HOME/dotfiles/color-schemes/one.dark.sh"
 [[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
 
 # Vi mode

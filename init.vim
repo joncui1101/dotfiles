@@ -34,13 +34,12 @@ Plug 'artur-shaik/vim-javacomplete2'
 " Go Plugins
 Plug 'nsf/gocode', { 'rtp': 'nvim', 'do': '~/.local/share/nvim/plugged/gocode/nvim/symlink.sh' }
 Plug 'zchee/deoplete-go', { 'do': 'make' }
-Plug 'fatih/vim-go', {'do': ':GoInstallBinaries'}
 
 " HTML Plugins
 Plug 'mattn/emmet-vim'
 
-" Vue Plugins
-Plug 'posva/vim-vue'
+" Syntax Plugins
+Plug 'sheerun/vim-polyglot'
 
 " Syntax checker
 Plug 'w0rp/ale'
@@ -61,7 +60,6 @@ Plug 'bling/vim-bufferline'
 
 " Color Themes
 Plug 'chriskempson/base16-vim'
-Plug 'rakr/vim-one'
 
 " Comment Plugin
 Plug 'tpope/vim-commentary'
@@ -92,7 +90,7 @@ endif
 "================================================================================
 
 set background=dark
-colorscheme base16-flat
+colorscheme base16-onedark
 
 highlight Normal ctermbg=None
 highlight NonText ctermbg=None
@@ -361,7 +359,7 @@ let g:tern#filetypes = [ 'jsx', 'javascript.jsx', 'vue' ]
 let g:deoplete#sources#go#gocode_binary = $GOPATH.'/bin/gocode'
 
 "================================================================================
-" Ale (AleS)
+" ALE (AleS)
 "================================================================================
 
 " Customize error and warning string.
