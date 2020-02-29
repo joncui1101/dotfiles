@@ -4,7 +4,7 @@
 [core]
     editor = /usr/local/bin/nvim
 [pull]
-    rebase = preserve
+    rebase = merges
 [merge]
     ff = false
     tool = sublime

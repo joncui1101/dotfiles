@@ -67,6 +67,9 @@ Plug 'tpope/vim-commentary'
 " Emmet Plugin
 Plug 'mattn/emmet-vim'
 
+" ledger Plugin
+Plug 'ledger/vim-ledger'
+
 call plug#end()
 
 "================================================================================
