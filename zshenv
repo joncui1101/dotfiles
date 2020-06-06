@@ -5,6 +5,8 @@ export PATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/sbin:/usr/local/bin:$HOME/.
 export LEDGER=$HOME/ledgers
 export LEDGER_FILE=$LEDGER/index.journal
 export FZF_DEFAULT_COMMAND='rg --files'
+export MANPAGER='nvim +Man!'
+export MANWIDTH=999
 #export JAVA_HOME=`/usr/libexec/java_home -v 1.8.0_92`
 
 WORKENV=$HOME/work_dot/workenv
