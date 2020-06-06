@@ -70,6 +70,9 @@ Plug 'mattn/emmet-vim'
 " ledger Plugin
 Plug 'ledger/vim-ledger'
 
+" vimwiki Plugin
+Plug 'vimwiki/vimwiki'
+
 call plug#end()
 
 "================================================================================
@@ -346,7 +349,7 @@ call camelcasemotion#CreateMotionMappings('<leader>')
 let g:deoplete#enable_at_startup = 1
 
 " Use smartcase.
-let g:deoplete#enable_smart_case = 1
+call deoplete#custom#option('smart_case', v:true)
 
 "================================================================================
 " File Completion Settings (FCS)
@@ -405,3 +408,9 @@ let g:go_highlight_methods = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_structs = 1
 let g:go_highlight_types = 1
+
+
+"================================================================================
+" Vimwiki (VWS)
+"================================================================================
+let g:vimwiki_list = [{'path': '~/wiki/wiki/', 'path_html': '~/wiki/doc/', 'name': "Jonathan's Wiki", 'auto_toc': 1, 'index': 'main'}]
