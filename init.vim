@@ -32,8 +32,7 @@ Plug 'Shougo/neco-vim'
 Plug 'artur-shaik/vim-javacomplete2'
 
 " Go Plugins
-Plug 'nsf/gocode', { 'rtp': 'nvim', 'do': '~/.local/share/nvim/plugged/gocode/nvim/symlink.sh' }
-Plug 'zchee/deoplete-go', { 'do': 'make' }
+Plug 'fatih/vim-go'
 
 " HTML Plugins
 Plug 'mattn/emmet-vim'
@@ -361,9 +360,6 @@ let g:tern_show_signature_in_pum = '0'
 
 let g:tern#filetypes = [ 'jsx', 'javascript.jsx', 'vue' ]
 
-" Go
-let g:deoplete#sources#go#gocode_binary = $GOPATH.'/bin/gocode'
-
 "================================================================================
 " ALE (AleS)
 "================================================================================
@@ -408,9 +404,10 @@ let g:go_highlight_methods = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_structs = 1
 let g:go_highlight_types = 1
-
+let g:go_def_mode = 'gopls'
+let g:go_info_mode = 'gopls'
 
 "================================================================================
 " Vimwiki (VWS)
 "================================================================================
-let g:vimwiki_list = [{'path': '~/wiki/wiki/', 'path_html': '~/wiki/doc/', 'name': "Jonathan's Wiki", 'auto_toc': 1, 'index': 'main'}]
+let g:vimwiki_list = [{'path': '~/wiki/', 'name': "Jonathan's Wiki", 'auto_toc': 1, 'index': 'main', 'syntax': 'markdown', 'ext': '.md'}]
