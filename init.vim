@@ -174,7 +174,7 @@ set scrolloff=10
 set sidescrolloff=20
 
 " Min width of number column
-set numberwidth=1
+set numberwidth=4
 
 " Always show tabs
 set showtabline=2
@@ -207,6 +207,12 @@ set foldlevelstart=99 " Open all folds by default
 
 " Remove the default mode
 set noshowmode
+
+" When and how to draw the signcolumn.
+set signcolumn=yes
+
+" Faster update time
+set updatetime=300
 
 " Keep undo history across sessions, by storing in file.
 " Only works all the time.
