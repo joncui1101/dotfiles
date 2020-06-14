@@ -156,17 +156,11 @@ set hidden
 " Give one virtual space at the end of line
 set virtualedit=onemore
 
-" Command-line auto completion
-set wildmenu
-set wildmode=list:longest,full " Complete longest common string, then each full match
-set wildignore=*/.DS_Store,*/.git/*,*/.idea/*,*/node_modules/* " Stuff to ignore when tab completing
-
 " Case insensitive search
 set ignorecase
 set smartcase
 
 " Turn backup off
-set nobackup
 set nowritebackup
 set noswapfile
 
@@ -181,9 +175,6 @@ set sidescrolloff=20
 
 " Min width of number column
 set numberwidth=1
-
-" Auto complete setting
-set completeopt=longest,menuone
 
 " Always show tabs
 set showtabline=2
@@ -211,7 +202,6 @@ set showmatch
 " Round indent to multiple of shiftwidth
 set shiftround
 
-set foldenable " Enable folds by default
 set foldmethod=syntax " Fold via syntax of files
 set foldlevelstart=99 " Open all folds by default
 
@@ -232,21 +222,6 @@ endif
 
 " Map leader to comma
 let mapleader = ","
-
-" Toggle between paste mode; useful for pasting large items
-nnoremap <silent> <Leader>1 :set paste!<CR>
-
-" Toggle copy mode; useful for copying text from files
-nnoremap <silent> <Leader>2 :call ToggleCopy()<CR>
-function! ToggleCopy()
-    if &mouse == 'a'
-        set mouse=
-        set nonu
-    else
-        set mouse=a
-        set nu
-    endif
-endfunction
 
 " Next Buffer
 nnoremap <silent> <Leader>l :bn<CR>
@@ -279,9 +254,6 @@ noremap ; :
 
 " Q closes the window
 nnoremap Q :q<CR>
-
-" <Leader>1: Toggle between paste mode
-nnoremap <silent> <Leader>1 :set paste!<cr>
 
 "================================================================================
 " Insert Mode Key Mappings (IK)
@@ -316,6 +288,9 @@ let g:airline#extensions#tabline#enabled = 1
 
 " Enable bufferline integration
 let g:airline#extensions#bufferline#enabled = 1
+
+" configure whether buffer numbers should be shown.
+let g:airline#extensions#tabline#buffer_nr_show = 1
 
 "================================================================================
 " Bufferline Settings (BS)
