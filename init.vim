@@ -10,10 +10,17 @@ let g:python3_host_skip_check = 1
 
 let g:loaded_ruby_provider = 1
 
+" Autoinstall vim-plug
+if empty(glob('~/.nvim/autoload/plug.vim'))
+  silent !curl -fLo ~/.nvim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall
+endif
+
 call plug#begin('~/.local/share/nvim/plugged')
 
 " Fuzzy search
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
 " Code Completion
@@ -367,7 +374,9 @@ let g:ale_linters = {
 " FZF (FzfS)
 "================================================================================
 nnoremap <c-p> :Files<CR>
-nnoremap <c-g> :Rg<CR>
+nnoremap <c-g> :GFiles<CR>
+nnoremap <c-o> :Buffer<CR>
+nnoremap <c-f> :Rg!
 
 command! -bang -nargs=? -complete=dir Files
     \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': ['--layout=reverse', '--info=inline']}), <bang>0)
