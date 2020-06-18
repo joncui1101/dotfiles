@@ -39,7 +39,6 @@ Plug 'Shougo/neco-vim'
 Plug 'artur-shaik/vim-javacomplete2'
 
 " Go Plugins
-Plug 'fatih/vim-go'
 
 " HTML Plugins
 Plug 'mattn/emmet-vim'
