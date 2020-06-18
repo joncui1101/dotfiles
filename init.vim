@@ -366,8 +366,13 @@ let g:ale_linters = {
 "================================================================================
 " FZF (FzfS)
 "================================================================================
-nnoremap <c-p> :FZF<CR>
+nnoremap <c-p> :Files<CR>
 nnoremap <c-g> :Rg<CR>
+
+command! -bang -nargs=? -complete=dir Files
+    \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': ['--layout=reverse', '--info=inline']}), <bang>0)
+
+let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
 
 "================================================================================
 " Golang
