@@ -2,6 +2,7 @@
 printf "Creating symlinks\n"
 ln -s ~/dotfiles/init.vim ~/.config/nvim/init.vim
 ln -s ~/dotfiles/kitty/kitty.conf ~/.config/kitty/kitty.conf
+ln -s ~/dotfiles/hammerspoon ~/.hammerspoon
 for file in {tmux.conf,zshrc,zshenv,zprofile,gitconfig,gitignore}; do
     if [ ! -L ~/."$file" ]; then
         printf " - Creating symlink for $file\n"
