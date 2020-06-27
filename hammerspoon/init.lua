@@ -73,8 +73,6 @@ drag_event = hs.eventtap.new({ hs.eventtap.event.types.mouseMoved }, function(e)
         local dx = e:getProperty(hs.eventtap.event.properties.mouseEventDeltaX)
         local dy = e:getProperty(hs.eventtap.event.properties.mouseEventDeltaY)
         dragging.win:move({dx, dy}, nil, false, 0)
-        hs.alert.show(hs.geometry.new(hs.mouse.getRelativePosition()).x)
-        hs.alert.show(dragging.win:screen():frame().x)
 
         -- if the window is dragged to the top of the screen, maximize it using a timer.
         if dragging.win:frame().y == dragging.win:screen():frame().y then
