@@ -38,7 +38,8 @@ Plug 'Shougo/neco-vim'
 " Java Completion
 Plug 'artur-shaik/vim-javacomplete2'
 
-" Go Plugins
+" Markdown Plugins
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 
 " HTML Plugins
 Plug 'mattn/emmet-vim'
