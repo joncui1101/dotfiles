@@ -62,6 +62,7 @@ dragging = {}                   -- global variable to hold the dragging/resizing
 
 -- global timer to maximize the dragging window.
 max_timer = hs.timer.new(0, function()
+    if not dragging then return end
     if dragging.win then
         dragging.win:maximize(0)
     end
