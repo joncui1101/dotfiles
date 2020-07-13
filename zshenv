@@ -6,6 +6,7 @@ export LEDGER=$HOME/ledgers
 export LEDGER_FILE=$LEDGER/index.journal
 
 export FZF_DEFAULT_COMMAND='rg --files'
+export FZF_DEFAULT_OPTS='--layout=reverse --info=inline'
 export FZF_COMPLETION_TRIGGER=',,'
 
 export MANPAGER='nvim +Man!'

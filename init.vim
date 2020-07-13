@@ -379,7 +379,7 @@ nnoremap <c-o> :Buffer<CR>
 nnoremap <c-f> :Rg!
 
 command! -bang -nargs=? -complete=dir Files
-    \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': ['--layout=reverse', '--info=inline']}), <bang>0)
+    \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': []}), <bang>0)
 
 let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
 
