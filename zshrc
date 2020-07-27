@@ -20,6 +20,11 @@ for config_file ($ZSH/*.zsh*); do
 done
 unset config_file
 
+WORKENV=$HOME/work_dot/workenv
+if test -f "$WORKENV"; then
+    source $WORKENV
+fi
+
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 export NVM_DIR="$HOME/.nvm"
