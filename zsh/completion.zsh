@@ -11,8 +11,6 @@ setopt no_complete_aliases # complete aliases
 unsetopt correct_all # disable autocorrect
 setopt correct # spelling correction for commands
 
-compdef g=git
-
 # activate menu selection
 zstyle ':completion:*:*:*:*:*' menu select
 

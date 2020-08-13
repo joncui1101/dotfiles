@@ -1,0 +1,23 @@
+# Don't print a new line at the start of the prompt
+add_newline = false
+prompt_order = [
+    "custom.username",
+    "hostname",
+    "directory",
+    "git_branch",
+    "git_commit",
+    "git_state",
+    "git_status",
+    "line_break",
+    "character",
+]
+
+[character]
+symbol = "➜"
+
+[directory]
+truncate_to_repo = false
+
+[custom.username]
+command = "echo 崔"
+when = """test true"""
