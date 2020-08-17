@@ -333,7 +333,7 @@ call camelcasemotion#CreateMotionMappings('<leader>')
 "================================================================================
 
 " Use deoplete.
-let g:deoplete#enable_at_startup = 1
+" let g:deoplete#enable_at_startup = 1
 
 " Use smartcase.
 call deoplete#custom#option('smart_case', v:true)

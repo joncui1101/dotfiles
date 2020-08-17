@@ -16,6 +16,5 @@ export MANWIDTH=999
 skip_global_compinit=1
 
 if [[ ( "$SHLVL" -eq 1 && ! -o LOGIN ) && -s $HOME/.zshrc ]]; then
-    echo "sourcing zshrc"
     source $HOME/.zshrc
 fi
