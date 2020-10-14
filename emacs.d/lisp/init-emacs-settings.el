@@ -6,7 +6,8 @@
 (setq-default custom-file (expand-file-name "custom.el" user-emacs-directory))
 
 ;; Sets directory to store backup files.
-(setq-default backup-directory-alist '(("." . (expand-file-name "backups" user-emacs-directory))))
+(setq backup-directory (expand-file-name "backups" user-emacs-directory))
+(setq-default backup-directory-alist `(("." . ,(expand-file-name "backups" user-emacs-directory))))
 
 ;; Deletes excess backup files silently.
 (setq delete-old-versions t)
@@ -25,6 +26,16 @@
 
 ;; Never insert tabs
 (setq-default indent-tabs-mode nil)
+
+;; Disables the bell ring.
+(setq ring-bell-function 'ignore)
+
+;; Allow y for yes.
+(fset 'yes-or-no-p 'y-or-n-p)
+
+(use-package exec-path-from-shell
+  :defer 1
+  :config (exec-path-from-shell-initialize))
 
 (defun jc/reload-emacs-config ()
   (interactive)

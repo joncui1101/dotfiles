@@ -3,14 +3,14 @@
 ;;; Code:
 
 (eval-when-compile
-  (require 'cl))
+  (require 'cl-lib))
 (require 'package)
 
 ;; Standard package repositories
 
 (setq package-enable-at-startup nil)
 (setq package-archives '(("melpa" . "https://melpa.org/packages/")
-			 ("gnu" . "https://elpa.gnu.org/packages/")))
+             ("gnu" . "https://elpa.gnu.org/packages/")))
 
 (package-initialize)
 

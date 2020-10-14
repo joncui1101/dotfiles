@@ -11,34 +11,26 @@
 
 (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
 
-;;----------------------------------------------------------------------------
 ;; Adjust garbage collection thresholds during startup, and thereafter
-;;----------------------------------------------------------------------------
 (let ((normal-gc-cons-threshold (* 2 1000 1000))
       (init-gc-cons-threshold (* 5 1000 1000)))
   (setq gc-cons-threshold init-gc-cons-threshold)
   (add-hook 'emacs-startup-hook
             (lambda () (setq gc-cons-threshold normal-gc-cons-threshold))))
 
-;;----------------------------------------------------------------------------
 ;; Bootstrap config
-;;----------------------------------------------------------------------------
 
-;; Calls (package-initialize)
+(require 'init-packages) ;; Calls (package-initialize)
 (require 'init-user-settings)
 (require 'init-emacs-settings)
-(require 'init-packages)
 
-
-;;----------------------------------------------------------------------------
 ;; Load configs for specific features and modes
-;;----------------------------------------------------------------------------
 
 (require 'init-ledger)
+(require 'init-evil)
 
-;;----------------------------------------------------------------------------
 ;; Allow access from emacsclient
-;;----------------------------------------------------------------------------
+
 (add-hook 'after-init-hook
           (lambda ()
             (require 'server)
