@@ -23,11 +23,13 @@
 (require 'init-packages) ;; Calls (package-initialize)
 (require 'init-user-settings)
 (require 'init-emacs-settings)
+(require 'init-theme)
 
 ;; Load configs for specific features and modes
 
 (require 'init-ledger)
 (require 'init-evil)
+(require 'init-version-control)
 
 ;; Allow access from emacsclient
 

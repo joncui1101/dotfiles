@@ -32,8 +32,10 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="$PATH:$HOME/.rvm/bin"
+export PATH="/usr/local/opt/mysql@5.7/bin:$PATH:$HOME/.rvm/bin"
 
 kitty + complete setup zsh | source /dev/stdin
+
+eval "$(pyenv init -)"
 
 eval "$(starship init zsh)"

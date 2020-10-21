@@ -56,3 +56,8 @@ alias history='fc -il 1'
 # Show top 5 cpu intensive processes
 alias pcf='ps aux | sort -rk 3,3 | head -n 6'
 alias pmf='ps aux | sort -rk 4,4 | head -n 6'
+
+if command -v bat &> /dev/null
+then
+    alias cat='bat'
+fi

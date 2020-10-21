@@ -19,6 +19,15 @@
   :config
   (global-evil-surround-mode 1))
 
+(use-package evil-snipe
+  :delight evil-snipe-local-mode
+  :requires evil
+  :config
+  (evil-snipe-mode 1)
+  (evil-snipe-override-mode 1)
+  (setq evil-snipe-scope 'buffer
+        evil-snipe-repeat-scope 'buffer
+        evil-snipe-spillover-scope 'whole-buffer))
+
 (provide 'init-evil)
 ;;; init-evil.el ends here
-
