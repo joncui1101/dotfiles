@@ -30,6 +30,7 @@
 (require 'init-ledger)
 (require 'init-evil)
 (require 'init-version-control)
+(require 'init-lsp)
 
 ;; Allow access from emacsclient
 
