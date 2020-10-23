@@ -36,6 +36,9 @@ export PATH="/usr/local/opt/mysql@5.7/bin:$PATH:$HOME/.rvm/bin"
 
 kitty + complete setup zsh | source /dev/stdin
 
-eval "$(pyenv init -)"
+if command -v pyenv &> /dev/null
+then
+    eval "$(pyenv init -)"
+fi
 
 eval "$(starship init zsh)"
