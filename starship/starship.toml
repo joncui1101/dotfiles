@@ -24,4 +24,3 @@ truncate_to_repo = false
 [custom.username]
 command = "echo 崔"
 when = "true"
-prefix = ""
