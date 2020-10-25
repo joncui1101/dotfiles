@@ -31,6 +31,8 @@
 (require 'init-evil)
 (require 'init-version-control)
 (require 'init-lsp)
+(require 'init-company)
+(require 'init-helm)
 
 ;; Allow access from emacsclient
 

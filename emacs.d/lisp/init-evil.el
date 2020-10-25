@@ -11,9 +11,9 @@
 
 (use-package evil-ledger
   :requires (evil ledger-mode)
-  :config
-  (setq evil-ledger-sort-key "S")
-  (add-hook 'ledger-mode-hook #'evil-ledger-mode))
+  :hook (ledger-mode . evil-ledger-mode)
+  :custom
+  (evil-ledger-sort-key "S"))
 
 (use-package evil-surround
   :config
@@ -25,9 +25,10 @@
   :config
   (evil-snipe-mode 1)
   (evil-snipe-override-mode 1)
-  (setq evil-snipe-scope 'buffer
-        evil-snipe-repeat-scope 'buffer
-        evil-snipe-spillover-scope 'whole-buffer))
+  :custom
+  (evil-snipe-scope 'buffer)
+  (evil-snipe-repeat-scope 'buffer)
+  (evil-snipe-spillover-scope 'whole-buffer))
 
 (provide 'init-evil)
 ;;; init-evil.el ends here
