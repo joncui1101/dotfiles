@@ -15,9 +15,6 @@ fi
 
 # CLI Aliases
 alias rm='rm -i '
-alias o='open '
-alias oo='open .'
-alias ks=kill-ssh
 alias so='source $DOTDIR/zshrc'
 alias cl='clear'
 

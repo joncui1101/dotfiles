@@ -1,8 +1,5 @@
 # history
-if [ -z "$HISTFILE" ]; then
-    HISTFILE=$HOME/.zsh_history
-fi
-
+HISTFILE=$ZDOTDIR/.zsh_history
 HISTSIZE=10000
 SAVEHIST=10000
 

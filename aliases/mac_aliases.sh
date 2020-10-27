@@ -11,3 +11,7 @@ alias emptytrash='sudo rm -rfv /Volumes/*/.Trashes; sudo rm -rfv ~/.Trash; sudo 
 # Show/hide hidden files in Finder
 alias showF='defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder'
 alias hideF='defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder'
+
+# Alias to open in finder
+alias o='open '
+alias oo='open .'
