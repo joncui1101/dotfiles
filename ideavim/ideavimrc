@@ -1,0 +1,12 @@
+" Emulate Vim Plugins
+set surround
+
+" Escape from insert mode
+inoremap jj <Esc>
+
+" Inserts new line at cursor (undoes what J does)
+nnoremap K i<CR><Esc>h
+
+" Remap colon to semicolon for go into command mode easier
+noremap ; :
+

@@ -1,16 +1,32 @@
 #!/bin/bash
 
+printf "Cleanup existing files\n"
+rm ~/.config/emacs
+rm ~/.config/ideavim
+rm ~/.config/kitty
+rm ~/.config/nvim
+rm ~/.config/starship
+rm ~/.config/zsh/.zprofile
+rm ~/.config/zsh/.zshrc
+rm ~/.gitconfig
+rm ~/.gitignore
+rm ~/.zshenv
+
 if [[ "$OSTYPE" == "darwin"* ]]; then
-    printf "Linking hammerspoon"
+    printf "Linking hammerspoon\n"
+    rm ~/.config/hammerspoon
     defaults write org.hammerspoon.Hammerspoon MJConfigFile "~/.config/hammerspoon/init.lua"
-    ln -s ~/dotfiles/hammerspoon ~/.config/hammerspoon
+    ln -s ~/dotfiles/hammerspoon ~/.config
 fi
 
 printf "Creating symlinks\n"
-ln -s ~/dotfiles/nvim ~/.config/nvim
-ln -s ~/dotfiles/kitty ~/.config/kitty
-ln -s ~/dotfiles/zshrc ~/.config/zsh/.zshrc
+ln -s ~/dotfiles/emacs ~/.config
+ln -s ~/dotfiles/ideavim ~/.config
+ln -s ~/dotfiles/kitty ~/.config
+ln -s ~/dotfiles/nvim ~/.config
+ln -s ~/dotfiles/starship ~/.config
 ln -s ~/dotfiles/zprofile ~/.config/zsh/.zprofile
+ln -s ~/dotfiles/zshrc ~/.config/zsh/.zshrc
 
 for file in {zshenv,gitconfig,gitignore}; do
     if [ ! -L ~/."$file" ]; then

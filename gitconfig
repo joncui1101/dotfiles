@@ -1,6 +1,8 @@
 [user]
     name = Jonathan Cui
     email = joncui1101@gmail.com
+[includeIf "gitdir:~/workspace/"]
+    path = ~/work_dot/.gitconfig
 [core]
     editor = /usr/local/bin/nvim
 [pull]

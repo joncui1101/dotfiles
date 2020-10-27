@@ -4,6 +4,8 @@ if [[ -z $(zmodload | grep complist) ]]; then
     zmodload zsh/complist
 fi
 
+fpath=(~/.config/zsh/functions $fpath)
+
 setopt auto_menu # get menu behavior when you hit tab again on ambiguous completion
 setopt complete_in_word # completion takes place at the cursor position in the word
 setopt always_to_end # cursor moves to end of word after it is completed
