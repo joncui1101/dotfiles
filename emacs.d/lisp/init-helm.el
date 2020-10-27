@@ -13,6 +13,9 @@
          ("<tab>" . helm-execute-persistent-action)
          ("C-i" . helm-execute-persistent-action)
          ("C-z" . helm-select-action)
+         ("C-h a" . helm-apropos)
+         ("M-y" . helm-show-kill-ring)
+         ("M-c" . helm-calcul-expression)
          :map evil-ex-map
          ("b" . helm-mini))
   :custom
