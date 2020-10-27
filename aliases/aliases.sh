@@ -1,5 +1,4 @@
 # Source necessary functions
-source $DOTDIR/functions.sh
 source $DOTDIR/aliases/dir_aliases.sh
 source $DOTDIR/aliases/vim_aliases.sh
 source $DOTDIR/aliases/git_aliases.sh
@@ -43,12 +42,11 @@ export LS_COLORS='no=00:fi=00:di=00;34:ln=01;36:pi=40;33:so=01;35:do=01;35:bd=40
 alias sudo='sudo '
 
 # Editor Aliases
-alias v='nvim '
-alias sv='sudo -E nvim '
-
-# Tmux Aliases
-alias tn='tmux new -s jcui'
-alias t0='tmux attach -t jcui'
+if command -v nvim &> /dev/null
+then
+    alias v='nvim '
+    alias sv='sudo -E nvim '
+fi
 
 # Show history
 alias history='fc -il 1'
