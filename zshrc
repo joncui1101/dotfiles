@@ -21,11 +21,9 @@ done
 unset config_file
 
 WORKENV=$HOME/work_dot/workenv
-if test -f "$WORKENV"; then
-    source $WORKENV
-fi
+[ -s $WORKENV ] && source $WORKENV
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+[ -s ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -38,6 +36,11 @@ kitty + complete setup zsh | source /dev/stdin
 if command -v pyenv &> /dev/null
 then
     eval "$(pyenv init -)"
+    [ -s $PYENV_ROOT/completions/pyenv.zsh ] && source $PYENV_ROOT/completions/pyenv.zsh
 fi
 
-eval "$(starship init zsh)"
+
+if command -v starship &> /dev/null
+then
+    eval "$(starship init zsh)"
+fi
