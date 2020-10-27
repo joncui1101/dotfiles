@@ -52,3 +52,6 @@ flycheck_*.el
 
 # transient directory
 /transient
+
+# recentf
+/recentf

@@ -5,6 +5,8 @@ export PATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/sbin:/usr/local/bin:$HOME/.
 export LEDGER=$HOME/ledgers
 export LEDGER_FILE=$LEDGER/index.journal
 
+export PYENV_ROOT=$HOME/.config/pyenv
+
 export FZF_DEFAULT_COMMAND='rg --files'
 export FZF_DEFAULT_OPTS='--layout=reverse --info=inline'
 export FZF_COMPLETION_TRIGGER=',,'

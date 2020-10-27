@@ -9,17 +9,24 @@ $git_branch\
 $git_commit\
 $git_state\
 $git_status\
+$golang\
+$python\
 $line_break\
-$character """
+$character"""
 
 [character]
-symbol = "➜ "
+symbol = "➜"
 
 [cmd_duration]
 disabled = true
 
 [directory]
 truncate_to_repo = false
+
+[python]
+pyenv_version_name = true
+symbol = "🐍"
+format = 'via [${symbol}${version}${symbol}]($style) '
 
 [custom.username]
 command = "echo 崔"
