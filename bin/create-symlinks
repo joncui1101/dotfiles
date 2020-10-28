@@ -2,14 +2,13 @@
 
 printf "Cleanup existing files\n"
 rm ~/.config/emacs
+rm ~/.config/git
 rm ~/.config/ideavim
 rm ~/.config/kitty
 rm ~/.config/nvim
 rm ~/.config/starship
 rm ~/.config/zsh/.zprofile
 rm ~/.config/zsh/.zshrc
-rm ~/.gitconfig
-rm ~/.gitignore
 rm ~/.zshenv
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
@@ -21,6 +20,7 @@ fi
 
 printf "Creating symlinks\n"
 ln -s ~/dotfiles/emacs ~/.config
+ln -s ~/dotfiles/git ~/.config
 ln -s ~/dotfiles/ideavim ~/.config
 ln -s ~/dotfiles/kitty ~/.config
 ln -s ~/dotfiles/nvim ~/.config
@@ -28,9 +28,4 @@ ln -s ~/dotfiles/starship ~/.config
 ln -s ~/dotfiles/zprofile ~/.config/zsh/.zprofile
 ln -s ~/dotfiles/zshrc ~/.config/zsh/.zshrc
 
-for file in {zshenv,gitconfig,gitignore}; do
-    if [ ! -L ~/."$file" ]; then
-        printf " - Creating symlink for $file\n"
-        ln -s ~/dotfiles/"$file" ~/."$file"
-    fi
-done
+ln -s ~/dotfiles/zshenv ~/.zshenv
