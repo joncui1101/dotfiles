@@ -13,8 +13,6 @@ export PATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/sbin:/usr/local/bin:$CARGO_
 export LEDGER=$HOME/ledgers
 export LEDGER_FILE=$LEDGER/index.journal
 
-export DOCKER_CONFIG=$XDG_CONFIG_HOME/docker
-
 export STARSHIP_CONFIG=$XDG_CONFIG_HOME/starship/starship.toml
 export STARSHIP_CACHE=$XDG_CACHE_HOME/starship
 
