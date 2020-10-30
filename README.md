@@ -6,8 +6,10 @@
 - kitty
 - starship
 - zsh
-- pyenv (work)
+- pyenv
 - hammerspoon (mac only)
+- ripgrep
+- fd
 
 ## Trying out
 - exa
