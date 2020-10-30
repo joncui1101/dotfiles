@@ -25,6 +25,9 @@ WORKENV=$HOME/work_dot/workenv
 
 if [[ $OSTYPE == darwin* ]]; then
     [ -f "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.zsh ] && source "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.zsh
+elif [[ $OSTYPE == *linux* ]]; then
+    [ -f /usr/share/fzf/completion.zsh ] && source /usr/share/fzf/completion.zsh
+    [ -f /usr/share/fzf/key-bindings.zsh ] && source /usr/share/fzf/key-bindings.zsh
 fi
 
 export NVM_DIR="$HOME/.nvm"

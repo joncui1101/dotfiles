@@ -18,7 +18,7 @@ if empty(glob('~/.config/local/share/nvim/site/autoload/plug.vim'))
   autocmd VimEnter * PlugInstall
 endif
 
-call plug#begin('~/.config/zsh/local/share/nvim/plugged')
+call plug#begin('~/.config/local/share/nvim/plugged')
 
 " Fuzzy search
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
