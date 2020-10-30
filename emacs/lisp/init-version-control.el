@@ -3,7 +3,9 @@
 ;;; Code:
 
 (use-package magit
-  :defer 0.3)
+  :defer 0.3
+  :custom
+  (magit-repository-directories '(("\~/workspace" . 2) ("\~/ledger" . 0) ("\~/dotfiles" . 0))))
 
 (use-package git-gutter
   :defer 0.3
