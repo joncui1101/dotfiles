@@ -33,6 +33,7 @@
 (require 'init-lsp)
 (require 'init-company)
 (require 'init-helm)
+(require 'init-projectile)
 
 ;; Allow access from emacsclient
 

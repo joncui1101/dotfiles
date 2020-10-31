@@ -44,7 +44,7 @@
  inbibit-startup-message t     ; Don't show the startup message
  inhibit-startup-screen t      ; Don't show the startup screen
  confirm-kill-emacs 'y-or-n-p  ; y and n instead of yes and no when quitting
-)
+ )
 
 ;; Allow y for yes.
 (fset 'yes-or-no-p 'y-or-n-p)

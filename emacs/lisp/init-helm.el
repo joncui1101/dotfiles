@@ -4,6 +4,7 @@
 (use-package helm
   :config
   (require 'helm-config)
+  (global-unset-key (kbd "C-x c"))
   (helm-mode 1)
   (helm-autoresize-mode 1)
   :demand
@@ -15,6 +16,8 @@
          ("C-h a" . helm-apropos)
          ("M-y" . helm-show-kill-ring)
          ("M-c" . helm-calcul-expression)
+         ("C-c h" . helm-command-prefix)
+         ("C-x r b" . helm-bookmarks)
          :map evil-ex-map
          ("b" . helm-mini)
          :map helm-map
@@ -24,7 +27,10 @@
          ("C-l" . helm-next-source)
          ("<tab>" . helm-execute-persistent-action)
          ("C-i" . helm-execute-persistent-action)
-         ("C-z" . helm-select-action))
+         ("C-z" . helm-select-action)
+         :map helm-find-files-map
+         ("C-h" . helm-find-files-up-one-level)
+         ("C-l" . helm-find-files-down-last-level))
   :custom
   (helm-apropos-fuzzy-match t)
   (helm-buffers-fuzzy-matching t)
