@@ -28,7 +28,7 @@
 
 (setq-default
  tab-width 4                   ; Set default tab width to 4 spaces
- line-spacing 0                
+ line-spacing 0
  make-backup-files nil         ; Stop creating backup~ files
  delete-old-versions t         ; Deletes excess backup files silently.
  create-lockfiles nil          ; Disable lockfiles.

@@ -23,7 +23,10 @@ alias pu='pushd'
 alias po='popd'
 
 # Replace ls with exa
-alias ls='exa'
+if command -v exa &> /dev/null
+then
+    alias ls='exa'
+fi
 
 # Enable aliases to be sudo'ed
 alias sudo='sudo '
