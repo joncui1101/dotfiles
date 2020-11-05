@@ -10,7 +10,7 @@
               ("C-c p" . projectile-command-map))
   :custom
   (projectile-enable-caching t)
-  (projectile-project-search-path '("~/workspace/" "~/dotfiles/")))
+  (projectile-project-search-path '("~/workspace/" "~")))
 
 (use-package helm-projectile
   :requires (projectile helm)

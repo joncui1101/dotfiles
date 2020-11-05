@@ -47,7 +47,7 @@
  )
 
 (set-face-attribute 'default nil
-                    :family "Hasklug Nerd Font"
+                    :family "Hasklig"
                     :weight 'normal
                     :width 'normal)
 
