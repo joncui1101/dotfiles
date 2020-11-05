@@ -46,6 +46,11 @@
  confirm-kill-emacs 'y-or-n-p  ; y and n instead of yes and no when quitting
  )
 
+(set-face-attribute 'default nil
+                    :family "Hasklug Nerd Font"
+                    :weight 'normal
+                    :width 'normal)
+
 ;; Allow y for yes.
 (fset 'yes-or-no-p 'y-or-n-p)
 
