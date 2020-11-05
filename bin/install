@@ -1,8 +1,10 @@
 #!/bin/bash
 
 printf "Downloading dotfiles\n"
-git clone --recursive https://github.com/joncui/dotfiles.git ~/dotfiles
+mkdir ~/pws
+export DOTDIR=~/pws/dotfiles
+git clone --recursive https://github.com/joncui/dotfiles.git ~/pws/dotfiles
 
-~/dotfiles/bin/create-symlinks
+$DOTDIR/bin/create-symlinks
 
 printf "Installation complete\n"

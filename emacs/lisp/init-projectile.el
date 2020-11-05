@@ -9,8 +9,7 @@
   :bind (:map projectile-mode-map
               ("C-c p" . projectile-command-map))
   :custom
-  (projectile-enable-caching t)
-  (projectile-project-search-path '("~/workspace/" "~")))
+  (projectile-project-search-path '("~/workspace/" "~/pws")))
 
 (use-package helm-projectile
   :requires (projectile helm)

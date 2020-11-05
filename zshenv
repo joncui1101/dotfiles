@@ -6,11 +6,11 @@ export ZDOTDIR=$XDG_CONFIG_HOME/zsh
 export CARGO_HOME=$XDG_CONFIG_HOME/cargo
 export RUSTUP_HOME=$XDG_CONFIG_HOME/rustup
 
-export DOTDIR=$HOME/dotfiles
-export GOPATH=$HOME/workspace/go
-export ZSH=$DOTDIR/zsh
-export PATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/sbin:/usr/local/bin:$CARGO_HOME/bin:$GOPATH/bin:$DOTDIR/bin
-export LEDGER=$HOME/ledgers
+export PWS=$HOME/pws
+export DOTDIR=$PWS/dotfiles
+export PATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/sbin:/usr/local/bin:$CARGO_HOME/bin:$DOTDIR/bin
+
+export LEDGER=$PWS/ledgers
 export LEDGER_FILE=$LEDGER/index.journal
 
 export STARSHIP_CONFIG=$XDG_CONFIG_HOME/starship/starship.toml
@@ -30,6 +30,6 @@ export MANWIDTH=999
 
 skip_global_compinit=1
 
-if [[ ( "$SHLVL" -eq 1 && ! -o LOGIN ) && -s $HOME/.zshrc ]]; then
-    source $ZDOTDIR/.zshrc
+if [[ ( "$SHLVL" -eq 1 && ! -o LOGIN ) && -s $XDG_CONFIG_HOME/zsh/.zshrc ]]; then
+    source $XDG_CONFIG_HOME/zsh/.zshrc
 fi

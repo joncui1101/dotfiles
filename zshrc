@@ -8,14 +8,14 @@ if [[ $OSTYPE == *linux* ]]; then
     export SUDO_EDITOR=rvim
 fi
 
-BASE16_SHELL="$HOME/dotfiles/color-schemes/one.dark.sh"
+BASE16_SHELL="$DOTDIR/color-schemes/one.dark.sh"
 [[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
 
 # Vi mode
 bindkey -v
 
 # source all config files
-for config_file ($ZSH/*.zsh*); do
+for config_file ($DOTDIR/zsh/*.zsh*); do
     source $config_file
 done
 unset config_file

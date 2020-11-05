@@ -5,7 +5,7 @@
 (use-package magit
   :defer 0.3
   :custom
-  (magit-repository-directories '(("\~/workspace" . 2) ("\~/ledger" . 0) ("\~/dotfiles" . 0))))
+  (magit-repository-directories '(("\~/workspace" . 1) ("\~/ledger" . 0) ("\~/dotfiles" . 0))))
 
 (use-package git-gutter
   :defer 0.3

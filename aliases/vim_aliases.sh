@@ -1,7 +1,7 @@
 # Vim Aliases
 
-alias zrc='v ~/dotfiles/zshrc'
-alias zenv='v ~/dotfiles/zshenv'
-alias va='v ~/dotfiles/aliases/aliases'
+alias zrc='v $DOTDIR/zshrc'
+alias zenv='v $DOTDIR/zshenv'
+alias va='v $DOTDIR/aliases/aliases'
 
 alias vf='v $(fd --type f | fzf)'

@@ -2,4 +2,4 @@
 alias dl='cd ~/Downloads'
 alias doc='cd ~/Documents'
 alias dt='cd ~/Desktop'
-alias dot='cd ~/dotfiles'
+alias dot='cd $DOTDIR'

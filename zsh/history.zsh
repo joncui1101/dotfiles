@@ -1,5 +1,5 @@
 # history
-HISTFILE=$ZDOTDIR/.zsh_history
+HISTFILE=$XDG_CONFIG_HOME/zsh/.zsh_history
 HISTSIZE=10000
 SAVEHIST=10000
 
