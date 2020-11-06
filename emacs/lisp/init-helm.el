@@ -45,5 +45,7 @@
   (helm-descbinds-mode)
   :bind ("C-h b" . helm-descbinds))
 
+(use-package helm-rg)
+
 (provide 'init-helm)
 ;;; init-helm.el ends here

@@ -5,6 +5,8 @@ export ZDOTDIR=$XDG_CONFIG_HOME/zsh
 
 export CARGO_HOME=$XDG_CONFIG_HOME/cargo
 export RUSTUP_HOME=$XDG_CONFIG_HOME/rustup
+export GOPATH=$XDG_CONFIG_HOME/go
+export GOBIN=$GOPATH/bin
 
 export PWS=$HOME/pws
 export DOTDIR=$PWS/dotfiles

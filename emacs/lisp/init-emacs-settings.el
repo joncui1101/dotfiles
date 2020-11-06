@@ -7,6 +7,8 @@
 
 ;; Add local bin to exec-path
 (add-to-list 'exec-path "/usr/local/bin")
+(add-to-list 'exec-path "~/.config/pyenv/versions/2.7.18/bin")
+(add-to-list 'exec-path "~/.config/pyenv/versions/3.9.0/bin")
 
 ;; Fullscreen on startup
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
