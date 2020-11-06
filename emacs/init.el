@@ -30,7 +30,7 @@
 (require 'init-ledger)
 (require 'init-evil)
 (require 'init-version-control)
-(require 'init-lsp)
+(require 'init-code)
 (require 'init-company)
 (require 'init-helm)
 (require 'init-projectile)

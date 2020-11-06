@@ -5,10 +5,11 @@
 (use-package magit
   :defer 0.3
   :custom
-  (magit-repository-directories '(("\~/workspace" . 1) ("\~/ledger" . 0) ("\~/dotfiles" . 0))))
+  (magit-repository-directories '(("\~/workspace" . 1) ("\~/pws" . 1))))
 
 (use-package git-gutter
   :defer 0.3
+  :delight
   :config (global-git-gutter-mode +1))
 
 (provide 'init-version-control)

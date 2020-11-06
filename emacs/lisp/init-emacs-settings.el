@@ -26,6 +26,9 @@
 ;; Turn off blinking cursor
 (blink-cursor-mode 0)
 
+;; See matching pairs of parantheses and other characters
+(show-paren-mode 1)
+
 (setq-default
  tab-width 4                   ; Set default tab width to 4 spaces
  line-spacing 0
@@ -57,6 +60,12 @@
 (defun jc/reload-emacs-config ()
   (interactive)
   (load-file user-init-file))
+
+(defun jc/server-shutdown ()
+  "Save buffers, Quit, and Shutdown (kill) server"
+  (interactive)
+  (save-some-buffers)
+  (kill-emacs))
 
 (provide 'init-emacs-settings)
 ;;; init-emacs-settings.el ends here

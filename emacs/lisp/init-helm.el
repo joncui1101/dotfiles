@@ -2,6 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 (use-package helm
+  :delight
   :config
   (require 'helm-config)
   (global-unset-key (kbd "C-x c"))
@@ -38,6 +39,11 @@
   (helm-recentf-fuzzy-match t)
   (helm-move-to-line-cycle-in-source t)
   (helm-split-window-inside-p t))
+
+(use-package helm-descbinds
+  :config
+  (helm-descbinds-mode)
+  :bind ("C-h b" . helm-descbinds))
 
 (provide 'init-helm)
 ;;; init-helm.el ends here
