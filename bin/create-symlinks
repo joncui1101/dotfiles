@@ -1,5 +1,7 @@
 #!/bin/bash
 
+source ~/pws/dotfiles/zshenv
+
 printf "Cleanup existing files\n"
 rm ~/.config/emacs
 rm ~/.config/git
@@ -9,16 +11,24 @@ rm ~/.config/nvim
 rm ~/.config/starship
 rm ~/.config/zsh/.zprofile
 rm ~/.config/zsh/.zshrc
-rm ~/.zshenv
+
+printf "Creating symlinks\n"
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
     printf "Linking hammerspoon\n"
     rm ~/.config/hammerspoon
     defaults write org.hammerspoon.Hammerspoon MJConfigFile "~/.config/hammerspoon/init.lua"
     ln -s $DOTDIR/hammerspoon ~/.config
+
+    printf "Linking zshenv\n"
+    rm ~/.zshenv
+    ln -s $DOTDIR/zshenv ~/.zshenv
+elif [[ $OSTYPE == *linux* ]]; then
+    printf "Linking zshenv\n"
+    rm $ZDOTDIR/.zshenv
+    ln -s $DOTDIR/zshenv $ZDOTDIR/.zshenv
 fi
 
-printf "Creating symlinks\n"
 ln -s $DOTDIR/emacs ~/.config
 ln -s $DOTDIR/git ~/.config
 ln -s $DOTDIR/ideavim ~/.config
@@ -27,5 +37,3 @@ ln -s $DOTDIR/nvim ~/.config
 ln -s $DOTDIR/starship ~/.config
 ln -s $DOTDIR/zprofile ~/.config/zsh/.zprofile
 ln -s $DOTDIR/zshrc ~/.config/zsh/.zshrc
-
-ln -s $DOTDIR/zshenv ~/.zshenv
