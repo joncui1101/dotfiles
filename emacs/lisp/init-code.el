@@ -2,15 +2,19 @@
 ;;; Commentary:
 ;;; Code:
 (use-package lsp-mode
-  :hook ((python-mode . lsp-deferred)
-         (go-mode . lsp-deferred)
+  :hook (((python-mode go-mode yaml-mode) . lsp-deferred)
          (lsp-mode . lsp-enable-which-key-integration))
   :custom
   (lsp-keymap-prefix "C-l")
   :commands (lsp lsp-deferred))
 
 (use-package lsp-ui
-  :requires lsp-mode)
+  :requires lsp-mode
+  :hook (lsp-mode . lsp-ui-mode)
+  :custom
+  (lsp-lens-enable t)
+  (lsp-ui-sideline-show-hover t)
+  (lsp-ui-sideline-show-code-actions t))
 
 (use-package go-mode
   :mode "\\.go\\'")

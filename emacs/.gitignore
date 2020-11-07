@@ -56,3 +56,6 @@ flycheck_*.el
 
 # recentf
 /recentf
+
+# lsp
+/.lsp-session-v1
