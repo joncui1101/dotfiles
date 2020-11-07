@@ -9,6 +9,9 @@
   (lsp-keymap-prefix "C-l")
   :commands (lsp lsp-deferred))
 
+(use-package lsp-ui
+  :requires lsp-mode)
+
 (use-package go-mode
   :mode "\\.go\\'")
 
