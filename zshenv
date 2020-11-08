@@ -10,7 +10,7 @@ export GOBIN=$GOPATH/bin
 
 export PWS=$HOME/pws
 export DOTDIR=$PWS/dotfiles
-export PATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/sbin:/usr/local/bin:$CARGO_HOME/bin:$DOTDIR/bin
+export PATH=/usr/local/opt/mysql@5.7/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/sbin:/usr/local/bin:$CARGO_HOME/bin:$GOBIN:$DOTDIR/bin
 
 export LEDGER=$PWS/ledgers
 export LEDGER_FILE=$LEDGER/index.journal
@@ -31,7 +31,3 @@ export MANWIDTH=999
 #export JAVA_HOME=`/usr/libexec/java_home -v 1.8.0_92`
 
 skip_global_compinit=1
-
-if [[ ( "$SHLVL" -eq 1 && ! -o LOGIN ) && -s $XDG_CONFIG_HOME/zsh/.zshrc ]]; then
-    source $XDG_CONFIG_HOME/zsh/.zshrc
-fi
