@@ -16,6 +16,11 @@
   (lsp-ui-sideline-show-hover t)
   (lsp-ui-sideline-show-code-actions t))
 
+(use-package lsp-pyright
+  :hook (python-mode . (lambda ()
+                         (require 'lsp-pyright)
+                         (lsp-deferred))))
+
 (use-package go-mode
   :mode "\\.go\\'")
 
@@ -23,7 +28,7 @@
   :delight
   :config
   (require 'smartparens-config)
-  :hook ((lsp-mode python-mode emacs-lisp-mode yaml-mode) . smartparens-mode))
+  :hook ((emacs-lisp-mode go-mode lsp-mode python-mode yaml-mode) . smartparens-strict-mode))
 
 (use-package yaml-mode
   :mode "\\.ya?ml\\'"

@@ -7,6 +7,10 @@
   :custom
   (magit-repository-directories '(("\~/workspace" . 1) ("\~/pws" . 1))))
 
+(use-package evil-magit
+  :requires (evil magit)
+  :hook (magit-mode . turn-off-evil-snipe-override-mode))
+
 (use-package git-gutter
   :defer 0.3
   :delight
