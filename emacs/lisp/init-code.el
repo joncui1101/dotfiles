@@ -53,5 +53,7 @@
   :config
   (which-key-mode))
 
+(global-superword-mode +1)
+
 (provide 'init-code)
 ;;; init-code.el ends here
