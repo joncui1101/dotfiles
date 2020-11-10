@@ -7,6 +7,7 @@ export CARGO_HOME=$XDG_CONFIG_HOME/cargo
 export RUSTUP_HOME=$XDG_CONFIG_HOME/rustup
 export GOPATH=$XDG_CONFIG_HOME/go
 export GOBIN=$GOPATH/bin
+export NVM_DIR=$XDG_CONFIG_HOME/nvm
 
 export PWS=$HOME/pws
 export DOTDIR=$PWS/dotfiles

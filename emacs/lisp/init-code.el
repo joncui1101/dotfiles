@@ -2,10 +2,11 @@
 ;;; Commentary:
 ;;; Code:
 (use-package lsp-mode
-  :hook (((python-mode go-mode yaml-mode) . lsp-deferred)
+  :hook (((go-mode yaml-mode) . lsp-deferred)
          (lsp-mode . lsp-enable-which-key-integration))
   :custom
   (lsp-keymap-prefix "C-l")
+  (lsp-pyls-server-command "pyright")
   :commands (lsp lsp-deferred))
 
 (use-package lsp-ui
@@ -20,6 +21,19 @@
   :hook (python-mode . (lambda ()
                          (require 'lsp-pyright)
                          (lsp-deferred))))
+
+(use-package pyvenv
+  :init
+  (setenv "WORKON_HOME" "~/.config/pyenv/versions")
+  :preface
+  (defun jc/projectile-pyenv-mode-set ()
+    (let ((pyenv-version-path (f-expand ".python-version" (projectile-project-root))))
+      (if (f-exists? pyenv-version-path)
+          (pyvenv-workon (car (s-lines (s-trim (f-read-text pyenv-version-path)))))
+        (pyvenv-deactivate))))
+  :hook
+  (python-mode . pyvenv-mode)
+  (projectile-after-switch-project . jc/projectile-pyenv-mode-set))
 
 (use-package go-mode
   :mode "\\.go\\'")
