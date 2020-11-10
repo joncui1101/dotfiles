@@ -5,9 +5,13 @@ export ZDOTDIR=$XDG_CONFIG_HOME/zsh
 
 export CARGO_HOME=$XDG_CONFIG_HOME/cargo
 export RUSTUP_HOME=$XDG_CONFIG_HOME/rustup
+
 export GOPATH=$XDG_CONFIG_HOME/go
 export GOBIN=$GOPATH/bin
+
 export NVM_DIR=$XDG_CONFIG_HOME/nvm
+export NPM_CONFIG_USERCONFIG=$XDG_CONFIG_HOME/npm/.npmrc
+export NPM_CONFIG_CACHE=$XDG_CONFIG_HOME/npm
 
 export PWS=$HOME/pws
 export DOTDIR=$PWS/dotfiles
