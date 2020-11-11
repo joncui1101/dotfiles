@@ -5,10 +5,10 @@
 ;; Sets a custom file so it is not in the bottom of the init.el file.
 (setq-default custom-file (expand-file-name "custom.el" user-emacs-directory))
 
-;; Add local bin to exec-path
-(add-to-list 'exec-path "/usr/local/bin")
-(add-to-list 'exec-path "~/.config/pyenv/versions/2.7.18/bin")
-(add-to-list 'exec-path "~/.config/pyenv/versions/3.9.0/bin")
+;; Add $PATH to exec-path
+(use-package exec-path-from-shell
+  :defer 1
+  :config (exec-path-from-shell-initialize))
 
 ;; Fullscreen on startup
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
