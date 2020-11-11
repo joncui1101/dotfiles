@@ -6,6 +6,7 @@
   :defer 0.3
   :custom
   (magit-repository-directories '(("\~/workspace" . 1) ("\~/pws" . 1))))
+  (magit-branch-read-upstream-first 'fallback)
 
 (use-package evil-magit
   :requires (evil magit)

@@ -38,6 +38,7 @@
   (helm-M-x-fuzzy-matching t)
   (helm-recentf-fuzzy-match t)
   (helm-move-to-line-cycle-in-source t)
+  (helm-window-prefer-horizontal-split t)
   (helm-split-window-inside-p t))
 
 (use-package helm-descbinds
