@@ -2,10 +2,9 @@
 ;;; Commentary:
 ;;; Code:
 
-(eval-when-compile
-  (require 'cl-lib))
-
 (use-package evil
+  :custom
+  (evil-symbol-word-search t)
   :config
   (evil-mode 1))
 

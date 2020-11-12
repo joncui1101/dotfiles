@@ -22,6 +22,9 @@
                          (require 'lsp-pyright)
                          (lsp-deferred))))
 
+(use-package python-mode
+  :hook (python-mode . (lambda () (modify-syntax-entry ?_ "w" python-mode-syntax-table))))
+
 (use-package pyvenv
   :init
   (setenv "WORKON_HOME" "~/.config/pyenv/versions")
@@ -52,8 +55,6 @@
 (use-package which-key
   :config
   (which-key-mode))
-
-(global-superword-mode +1)
 
 (provide 'init-code)
 ;;; init-code.el ends here
