@@ -41,6 +41,11 @@
   (helm-window-prefer-horizontal-split t)
   (helm-split-window-inside-p t))
 
+(use-package helm-projectile
+  :requires (projectile helm)
+  :config
+  (helm-projectile-on))
+
 (use-package helm-descbinds
   :config
   (helm-descbinds-mode)

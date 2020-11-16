@@ -20,6 +20,7 @@
 
 ;; Show line numbers
 (global-display-line-numbers-mode)
+(setq display-line-numbers 'relative)
 
 ;; Turn on visual line mode
 (global-visual-line-mode t)
@@ -29,6 +30,9 @@
 
 ;; See matching pairs of parantheses and other characters
 (show-paren-mode 1)
+
+;; Show visible bell
+(setq visible-bell t)
 
 (setq-default
  tab-width 4                   ; Set default tab width to 4 spaces

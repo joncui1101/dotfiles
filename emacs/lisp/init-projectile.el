@@ -10,13 +10,8 @@
   :bind (:map projectile-mode-map
               ("C-c p" . projectile-command-map))
   :custom
-  (projectile-completion-system 'helm)
+  ;; (projectile-completion-system 'helm)
   (projectile-project-search-path '("~/workspace/" "~/pws")))
-
-(use-package helm-projectile
-  :requires (projectile helm)
-  :config
-  (helm-projectile-on))
 
 (provide 'init-projectile)
 ;;; init-projectile.el ends here
