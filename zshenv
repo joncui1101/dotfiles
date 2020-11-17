@@ -13,11 +13,10 @@ export NVM_DIR=$XDG_CONFIG_HOME/nvm
 export NPM_CONFIG_USERCONFIG=$XDG_CONFIG_HOME/npm/.npmrc
 export NPM_CONFIG_CACHE=$XDG_CONFIG_HOME/npm
 
-export PWS=$HOME/pws
-export DOTDIR=$PWS/dotfiles
+export DOTDIR=$HOME/workspace/dotfiles
 export PATH=/usr/local/opt/mysql@5.7/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/sbin:/usr/local/bin:$CARGO_HOME/bin:$GOBIN:$DOTDIR/bin
 
-export LEDGER=$PWS/ledgers
+export LEDGER=$HOME/workspace/ledgers
 export LEDGER_FILE=$LEDGER/index.journal
 
 export STARSHIP_CONFIG=$XDG_CONFIG_HOME/starship/starship.toml

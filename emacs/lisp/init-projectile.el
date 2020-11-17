@@ -11,7 +11,7 @@
               ("C-c p" . projectile-command-map))
   :custom
   ;; (projectile-completion-system 'helm)
-  (projectile-project-search-path '("~/workspace/" "~/pws")))
+  (projectile-project-search-path '("~/workspace/")))
 
 (provide 'init-projectile)
 ;;; init-projectile.el ends here

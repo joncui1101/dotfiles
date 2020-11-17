@@ -1,9 +1,9 @@
 #!/bin/bash
 
 printf "Downloading dotfiles\n"
-mkdir ~/pws
-export DOTDIR=~/pws/dotfiles
-git clone --recursive https://github.com/joncui/dotfiles.git ~/pws/dotfiles
+mkdir ~/workspace
+export DOTDIR=~/workspace/dotfiles
+git clone --recursive https://github.com/joncui/dotfiles.git ~/workspace/dotfiles
 
 $DOTDIR/bin/create-symlinks
 

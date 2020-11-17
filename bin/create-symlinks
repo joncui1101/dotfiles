@@ -17,15 +17,15 @@ if [[ $OSTYPE == darwin* ]]; then
     printf "Linking hammerspoon\n"
     rm ~/.config/hammerspoon
     defaults write org.hammerspoon.Hammerspoon MJConfigFile "~/.config/hammerspoon/init.lua"
-    ln -s $DOTDIR/hammerspoon ~/.config
+    ln -s $DOTDIR/hammerspoon ~/.config/hammerspoon
 fi
 
-ln -s $DOTDIR/emacs ~/.config
-ln -s $DOTDIR/git ~/.config
-ln -s $DOTDIR/ideavim ~/.config
-ln -s $DOTDIR/kitty ~/.config
-ln -s $DOTDIR/nvim ~/.config
-ln -s $DOTDIR/starship ~/.config
+ln -s $DOTDIR/emacs ~/.config/emacs
+ln -s $DOTDIR/git ~/.config/git
+ln -s $DOTDIR/ideavim ~/.config/ideavim
+ln -s $DOTDIR/kitty ~/.config/kitty
+ln -s $DOTDIR/nvim ~/.config/nvim
+ln -s $DOTDIR/starship ~/.config/starship
 ln -s $DOTDIR/zprofile ~/.config/zsh/.zprofile
 ln -s $DOTDIR/zshrc ~/.config/zsh/.zshrc
 ln -s $DOTDIR/zshenv ~/.config/zsh/.zshenv
