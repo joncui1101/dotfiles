@@ -32,8 +32,8 @@
 (require 'init-version-control)
 (require 'init-code)
 (require 'init-company)
-(require 'init-helm)
 (require 'init-projectile)
+(require 'init-helm)
 
 ;; Allow access from emacsclient
 
