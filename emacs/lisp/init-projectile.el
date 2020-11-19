@@ -10,6 +10,7 @@
   :bind (:map projectile-mode-map
               ("C-c p" . projectile-command-map))
   :custom
+  (projectile-completion-system 'ivy)
   ;; (projectile-completion-system 'helm)
   (projectile-project-search-path '("~/workspace/")))
 

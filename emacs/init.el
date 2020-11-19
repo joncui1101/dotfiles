@@ -33,7 +33,8 @@
 (require 'init-code)
 (require 'init-company)
 (require 'init-projectile)
-(require 'init-helm)
+(require 'init-ivy)
+;; (require 'init-helm)
 
 ;; Allow access from emacsclient
 
