@@ -3,13 +3,13 @@
 ;;; Code:
 
 (use-package projectile
-  :demand
   :delight
-  :config
+  :init
   (projectile-mode 1)
   :bind (:map projectile-mode-map
               ("C-c p" . projectile-command-map))
   :custom
+  (projectile-enable-caching t)
   (projectile-completion-system 'ivy)
   ;; (projectile-completion-system 'helm)
   (projectile-project-search-path '("~/workspace/")))

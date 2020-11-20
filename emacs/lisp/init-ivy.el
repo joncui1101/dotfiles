@@ -1,4 +1,4 @@
-;;; init-ivy.el --- Setup helm -*- lexical-binding: t -*-
+;;; init-ivy.el --- Setup ivy -*- lexical-binding: t -*-
 ;;; Commentary:
 ;;; Code:
 (use-package ivy
@@ -38,9 +38,10 @@
 
 (use-package counsel-projectile
   :requires projectile
-  :demand
-  :config
-  (counsel-projectile-mode 1))
+  :init
+  (counsel-projectile-mode 1)
+  :custom
+  (counsel-projectile-find-file-matcher 'ivy--re-filter))
 
 (provide 'init-ivy)
 ;;; init-ivy.el ends here
