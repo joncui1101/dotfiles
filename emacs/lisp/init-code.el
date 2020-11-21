@@ -52,9 +52,5 @@
   :bind (:map yaml-mode-map
               ("\C-m" . newline-and-indent)))
 
-(use-package which-key
-  :config
-  (which-key-mode))
-
 (provide 'init-code)
 ;;; init-code.el ends here

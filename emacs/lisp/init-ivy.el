@@ -14,7 +14,7 @@
          :map ivy-reverse-i-search-map
          ("C-k" . ivy-previous-line)
          ("C-d" . ivy-reverse-i-search-kill))
-  :config
+  :init
   (ivy-mode +1)
   :custom
   (ivy-use-virtual-buffers t)
@@ -23,14 +23,9 @@
   (ivy-count-format "(%d/%d) "))
 
 (use-package counsel
-  :bind (("M-x" . counsel-M-x)
-         ("C-x C-f" . counsel-find-file)
-         ("C-x b" . counsel-ibuffer)
-         ("C-M-l" . counsel-imenu)
-         ([remap apropos-command] . counsel-apropos)
-         ([remap describe-variable] . counsel-describe-variable)
-         ([remap describe-symbol] . counsel-describe-symbol)
-         ([remap describe-function] . counsel-describe-function)
+  :init
+  (counsel-mode +1)
+  :bind (("C-x b" . counsel-ibuffer)
          :map minibuffer-local-map
          ("C-r" . 'counsel-minibuffer-history))
   :custom
@@ -41,6 +36,9 @@
   :init
   (counsel-projectile-mode 1)
   :custom
+  (counsel-projectile-remove-current-buffer t)
+  (counsel-projectile-remove-current-project t)
+  (counsel-projectile-preview-buffers t)
   (counsel-projectile-find-file-matcher 'ivy--re-filter))
 
 (provide 'init-ivy)
