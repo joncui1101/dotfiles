@@ -115,30 +115,30 @@ highlight NonText ctermbg=None
 autocmd BufEnter * set formatoptions-=ro
 
 " Set augroup
-augroup MyAutoCmd
-    autocmd!
-augroup END
-
 augroup initvim
     autocmd!
+
+    " Reload init.vim when edited
+    autocmd BufWritePost init.vim nested :source ~/.config/nvim/init.vim
 augroup END
 
-" Delete trailing whitespace
 augroup MyAutoCmd
+    autocmd!
+
+    " Delete trailing whitespace
     autocmd FileWritePre   * :call TrimWhiteSpace()
     autocmd FileAppendPre  * :call TrimWhiteSpace()
     autocmd FilterWritePre * :call TrimWhiteSpace()
     autocmd BufWritePre    * :call TrimWhiteSpace()
-augroup END
 
-" Reload init.vim when edited
-autocmd MyAutoCmd BufWritePost init.vim nested :source ~/.config/nvim/init.vim
-
-augroup MyAutoCmd
+    " convert tabs to space
     autocmd FileWritePre   * :retab
     autocmd FileAppendPre  * :retab
     autocmd FilterWritePre * :retab
     autocmd BufWritePre    * :retab
+
+    " Set *.pp files to json filetype
+    autocmd BufNewFile,BufRead *.pp set filetype=json
 augroup END
 
 autocmd FileType java setlocal omnifunc=javacomplete#Complete
