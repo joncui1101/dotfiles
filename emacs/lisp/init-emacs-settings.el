@@ -6,6 +6,7 @@
 (setq-default custom-file (expand-file-name "custom.el" user-emacs-directory))
 
 ;; Add $PATH to exec-path
+;; (load-env "env-file")
 (setq local-bin "/usr/local/bin")
 (setq pyenv-path (expand-file-name "~/.config/pyenv/shims"))
 (setq nvm-path (expand-file-name "~/.config/nvm/versions/node/v15.2.1/bin"))

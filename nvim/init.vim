@@ -225,8 +225,8 @@ set updatetime=300
 " Keep undo history across sessions, by storing in file.
 " Only works all the time.
 if has('persistent_undo')
-    silent !mkdir $XDG_CACHE_HOME/vim/undo > /dev/null 2>&1
-    set undodir=$XDG_CACHE_HOME/vim/undo
+    silent !mkdir ${XDG_CACHE_HOME}/vim/undo > /dev/null 2>&1
+    set undodir=${XDG_CACHE_HOME}/vim/undo
     set undofile
 endif
 
