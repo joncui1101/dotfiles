@@ -6,8 +6,16 @@
 (setq-default custom-file (expand-file-name "custom.el" user-emacs-directory))
 
 ;; Add $PATH to exec-path
-(use-package exec-path-from-shell
-  :config (exec-path-from-shell-initialize))
+(setq local-bin "/usr/local/bin")
+(setq pyenv-path (expand-file-name "~/.config/pyenv/shims"))
+(setq nvm-path (expand-file-name "~/.config/nvm/versions/node/v15.2.1/bin"))
+
+(dolist (path (list local-bin
+                    pyenv-path
+                    nvm-path))
+  (add-to-list 'exec-path path))
+
+(setenv "PATH" (string-join (list local-bin pyenv-path nvm-path (getenv "PATH")) ":"))
 
 ;; Fullscreen on startup
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
