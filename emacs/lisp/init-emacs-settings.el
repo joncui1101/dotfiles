@@ -1,22 +1,16 @@
 ;;; init-emacs-settings.el --- Settings emacs -*- lexical-binding: t -*-
 ;;; Commentary:
 ;;; Code:
+(require 'f)
 
 ;; Sets a custom file so it is not in the bottom of the init.el file.
-(setq-default custom-file (expand-file-name "custom.el" user-emacs-directory))
+(setq-default custom-file (f-expand "custom.el" user-emacs-directory))
 
 ;; Add $PATH to exec-path
-;; (load-env "env-file")
-(setq local-bin "/usr/local/bin")
-(setq pyenv-path (expand-file-name "~/.config/pyenv/shims"))
-(setq nvm-path (expand-file-name "~/.config/nvm/versions/node/v15.2.1/bin"))
-
-(dolist (path (list local-bin
-                    pyenv-path
-                    nvm-path))
-  (add-to-list 'exec-path path))
-
-(setenv "PATH" (string-join (list local-bin pyenv-path nvm-path (getenv "PATH")) ":"))
+(use-package init-env
+  :load-path "lisp"
+  :config
+  (load-env "env-file"))
 
 ;; Fullscreen on startup
 (add-to-list 'default-frame-alist '(fullscreen . maximized))

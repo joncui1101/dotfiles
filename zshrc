@@ -46,3 +46,8 @@ if command -v starship &> /dev/null
 then
     eval "$(starship init zsh)"
 fi
+
+if [[ `cat $DOTDIR/emacs/env-file` != $PATH ]]; then
+    echo "Updating 'env-file'"
+    echo $PATH > $DOTDIR/emacs/env-file
+fi
