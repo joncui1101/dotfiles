@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 (use-package lsp-mode
-  :hook (((go-mode yaml-mode) . lsp-deferred)
+  :hook (((go-mode yaml-mode dockerfile-mode sh-mode) . lsp-deferred)
          (lsp-mode . lsp-enable-which-key-integration))
   :custom
   (lsp-keymap-prefix "C-l")
@@ -51,6 +51,13 @@
   :mode "\\.ya?ml\\'"
   :bind (:map yaml-mode-map
               ("\C-m" . newline-and-indent)))
+
+(use-package dockerfile-mode
+  :mode "Dockerfile\\(?:\\.?.*\\)?\\'")
+
+(use-package sh-script
+  :mode (("\\.sh\\'" . sh-mode)
+         ("\\^.z.*\\'" . sh-mode)))
 
 (provide 'init-code)
 ;;; init-code.el ends here

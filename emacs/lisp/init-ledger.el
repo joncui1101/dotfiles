@@ -23,6 +23,7 @@
   (ledger-mode-should-check-version nil)
   (ledger-init-file-name "")
   (ledger-default-date-format "%m/%d")
+  (ledger-post-amount-alignment-at :decimal)
   (ledger-highlight-xact-under-point nil))
 
 (provide 'init-ledger)
