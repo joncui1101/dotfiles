@@ -3,6 +3,9 @@ export XDG_DATA_HOME=$XDG_CONFIG_HOME/local/share
 export XDG_CACHE_HOME=$XDG_CONFIG_HOME/cache
 export ZDOTDIR=$XDG_CONFIG_HOME/zsh
 
+export WS=$HOME/workspace/work
+export PWS=$HOME/workspace/personal
+
 export CARGO_HOME=$XDG_CONFIG_HOME/cargo
 export RUSTUP_HOME=$XDG_CONFIG_HOME/rustup
 
@@ -13,10 +16,10 @@ export NVM_DIR=$XDG_CONFIG_HOME/nvm
 export NPM_CONFIG_USERCONFIG=$XDG_CONFIG_HOME/npm/.npmrc
 export NPM_CONFIG_CACHE=$XDG_CONFIG_HOME/npm
 
-export DOTDIR=$HOME/workspace/dotfiles
+export DOTDIR=$PWS/dotfiles
 export PATH=/usr/local/opt/mysql@5.7/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/sbin:/usr/local/bin:$CARGO_HOME/bin:$GOBIN:$DOTDIR/bin
 
-export LEDGER=$HOME/workspace/ledgers
+export LEDGER=$PWS/ledgers
 export LEDGER_FILE=$LEDGER/index.journal
 
 export STARSHIP_CONFIG=$XDG_CONFIG_HOME/starship/starship.toml

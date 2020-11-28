@@ -12,7 +12,7 @@
   (projectile-enable-caching t)
   (projectile-completion-system 'ivy)
   ;; (projectile-completion-system 'helm)
-  (projectile-project-search-path '("~/workspace/")))
+  (projectile-project-search-path '("~/workspace/work/" "~/workspace/personal")))
 
 (provide 'init-projectile)
 ;;; init-projectile.el ends here
