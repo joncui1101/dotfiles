@@ -3,13 +3,17 @@
 ;;; Code:
 
 (use-package projectile
-  :delight
   :init
   (projectile-mode 1)
   :bind (:map projectile-mode-map
               ("C-c p" . projectile-command-map))
+  :config
+  (add-to-list 'projectile-globally-ignored-directories "vendor")
+  (add-to-list 'projectile-globally-ignored-directories ".github")
   :custom
+  (projectile-mode-line-prefix " Proj")
   (projectile-enable-caching t)
+  (projectile-indexing-method 'native)
   (projectile-completion-system 'ivy)
   ;; (projectile-completion-system 'helm)
   (projectile-project-search-path '("~/workspace/work/" "~/workspace/personal")))

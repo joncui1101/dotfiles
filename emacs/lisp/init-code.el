@@ -11,7 +11,6 @@
 
 (use-package lsp-ui
   :requires lsp-mode
-  :hook (lsp-mode . lsp-ui-mode)
   :custom
   (lsp-lens-enable t)
   (lsp-ui-sideline-show-hover t)
@@ -25,27 +24,14 @@
 (use-package python-mode
   :hook (python-mode . (lambda () (modify-syntax-entry ?_ "w" python-mode-syntax-table))))
 
-(use-package pyvenv
-  :init
-  (setenv "WORKON_HOME" "~/.config/pyenv/versions")
-  :preface
-  (defun jc/projectile-pyenv-mode-set ()
-    (let ((pyenv-version-path (f-expand ".python-version" (projectile-project-root))))
-      (if (f-exists? pyenv-version-path)
-          (pyvenv-workon (car (s-lines (s-trim (f-read-text pyenv-version-path)))))
-        (pyvenv-deactivate))))
-  :hook
-  (python-mode . pyvenv-mode)
-  (projectile-after-switch-project . jc/projectile-pyenv-mode-set))
-
 (use-package go-mode
-  :mode "\\.go\\'")
-
-(use-package smartparens
-  :delight
-  :config
-  (require 'smartparens-config)
-  :hook ((emacs-lisp-mode go-mode lsp-mode python-mode yaml-mode) . smartparens-strict-mode))
+  :preface
+  (defun jc/lsp-go-install-save-hooks ()
+    (add-hook 'before-save-hook #'lsp-format-buffer t t)
+    (add-hook 'before-save-hook #'lsp-organize-imports t t))
+  :mode "\\.go\\'"
+  :hook
+  (go-mode . jc/lsp-go-install-save-hooks))
 
 (use-package yaml-mode
   :mode "\\.ya?ml\\'"
@@ -58,6 +44,25 @@
 (use-package sh-script
   :mode (("\\.sh\\'" . sh-mode)
          ("\\^.z.*\\'" . sh-mode)))
+
+(use-package smartparens
+  :delight
+  :config
+  (require 'smartparens-config)
+  :hook ((emacs-lisp-mode go-mode lsp-mode python-mode yaml-mode) . smartparens-strict-mode))
+
+(use-package pyvenv
+  :init
+  (setenv "WORKON_HOME" "~/.config/pyenv/versions")
+  :preface
+  (defun jc/projectile-pyenv-mode-set ()
+    (let ((pyenv-version-path (f-expand ".python-version" (projectile-project-root))))
+      (if (f-exists? pyenv-version-path)
+          (pyvenv-workon (car (s-lines (s-trim (f-read-text pyenv-version-path)))))
+        (pyvenv-deactivate))))
+  :hook
+  (python-mode . pyvenv-mode)
+  (projectile-after-switch-project . jc/projectile-pyenv-mode-set))
 
 (provide 'init-code)
 ;;; init-code.el ends here

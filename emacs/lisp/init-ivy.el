@@ -23,6 +23,7 @@
   (ivy-count-format "(%d/%d) "))
 
 (use-package counsel
+  :delight
   :init
   (counsel-mode +1)
   :bind (("C-x b" . counsel-ibuffer)
