@@ -22,6 +22,11 @@
   (enable-recursive-minibuffers t)
   (ivy-count-format "(%d/%d) "))
 
+(use-package ivy-rich
+  :init (ivy-rich-mode +1)
+  :config
+  (setcdr (assq t ivy-format-functions-alist) #'ivy-format-function-line))
+
 (use-package counsel
   :delight
   :init
@@ -37,8 +42,6 @@
   :init
   (counsel-projectile-mode 1)
   :custom
-  (counsel-projectile-remove-current-buffer t)
-  (counsel-projectile-remove-current-project t)
   (counsel-projectile-find-file-matcher 'ivy--re-filter))
 
 (provide 'init-ivy)

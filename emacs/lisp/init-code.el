@@ -49,7 +49,7 @@
   :delight
   :config
   (require 'smartparens-config)
-  :hook ((emacs-lisp-mode go-mode lsp-mode python-mode yaml-mode) . smartparens-strict-mode))
+  :hook ((emacs-lisp-mode go-mode lsp-mode python-mode yaml-mode) . smartparens-mode))
 
 (use-package pyvenv
   :init
@@ -63,6 +63,14 @@
   :hook
   (python-mode . pyvenv-mode)
   (projectile-after-switch-project . jc/projectile-pyenv-mode-set))
+
+(use-package display-line-numbers
+  :preface
+  (defun jc/line-numbers ()
+    (display-line-numbers-mode 1)
+    (setq display-line-numbers 'relative))
+  :hook ((prog-mode . jc/line-numbers)
+         (text-mode . jc/line-numbers)))
 
 (provide 'init-code)
 ;;; init-code.el ends here

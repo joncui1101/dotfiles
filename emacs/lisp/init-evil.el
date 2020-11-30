@@ -3,6 +3,10 @@
 ;;; Code:
 
 (use-package evil
+  :init
+  (setq evil-want-integration t)
+  (setq evil-want-keybinding nil)
+  (setq evil-respect-visual-line-mode t)
   :custom
   (evil-symbol-word-search t)
   :config
@@ -28,6 +32,13 @@
   (evil-snipe-scope 'buffer)
   (evil-snipe-repeat-scope 'buffer)
   (evil-snipe-spillover-scope 'whole-buffer))
+
+(use-package evil-collection
+  :requires evil
+  :config
+  (evil-collection-init)
+  :custom
+  (evil-collection-setup-minibuffer t))
 
 (provide 'init-evil)
 ;;; init-evil.el ends here

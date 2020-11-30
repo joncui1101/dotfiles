@@ -21,10 +21,6 @@
 ;; Remove scrollbar
 (if window-system (scroll-bar-mode -1))
 
-;; Show line numbers
-(global-display-line-numbers-mode)
-(setq display-line-numbers 'relative)
-
 ;; Turn on visual line mode
 (global-visual-line-mode t)
 
