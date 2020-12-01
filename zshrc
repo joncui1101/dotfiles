@@ -20,7 +20,7 @@ for config_file ($DOTDIR/zsh/*.zsh*); do
 done
 unset config_file
 
-WORKENV=$HOME/work_dot/workenv
+WORKENV=$WS/dotfiles/workenv.zsh
 [ -s $WORKENV ] && source $WORKENV
 
 if [[ $OSTYPE == darwin* ]]; then

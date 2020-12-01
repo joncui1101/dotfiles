@@ -2,8 +2,8 @@
 source $DOTDIR/aliases/dir_aliases.sh
 source $DOTDIR/aliases/vim_aliases.sh
 source $DOTDIR/aliases/git_aliases.sh
-if [[ -d $HOME/work_dot ]]; then
-    source $HOME/work_dot/*
+if [[ -d $WS/dotfiles ]]; then
+    source $WS/dotfiles/work_aliases.sh
 fi
 
 
