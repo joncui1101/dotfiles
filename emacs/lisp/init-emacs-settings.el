@@ -12,15 +12,6 @@
   :config
   (load-env "env-file"))
 
-;; Fullscreen on startup
-(add-to-list 'default-frame-alist '(fullscreen . maximized))
-
-;; Remove toolbar
-(tool-bar-mode -1)
-
-;; Remove scrollbar
-(if window-system (scroll-bar-mode -1))
-
 ;; Turn on visual line mode
 (global-visual-line-mode t)
 
