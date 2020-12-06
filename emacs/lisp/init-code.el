@@ -72,5 +72,9 @@
   :hook ((prog-mode . jc/line-numbers)
          (text-mode . jc/line-numbers)))
 
+(use-package hl-line
+  :hook ((prog-mode . hl-line-mode)
+         (text-mode . hl-line-mode)))
+
 (provide 'init-code)
 ;;; init-code.el ends here
