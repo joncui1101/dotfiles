@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 (use-package helm
-  :delight
+  :diminish
   :config
   (require 'helm-config)
   (global-unset-key (kbd "C-x c"))

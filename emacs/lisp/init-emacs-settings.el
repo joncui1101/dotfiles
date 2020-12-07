@@ -47,7 +47,8 @@
 (set-face-attribute 'default nil
                     :family "Hasklug Nerd Font"
                     :weight 'normal
-                    :width 'normal)
+                    :width 'normal
+                    :height 130)
 
 (use-package ligature
   :load-path "lisp-local"
@@ -66,9 +67,9 @@
   (global-ligature-mode t))
 
 (use-package which-key
+  :diminish
   :init
-  (which-key-mode)
-  :delight)
+  (which-key-mode))
 
 ;; ESC cancels all
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)

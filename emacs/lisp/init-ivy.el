@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 (use-package ivy
-  :delight
+  :diminish
   :bind (("C-s" . swiper)
          :map ivy-minibuffer-map
          ("C-l" . ivy-alt-done)
@@ -28,7 +28,7 @@
   (setcdr (assq t ivy-format-functions-alist) #'ivy-format-function-line))
 
 (use-package counsel
-  :delight
+  :diminish
   :init
   (counsel-mode +1)
   :bind (("C-x b" . counsel-ibuffer)

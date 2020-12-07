@@ -14,7 +14,7 @@
 
 (use-package git-gutter
   :defer 0.3
-  :delight
+  :diminish
   :config (global-git-gutter-mode +1)
   :custom
   (git-gutter:update-interval 2))

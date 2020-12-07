@@ -22,6 +22,7 @@
                          (lsp-deferred))))
 
 (use-package python-mode
+  :diminish " py"
   :hook (python-mode . (lambda () (modify-syntax-entry ?_ "w" python-mode-syntax-table))))
 
 (use-package go-mode
@@ -46,10 +47,14 @@
          ("\\^.z.*\\'" . sh-mode)))
 
 (use-package smartparens
-  :delight
+  :diminish
   :config
   (require 'smartparens-config)
-  :hook ((emacs-lisp-mode go-mode lsp-mode python-mode yaml-mode) . smartparens-mode))
+  :hook (prog-mode . smartparens-mode))
+
+(use-package evil-cleverparens
+  :diminish
+  :hook (smartparens-mode . evil-cleverparens-mode))
 
 (use-package pyvenv
   :init

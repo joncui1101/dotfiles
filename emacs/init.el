@@ -16,7 +16,7 @@
 (require 'init-packages) ;; Calls (package-initialize)
 (require 'init-user-settings)
 (require 'init-emacs-settings)
-(require 'init-theme)
+(require 'init-ui)
 
 ;; Load configs for specific features and modes
 

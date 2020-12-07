@@ -23,7 +23,10 @@
 (require 'use-package)
 (setq use-package-always-ensure t)
 
-(use-package delight)
+(use-package diminish
+  :diminish auto-revert-mode
+  :diminish eldoc-mode
+  :diminish visual-line-mode)
 
 (provide 'init-packages)
 ;;; init-packages.el ends here

@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 (use-package company
-  :delight
+  :diminish
   :config (global-company-mode 1)
   :custom
   (company-idle-delay 0)

@@ -23,7 +23,7 @@
   (global-evil-surround-mode 1))
 
 (use-package evil-snipe
-  :delight evil-snipe-local-mode
+  :diminish evil-snipe-local-mode
   :requires evil
   :config
   (evil-snipe-mode 1)
