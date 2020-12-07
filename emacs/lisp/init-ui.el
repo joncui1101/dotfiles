@@ -16,6 +16,8 @@
   (mode-line ((t (:height 120))))
   (mode-line-inactive ((t (:height 120))))
   :custom
+  (doom-modeline-vcs-max-length 50)
+  (doom-modeline-modal-icon nil)
   (doom-modeline-lsp t))
 
 (provide 'init-ui)
