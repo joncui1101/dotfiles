@@ -7,6 +7,7 @@
   :custom
   (lsp-keymap-prefix "C-l")
   (lsp-pyls-server-command "pyright")
+  (lsp-headerline-breadcrumb-enable t)
   :commands (lsp lsp-deferred))
 
 (use-package lsp-ui
