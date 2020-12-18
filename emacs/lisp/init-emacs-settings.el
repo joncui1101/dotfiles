@@ -33,6 +33,7 @@
  auto-save-default nil         ; Stop creating #autosave# files
  load-prefer-newer t           ; Load the newest version of a file.
  indent-tabs-mode nil          ; Use space instead of tabs for indents.
+ backward-delete-char-untabify-method 'hungry ; Make backspace erase the tab instead of 1 space at a time
  sentence-end-double-space nil ; Single space to end a sentence.
  ring-bell-function 'ignore    ; Disable bell ring.
  visible-bell nil              ; Disable visible bell.

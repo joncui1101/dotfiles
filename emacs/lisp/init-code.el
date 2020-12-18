@@ -5,17 +5,17 @@
   :hook (((go-mode yaml-mode dockerfile-mode sh-mode) . lsp-deferred)
          (lsp-mode . lsp-enable-which-key-integration))
   :custom
-  (lsp-keymap-prefix "C-l")
-  (lsp-pyls-server-command "pyright")
+  (lsp-enable-file-watchers nil)
   (lsp-headerline-breadcrumb-enable t)
+  (lsp-keymap-prefix "C-l")
+  (lsp-lens-enable t)
+  (lsp-pyls-server-command "pyright")
   :commands (lsp lsp-deferred))
 
 (use-package lsp-ui
-  :requires lsp-mode
-  :custom
-  (lsp-lens-enable t)
-  (lsp-ui-sideline-show-hover t)
-  (lsp-ui-sideline-show-code-actions t))
+  :config
+  (setq lsp-ui-sideline-show-code-actions t
+        lsp-ui-sideline-show-diagnostics t))
 
 (use-package lsp-pyright
   :hook (python-mode . (lambda ()
@@ -53,10 +53,6 @@
   (require 'smartparens-config)
   :hook (prog-mode . smartparens-mode))
 
-(use-package evil-cleverparens
-  :diminish
-  :hook (smartparens-mode . evil-cleverparens-mode))
-
 (use-package pyvenv
   :init
   (setenv "WORKON_HOME" "~/.config/pyenv/versions")
@@ -81,6 +77,9 @@
 (use-package hl-line
   :hook ((prog-mode . hl-line-mode)
          (text-mode . hl-line-mode)))
+
+(use-package indent-guide
+  :hook ((prog-mode . indent-guide-mode)))
 
 (provide 'init-code)
 ;;; init-code.el ends here

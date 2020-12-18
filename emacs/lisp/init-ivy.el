@@ -27,6 +27,8 @@
   :config
   (setcdr (assq t ivy-format-functions-alist) #'ivy-format-function-line))
 
+(use-package lsp-ivy)
+
 (use-package counsel
   :diminish
   :init
