@@ -17,10 +17,11 @@
   :init
   (ivy-mode +1)
   :custom
-  (ivy-use-virtual-buffers t)
-  (ivy-wrap t)
   (enable-recursive-minibuffers t)
-  (ivy-count-format "(%d/%d) "))
+  (ivy-count-format "(%d/%d) ")
+  (ivy-re-builders-alist '((t . ivy--regex-ignore-order)))
+  (ivy-use-virtual-buffers t)
+  (ivy-wrap t))
 
 (use-package ivy-rich
   :init (ivy-rich-mode +1)

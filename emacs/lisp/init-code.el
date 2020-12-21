@@ -78,8 +78,12 @@
   :hook ((prog-mode . hl-line-mode)
          (text-mode . hl-line-mode)))
 
-(use-package indent-guide
-  :hook ((prog-mode . indent-guide-mode)))
+(use-package highlight-indent-guides
+  :custom
+  (highlight-indent-guides-method 'bitmap)
+  :hook ((python-mode . highlight-indent-guides-mode)
+         (yaml-mode . highlight-indent-guides-mode)
+         (go-mode . highlight-indent-guides-mode)))
 
 (provide 'init-code)
 ;;; init-code.el ends here
