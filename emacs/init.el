@@ -20,12 +20,14 @@
 
 ;; Load configs for specific features and modes
 
+(require 'init-dired)
 (require 'init-ledger)
 (require 'init-evil)
 (require 'init-version-control)
 (require 'init-code)
 (require 'init-company)
 (require 'init-projectile)
+(require 'init-markdown)
 (require 'init-ivy)
 ;; (require 'init-helm)
 

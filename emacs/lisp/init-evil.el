@@ -19,10 +19,12 @@
   (evil-ledger-sort-key "S"))
 
 (use-package evil-surround
+  :defer 1
   :config
   (global-evil-surround-mode 1))
 
 (use-package evil-snipe
+  :defer 1
   :diminish evil-snipe-local-mode
   :requires evil
   :config
@@ -34,6 +36,7 @@
   (evil-snipe-spillover-scope 'whole-buffer))
 
 (use-package evil-collection
+  :defer 1
   :requires evil
   :config
   (evil-collection-init)

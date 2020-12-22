@@ -8,7 +8,6 @@
   (global-unset-key (kbd "C-x c"))
   (helm-mode 1)
   (helm-autoresize-mode 1)
-  :demand
   :bind (("M-x" . helm-M-x)
          ("C-x C-f" . helm-find-files)
          ("C-x C-b" . helm-mini)

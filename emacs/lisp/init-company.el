@@ -2,6 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 (use-package company
+  :defer 1
   :diminish
   :config (global-company-mode 1)
   :custom

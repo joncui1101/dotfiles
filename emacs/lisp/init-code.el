@@ -71,19 +71,16 @@
   (defun jc/line-numbers ()
     (display-line-numbers-mode 1)
     (setq display-line-numbers 'relative))
-  :hook ((prog-mode . jc/line-numbers)
-         (text-mode . jc/line-numbers)))
+  :hook (((prog-mode text-mode) . jc/line-numbers)))
 
 (use-package hl-line
-  :hook ((prog-mode . hl-line-mode)
-         (text-mode . hl-line-mode)))
+  :ensure nil
+  :hook ((prog-mode text-mode dired-mode) . hl-line-mode))
 
 (use-package highlight-indent-guides
   :custom
   (highlight-indent-guides-method 'bitmap)
-  :hook ((python-mode . highlight-indent-guides-mode)
-         (yaml-mode . highlight-indent-guides-mode)
-         (go-mode . highlight-indent-guides-mode)))
+  :hook (((python-mode yaml-mode go-mode) . highlight-indent-guides-mode)))
 
 (provide 'init-code)
 ;;; init-code.el ends here

@@ -2,8 +2,6 @@
 ;;; Commentary:
 ;;; Code:
 
-(eval-when-compile
-  (require 'cl-lib))
 (require 'package)
 
 ;; Standard package repositories
@@ -17,7 +15,7 @@
 ;; Bootstrap use-package
 
 (unless (package-installed-p 'use-package)
-  (package-refresh-contents)
+  ;; (package-refresh-contents)
   (package-install 'use-package))
 
 (require 'use-package)

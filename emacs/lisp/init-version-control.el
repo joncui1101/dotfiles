@@ -3,7 +3,7 @@
 ;;; Code:
 
 (use-package magit
-  :defer 0.3
+  :defer 1
   :custom
   (magit-branch-read-upstream-first 'fallback)
   (magit-repository-directories '(("\~/workspace" . 1))))
@@ -13,7 +13,7 @@
   :hook (magit-mode . turn-off-evil-snipe-override-mode))
 
 (use-package git-gutter
-  :defer 0.3
+  :defer 1
   :diminish
   :config (global-git-gutter-mode +1)
   :custom

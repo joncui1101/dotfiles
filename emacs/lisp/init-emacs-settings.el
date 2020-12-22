@@ -5,6 +5,7 @@
 
 ;; Sets a custom file so it is not in the bottom of the init.el file.
 (setq-default custom-file (f-expand "custom.el" user-emacs-directory))
+(load custom-file t)
 
 ;; Add $PATH to exec-path
 (use-package init-env
@@ -21,8 +22,13 @@
 ;; See matching pairs of parantheses and other characters
 (show-paren-mode 1)
 
-;; Show visible bell
-(setq visible-bell t)
+(setq transient-directory "~/.config/cache/emacs/"
+      backup-directory-alist `(("." . ,(f-expand "backups" transient-directory)))
+      url-history-file (f-expand "url/history" transient-directory)
+      auto-save-list-file-prefix (f-expand "auto-save-list/.saves-" transient-directory)
+      projectile-known-projects-file (f-expand "projectile-bookmarks.eld" transient-directory)
+      projectile-cache-file (f-expand "projectile.cache" transient-directory)
+      package-quickstart-file (f-expand "package-quickstart.el" transient-directory))
 
 (setq-default
  tab-width 4                   ; Set default tab width to 4 spaces
@@ -36,7 +42,7 @@
  backward-delete-char-untabify-method 'hungry ; Make backspace erase the tab instead of 1 space at a time
  sentence-end-double-space nil ; Single space to end a sentence.
  ring-bell-function 'ignore    ; Disable bell ring.
- visible-bell nil              ; Disable visible bell.
+ visible-bell t                ; Enable visible bell.
  line-number-mode nil          ; Hide line number from mode line.
  dired-use-ls-dired nil        ; Don't use --dired with ls.
  initial-scratch-message ""    ; Start with a blank canvas.
@@ -68,9 +74,12 @@
   (global-ligature-mode t))
 
 (use-package which-key
+  :defer 1
   :diminish
   :init
-  (which-key-mode))
+  (which-key-mode)
+  :custom
+  (which-key-idle-delay 0.3))
 
 ;; ESC cancels all
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
