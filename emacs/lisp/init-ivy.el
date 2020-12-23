@@ -2,6 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 (use-package ivy
+  :defer 1
   :diminish
   :bind (("C-s" . swiper)
          :map ivy-minibuffer-map
@@ -24,24 +25,28 @@
   (ivy-wrap t))
 
 (use-package ivy-rich
+  :requires ivy
   :init (ivy-rich-mode +1)
   :config
   (setcdr (assq t ivy-format-functions-alist) #'ivy-format-function-line))
 
-(use-package lsp-ivy)
+(use-package lsp-ivy
+  :requires (lsp-mode ivy))
 
 (use-package counsel
+  :requires ivy
   :diminish
   :init
   (counsel-mode +1)
   :bind (("C-x b" . counsel-ibuffer)
+         ("M-c" . quick-calc)
          :map minibuffer-local-map
          ("C-r" . 'counsel-minibuffer-history))
   :custom
   (ivy-initial-inputs-alist nil))
 
 (use-package counsel-projectile
-  :requires projectile
+  :requires (counsel projectile)
   :init
   (counsel-projectile-mode 1)
   :custom

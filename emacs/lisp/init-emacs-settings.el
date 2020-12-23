@@ -58,6 +58,7 @@
                     :height 130)
 
 (use-package ligature
+  :defer 1
   :load-path "lisp-local"
   :config
   (ligature-set-ligatures 't '("www"))

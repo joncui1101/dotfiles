@@ -3,6 +3,7 @@
 ;;; Code:
 
 (use-package projectile
+  :defer 1
   :diminish
   :init
   (projectile-mode 1)
