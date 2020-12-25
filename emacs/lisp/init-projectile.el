@@ -14,6 +14,7 @@
   (add-to-list 'projectile-globally-ignored-directories ".github")
   :custom
   (projectile-enable-caching t)
+  (projectile-require-project-root t)
   (projectile-indexing-method 'native)
   (projectile-completion-system 'ivy)
   ;; (projectile-completion-system 'helm)

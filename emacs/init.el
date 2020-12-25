@@ -14,6 +14,7 @@
 ;; Bootstrap config
 
 (require 'init-packages) ;; Calls (package-initialize)
+(require 'init-functions)
 (require 'init-user-settings)
 (require 'init-emacs-settings)
 (require 'init-ui)
@@ -30,6 +31,7 @@
 (require 'init-markdown)
 (require 'init-ivy)
 ;; (require 'init-helm)
+(require 'init-elfeed)
 
 ;; Allow access from emacsclient
 (add-hook 'after-init-hook

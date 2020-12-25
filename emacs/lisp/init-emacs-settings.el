@@ -28,7 +28,8 @@
       auto-save-list-file-prefix (f-expand "auto-save-list/.saves-" transient-directory)
       projectile-known-projects-file (f-expand "projectile-bookmarks.eld" transient-directory)
       projectile-cache-file (f-expand "projectile.cache" transient-directory)
-      package-quickstart-file (f-expand "package-quickstart.el" transient-directory))
+      package-quickstart-file (f-expand "package-quickstart.el" transient-directory)
+      url-cache-directory (f-expand "url/cache" transient-directory))
 
 (setq-default
  tab-width 4                   ; Set default tab width to 4 spaces
@@ -49,6 +50,8 @@
  inbibit-startup-message t     ; Don't show the startup message
  inhibit-startup-screen t      ; Don't show the startup screen
  confirm-kill-emacs 'y-or-n-p  ; y and n instead of yes and no when quitting
+ browse-url-browser-function '(("youtube" . jc/browse-url-vlc)
+                               ("." . jc/browse-url-firefox))
  )
 
 (set-face-attribute 'default nil
@@ -87,16 +90,6 @@
 
 ;; Allow y for yes.
 (fset 'yes-or-no-p 'y-or-n-p)
-
-(defun jc/reload-emacs-config ()
-  (interactive)
-  (load-file user-init-file))
-
-(defun jc/server-shutdown ()
-  "Save buffers, Quit, and Shutdown (kill) server"
-  (interactive)
-  (save-some-buffers)
-  (kill-emacs))
 
 (provide 'init-emacs-settings)
 ;;; init-emacs-settings.el ends here
