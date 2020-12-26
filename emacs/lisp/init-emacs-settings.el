@@ -34,11 +34,10 @@
 (setq-default
  tab-width 4                   ; Set default tab width to 4 spaces
  line-spacing 0
- make-backup-files nil         ; Stop creating backup~ files
  delete-old-versions t         ; Deletes excess backup files silently.
  create-lockfiles nil          ; Disable lockfiles.
- auto-save-default nil         ; Stop creating #autosave# files
  load-prefer-newer t           ; Load the newest version of a file.
+ backup-by-copying t           ; Use copying to create backup files.
  indent-tabs-mode nil          ; Use space instead of tabs for indents.
  backward-delete-char-untabify-method 'hungry ; Make backspace erase the tab instead of 1 space at a time
  sentence-end-double-space nil ; Single space to end a sentence.
@@ -84,6 +83,15 @@
   (which-key-mode)
   :custom
   (which-key-idle-delay 0.3))
+
+(use-package savehist
+  :ensure nil
+  :custom
+  (savehist-file "~/.config/cache/emacs/savehist")
+  (history-length 1000)
+  (history-delete-duplicates t)
+  (savehist-save-minibuffer-history t)
+  :hook (after-init . savehist-mode))
 
 ;; ESC cancels all
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
