@@ -3,7 +3,27 @@
 ;;; Code:
 
 (use-package elfeed
-  :bind ("C-x w" . elfeed)
+  :preface
+  (defun jc/elfeed-load-db-and-open ()
+    "Wrapper to load the elfeed db from disk before opening"
+    (interactive)
+    (elfeed)
+    (elfeed-db-load)
+    (elfeed-search-update--force)
+    (elfeed-update))
+  (defun jc/elfeed-save-db-and-bury ()
+    "Wrapper to save the elfeed db to disk before burying buffer"
+    (interactive)
+    (elfeed-db-save)
+    (quit-window))
+  (defun jc/elfeed-evil-collection-remap (_mode mode-keymaps &rest _rest)
+    (evil-collection-define-key 'normal 'elfeed-search-mode-map
+      (kbd "RET") 'elfeed-search-browse-url
+      (kbd "S-<return>") 'elfeed-search-show-entry
+      "q" 'jc/elfeed-save-db-and-bury
+      "Q" 'jc/elfeed-save-db-and-bury))
+  :hook (evil-collection-setup . jc/elfeed-evil-collection-remap)
+  :bind (("C-x w" . jc/elfeed-load-db-and-open))
   :custom
   (elfeed-db-directory "~/.config/cache/emacs/elfeed")
   (elfeed-feeds
@@ -39,7 +59,8 @@
      ("https://www.youtube.com/feeds/videos.xml?channel_id=UCUT8RoNBTJvwW1iErP6-b-A" amongus youtube) ;; disguised toast
      ("https://www.youtube.com/feeds/videos.xml?channel_id=UCBh2UCIk9In7uf87GJU6qgg" civ youtube) ;; the game mechanic
      ("https://www.youtube.com/feeds/videos.xml?channel_id=UCqqJQ_cXSat0KIAVfIfKkVA" cooking youtube) ;; kenji
-     )))
+     ))
+  (elfeed-search-filter "+unread "))
 
 (provide 'init-elfeed)
 ;;; init-elfeed.el ends here

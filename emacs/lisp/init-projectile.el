@@ -16,6 +16,7 @@
   (projectile-enable-caching t)
   (projectile-require-project-root t)
   (projectile-indexing-method 'native)
+  (projectile-project-root-functions '(projectile-root-local projectile-root-bottom-up projectile-root-top-down-recurring))
   (projectile-completion-system 'ivy)
   ;; (projectile-completion-system 'helm)
   (projectile-project-search-path '("~/workspace/work/" "~/workspace/personal")))
