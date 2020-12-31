@@ -2,14 +2,13 @@
 ;;; Commentary:
 ;;; Code:
 (use-package lsp-mode
-  :hook (((go-mode yaml-mode dockerfile-mode sh-mode) . lsp-deferred)
+  :hook (((go-mode yaml-mode dockerfile-mode sh-mode python-mode) . lsp-deferred)
          (lsp-mode . lsp-enable-which-key-integration))
   :custom
   (lsp-enable-file-watchers nil)
   (lsp-headerline-breadcrumb-enable t)
   (lsp-keymap-prefix "C-l")
-  (lsp-lens-enable t)
-  (lsp-pyls-server-command "pyright")
+  (lsp-lens-enable nil)
   :commands (lsp lsp-deferred))
 
 (use-package lsp-ui
@@ -17,13 +16,7 @@
   (setq lsp-ui-sideline-show-code-actions t
         lsp-ui-sideline-show-diagnostics t))
 
-(use-package lsp-pyright
-  :hook (python-mode . (lambda ()
-                         (require 'lsp-pyright)
-                         (lsp-deferred))))
-
 (use-package python-mode
-  :diminish " py"
   :hook (python-mode . (lambda () (modify-syntax-entry ?_ "w" python-mode-syntax-table))))
 
 (use-package go-mode
