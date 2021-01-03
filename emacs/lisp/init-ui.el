@@ -18,9 +18,10 @@
   (mode-line ((t (:height 120))))
   (mode-line-inactive ((t (:height 120))))
   :custom
-  (doom-modeline-vcs-max-length 50)
+  (doom-modeline-env-enable-python nil)
+  (doom-modeline-lsp t)
   (doom-modeline-modal-icon nil)
-  (doom-modeline-lsp t))
+  (doom-modeline-vcs-max-length 50))
 
 (provide 'init-ui)
 ;;; init-ui.el ends here

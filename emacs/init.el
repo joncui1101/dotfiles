@@ -26,6 +26,7 @@
 (require 'init-evil)
 (require 'init-version-control)
 (require 'init-code)
+(require 'init-go)
 (require 'init-company)
 (require 'init-projectile)
 (require 'init-markdown)

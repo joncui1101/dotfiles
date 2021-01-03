@@ -12,21 +12,14 @@
   :commands (lsp lsp-deferred))
 
 (use-package lsp-ui
+  :commands lsp-ui-mode
   :config
   (setq lsp-ui-sideline-show-code-actions t
         lsp-ui-sideline-show-diagnostics t))
 
 (use-package python-mode
+  :delight '(:eval (format " py[%s]" (pyenv-mode-version)))
   :hook (python-mode . (lambda () (modify-syntax-entry ?_ "w" python-mode-syntax-table))))
-
-(use-package go-mode
-  :preface
-  (defun jc/lsp-go-install-save-hooks ()
-    (add-hook 'before-save-hook #'lsp-format-buffer t t)
-    (add-hook 'before-save-hook #'lsp-organize-imports t t))
-  :mode "\\.go\\'"
-  :hook
-  (go-mode . jc/lsp-go-install-save-hooks))
 
 (use-package yaml-mode
   :mode "\\.ya?ml\\'"
@@ -46,17 +39,18 @@
   (require 'smartparens-config)
   :hook (prog-mode . smartparens-mode))
 
-(use-package pyvenv
-  :init
-  (setenv "WORKON_HOME" "~/.config/pyenv/versions")
+(use-package pyenv-mode
+  :custom
+  (pyenv-mode-mode-line-format nil)
   :preface
   (defun jc/projectile-pyenv-mode-set ()
+    "Set pyenv version matching project name."
     (let ((pyenv-version-path (f-expand ".python-version" (projectile-project-root))))
       (if (f-exists? pyenv-version-path)
-          (pyvenv-workon (car (s-lines (s-trim (f-read-text pyenv-version-path)))))
-        (pyvenv-deactivate))))
+          (pyenv-mode-set (car (s-lines (s-trim (f-read-text pyenv-version-path)))))
+        (pyenv-mode-unset))))
   :hook
-  (python-mode . pyvenv-mode)
+  (python-mode . pyenv-mode)
   (projectile-after-switch-project . jc/projectile-pyenv-mode-set))
 
 (use-package display-line-numbers
