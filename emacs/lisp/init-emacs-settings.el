@@ -29,7 +29,8 @@
       projectile-known-projects-file (f-expand "projectile-bookmarks.eld" transient-directory)
       projectile-cache-file (f-expand "projectile.cache" transient-directory)
       package-quickstart-file (f-expand "package-quickstart.el" transient-directory)
-      url-cache-directory (f-expand "url/cache" transient-directory))
+      url-cache-directory (f-expand "url/cache" transient-directory)
+      lsp-session-file (f-expand "lsp-session-v1" transient-directory))
 
 (setq-default
  tab-width 4                   ; Set default tab width to 4 spaces
