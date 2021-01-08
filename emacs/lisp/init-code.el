@@ -10,6 +10,7 @@
   (lsp-headerline-breadcrumb-enable t)
   (lsp-keymap-prefix "C-l")
   (lsp-lens-enable nil)
+  (lsp-pyls-plugins-flake8-max-line-length 120)
   :commands (lsp lsp-deferred))
 
 (use-package lsp-ui

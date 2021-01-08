@@ -8,10 +8,14 @@
 (use-package dired
   :ensure nil
   :commands (dired dired-jump)
-  :bind (("C-x C-j" . dired-jump)))
+  :bind (("C-x C-j" . dired-jump)
+         :map dired-mode-map
+         ([remap dired-find-file] . dired-single-buffer)
+         ([remap dired-mouse-find-file-other-window] . dired-single-buffer-mouse)
+         ([remap dired-up-directory] . dired-single-up-directory)))
 
 (use-package dired-single
-  :defer 1)
+  :requires dired)
 
 (use-package dired-collapse
   :defer 1)

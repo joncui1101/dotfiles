@@ -15,7 +15,7 @@
     "Wrapper to save the elfeed db to disk before burying buffer"
     (interactive)
     (elfeed-db-save)
-    (quit-window))
+    (elfeed-kill-buffer))
   (defun jc/elfeed-evil-collection-remap (_mode mode-keymaps &rest _rest)
     (evil-collection-define-key 'normal 'elfeed-search-mode-map
       (kbd "RET") 'elfeed-search-browse-url
