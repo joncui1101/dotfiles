@@ -10,7 +10,6 @@
   (lsp-headerline-breadcrumb-enable t)
   (lsp-keymap-prefix "C-l")
   (lsp-lens-enable nil)
-  (lsp-pyls-plugins-flake8-max-line-length 120)
   :commands (lsp lsp-deferred))
 
 (use-package lsp-ui
@@ -21,7 +20,11 @@
 
 (use-package python-mode
   :delight '(:eval (format " py[%s]" (pyenv-mode-version)))
-  :hook (python-mode . (lambda () (modify-syntax-entry ?_ "w" python-mode-syntax-table))))
+  :hook (python-mode . (lambda () (modify-syntax-entry ?_ "w" python-mode-syntax-table)))
+  :custom
+  (lsp-pyls-plugins-flake8-enabled t)
+  (lsp-pyls-plugins-flake8-ignore '("W292", "W392", "W391"))
+  (lsp-pyls-plugins-flake8-max-line-length 120))
 
 (use-package yaml-mode
   :mode "\\.ya?ml\\'"
