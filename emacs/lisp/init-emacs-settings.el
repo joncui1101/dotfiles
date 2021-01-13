@@ -22,6 +22,9 @@
 ;; See matching pairs of parantheses and other characters
 (show-paren-mode 1)
 
+;; Show column numbers
+(column-number-mode)
+
 (setq transient-directory "~/.config/cache/emacs/"
       backup-directory-alist `(("." . ,(f-expand "backups" transient-directory)))
       url-history-file (f-expand "url/history" transient-directory)
@@ -50,7 +53,7 @@
  inbibit-startup-message t     ; Don't show the startup message
  inhibit-startup-screen t      ; Don't show the startup screen
  confirm-kill-emacs 'y-or-n-p  ; y and n instead of yes and no when quitting
- browse-url-browser-function '(("youtube" . jc/browse-url-vlc)
+ browse-url-browser-function '(("www.youtube.com" . jc/browse-url-vlc)
                                ("." . jc/browse-url-firefox))
  )
 

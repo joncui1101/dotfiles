@@ -33,7 +33,7 @@
      ("http://rss.desiringgod.org/" christian)
      ("http://amiquiettimes.wordpress.com/feed/" christian)
      ("http://feeds.feedburner.com/HighScalability" dev)
-     ("http://feeds.dzone.com/java" dev)
+     ("http://feeds.dzone.com/java" dev java)
      ("http://feeds.dzone.com/performance" dev)
      ("https://medium.com/feed/paypal-engineering" dev)
      ("https://martinfowler.com/feed.atom" dev)
@@ -42,13 +42,13 @@
      ("http://www.daemonology.net/hn-daily/index.rss" dev)
      ("https://blog.codinghorror.com/rss/" dev)
      ("http://www.allthingsdistributed.com/atom.xml" dev)
-     ("https://dave.cheney.net/feed/atom" dev)
+     ("https://dave.cheney.net/feed/atom" dev golang)
      ("https://eng.uber.com/feed/" dev)
      ("https://codeascraft.com/atom" dev)
      ("https://instagram-engineering.com/feed" dev)
      ("https://planet.emacslife.com/atom.xml" dev emacs)
      ("https://github.blog/feed" dev)
-     ("https://blog.golang.org/feeds/posts/default" dev)
+     ("https://blog.golang.org/feeds/posts/default" dev golang)
      ("https://developer.squareup.com/blog/rss.xml" dev)
      ("https://stripe.com/blog/feed.rss" dev)
      ("https://smittenkitchen.com/atom" cooking)
@@ -59,6 +59,8 @@
      ("https://www.youtube.com/feeds/videos.xml?channel_id=UCUT8RoNBTJvwW1iErP6-b-A" amongus youtube) ;; disguised toast
      ("https://www.youtube.com/feeds/videos.xml?channel_id=UCBh2UCIk9In7uf87GJU6qgg" civ youtube) ;; the game mechanic
      ("https://www.youtube.com/feeds/videos.xml?channel_id=UCqqJQ_cXSat0KIAVfIfKkVA" cooking youtube) ;; kenji
+     ("https://www.gobeyond.dev/rss" dev golang)
+     ("https://cprss.s3.amazonaws.com/golangweekly.com.xml" dev golang)
      ))
   (elfeed-search-filter "+unread "))
 
