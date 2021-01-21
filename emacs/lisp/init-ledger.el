@@ -26,5 +26,10 @@
   (ledger-post-amount-alignment-at :decimal)
   (ledger-highlight-xact-under-point nil))
 
+(use-package company-ledger
+  :requires company
+  :init
+  (add-to-list 'company-backends 'company-ledger))
+
 (provide 'init-ledger)
 ;;; init-ledger.el ends here

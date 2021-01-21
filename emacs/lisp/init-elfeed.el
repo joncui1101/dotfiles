@@ -61,8 +61,13 @@
      ("https://www.youtube.com/feeds/videos.xml?channel_id=UCqqJQ_cXSat0KIAVfIfKkVA" cooking youtube) ;; kenji
      ("https://www.gobeyond.dev/rss" dev golang)
      ("https://cprss.s3.amazonaws.com/golangweekly.com.xml" dev golang)
+     ("https://sec.report/CIK/0001811210.rss" spac) ;; cciv
+     ("https://sec.report/CIK/0001802749.rss" spac) ;; gik
+     ("https://sec.report/CIK/0001807846.rss" spac) ;; fuse
+     ("https://sec.report/CIK/0001802457.rss" spac) ;; aacq
      ))
-  (elfeed-search-filter "+unread "))
+  (elfeed-search-filter "+unread ")
+  (elfeed-search-title-max-width 100))
 
 (provide 'init-elfeed)
 ;;; init-elfeed.el ends here
