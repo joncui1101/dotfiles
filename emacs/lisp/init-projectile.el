@@ -19,7 +19,12 @@
   (projectile-project-root-functions '(projectile-root-local projectile-root-bottom-up projectile-root-top-down-recurring))
   (projectile-completion-system 'ivy)
   ;; (projectile-completion-system 'helm)
-  (projectile-project-search-path '("~/workspace/work/" "~/workspace/personal")))
+  :config
+  (pcase system-type
+    ('darwin (setq projectile-project-search-path '("~/workspace/work/" "~/workspace/personal")))
+    ('windows-nt (message "Windows not available"))
+    ('gnu/linux (setq projectile-project-search-path '("~/workspace/personal"))))
+  )
 
 (provide 'init-projectile)
 ;;; init-projectile.el ends here
