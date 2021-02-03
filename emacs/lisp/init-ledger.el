@@ -6,7 +6,6 @@
   :bind ((:map ledger-mode-map
                ("C-x C-s" . jc/ledger-save-buffer))
          ([remap evil-write] . jc/ledger-evil-write))
-  :hook (ledger-mode . ledger-flymake-enable)
   :preface
   (defun jc/ledger-save-buffer ()
     "Automatically clean the ledger buffer at each save."

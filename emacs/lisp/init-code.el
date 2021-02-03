@@ -6,10 +6,13 @@
   :hook (((go-mode yaml-mode dockerfile-mode sh-mode python-mode) . lsp-deferred)
          (lsp-mode . lsp-enable-which-key-integration))
   :custom
+  (lsp-diagnostics-provider :none)
   (lsp-enable-file-watchers nil)
   (lsp-headerline-breadcrumb-enable t)
+  (lsp-headerline-breadcrumb-enable-diagnostics nil)
   (lsp-keymap-prefix "C-l")
   (lsp-lens-enable nil)
+  (lsp-modeline-diagnostics-enable nil)
   :commands (lsp lsp-deferred))
 
 (use-package lsp-ui
@@ -20,11 +23,7 @@
 
 (use-package python-mode
   :delight '(:eval (format " py[%s]" (pyenv-mode-version)))
-  :hook (python-mode . (lambda () (modify-syntax-entry ?_ "w" python-mode-syntax-table)))
-  :custom
-  (lsp-pyls-plugins-flake8-enabled t)
-  (lsp-pyls-plugins-flake8-ignore "W292", "W392", "W391")
-  (lsp-pyls-plugins-flake8-max-line-length 120))
+  :hook (python-mode . (lambda () (modify-syntax-entry ?_ "w" python-mode-syntax-table))))
 
 (use-package yaml-mode
   :mode "\\.ya?ml\\'"
@@ -52,7 +51,9 @@
     "Set pyenv version matching project name."
     (let ((pyenv-version-path (f-expand ".python-version" (projectile-project-root))))
       (if (f-exists? pyenv-version-path)
-          (pyenv-mode-set (car (s-lines (s-trim (f-read-text pyenv-version-path)))))
+          (progn
+            (pyenv-mode-set (car (s-lines (s-trim (f-read-text pyenv-version-path)))))
+            (setq flycheck-python-flake8-executable (s-concat (pyenv-mode-full-path (pyenv-mode-version)) "/bin/python3")))
         (pyenv-mode-unset))))
   :hook
   (python-mode . pyenv-mode)
