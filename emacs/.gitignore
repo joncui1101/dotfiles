@@ -57,3 +57,5 @@ flycheck_*.el
 
 # env file
 /env-file
+
+package-quickstart.el
