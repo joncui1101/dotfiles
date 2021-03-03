@@ -64,7 +64,19 @@
      ("https://sec.report/CIK/0001811210.rss" spac) ;; cciv
      ("https://sec.report/CIK/0001802749.rss" spac) ;; gik
      ("https://sec.report/CIK/0001807846.rss" spac) ;; fuse
-     ("https://sec.report/CIK/0001802457.rss" spac) ;; aacq
+     ("https://sec.report/CIK/0001809987.rss" spac) ;; gsah
+     ("https://sec.report/CIK/0001794717.rss" spac) ;; scvx
+     ("https://sec.report/CIK/0001816090.rss" spac) ;; ftoc
+     ("https://sec.report/CIK/0001820630.rss" spac) ;; actc
+     ("https://sec.report/CIK/0001824963.rss" spac) ;; ajax
+     ("https://sec.report/CIK/0001815086.rss" spac) ;; btwn
+     ("https://sec.report/CIK/0001829426.rss" spac) ;; fpac
+     ("https://sec.report/CIK/0001820191.rss" spac) ;; impx
+     ("https://sec.report/CIK/0001818874.rss" spac) ;; ipoe
+     ("https://sec.report/CIK/0001818873.rss" spac) ;; ipof
+     ("https://sec.report/CIK/0001823575.rss" spac) ;; lnfa
+     ("https://sec.report/CIK/0001811882.rss" spac) ;; psth
+     ("https://sec.report/CIK/0001779474.rss" spac) ;; sspk
      ))
   (elfeed-search-filter "+unread ")
   (elfeed-search-title-max-width 100))
