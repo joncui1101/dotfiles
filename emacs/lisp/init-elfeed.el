@@ -42,25 +42,26 @@
      ("http://www.daemonology.net/hn-daily/index.rss" dev)
      ("https://blog.codinghorror.com/rss/" dev)
      ("http://www.allthingsdistributed.com/atom.xml" dev)
-     ("https://dave.cheney.net/feed/atom" dev golang)
+     ("https://dave.cheney.net/feed/atom" dev go)
      ("https://eng.uber.com/feed/" dev)
      ("https://codeascraft.com/atom" dev)
      ("https://instagram-engineering.com/feed" dev)
      ("https://planet.emacslife.com/atom.xml" dev emacs)
      ("https://github.blog/feed" dev)
-     ("https://blog.golang.org/feeds/posts/default" dev golang)
+     ("https://blog.golang.org/feeds/posts/default" dev go)
      ("https://developer.squareup.com/blog/rss.xml" dev)
      ("https://stripe.com/blog/feed.rss" dev)
      ("https://smittenkitchen.com/atom" cooking)
-     ("https://www.youtube.com/feeds/videos.xml?channel_id=UCAiiOTio8Yu69c3XnR7nQBQ" emacs youtube) ;; system crafters
-     ("https://www.youtube.com/feeds/videos.xml?channel_id=UC6x7GwJxuoABSosgVXDYtTw" maker youtube) ;; i like to make stuff
-     ("https://www.youtube.com/feeds/videos.xml?channel_id=UCKwM-7sO1_Tw9EmYhKfpBBw" maker youtube) ;; perkins builder brothers
-     ("https://www.youtube.com/feeds/videos.xml?channel_id=UCex87CEaoqw365i63aKxepQ" life youtube) ;; ice1cube
-     ("https://www.youtube.com/feeds/videos.xml?channel_id=UCUT8RoNBTJvwW1iErP6-b-A" amongus youtube) ;; disguised toast
-     ("https://www.youtube.com/feeds/videos.xml?channel_id=UCBh2UCIk9In7uf87GJU6qgg" civ youtube) ;; the game mechanic
-     ("https://www.youtube.com/feeds/videos.xml?channel_id=UCqqJQ_cXSat0KIAVfIfKkVA" cooking youtube) ;; kenji
-     ("https://www.gobeyond.dev/rss" dev golang)
-     ("https://cprss.s3.amazonaws.com/golangweekly.com.xml" dev golang)
+     ("https://www.youtube.com/feeds/videos.xml?channel_id=UCAiiOTio8Yu69c3XnR7nQBQ" emacs vid) ;; system crafters
+     ("https://www.youtube.com/feeds/videos.xml?channel_id=UC6x7GwJxuoABSosgVXDYtTw" maker vid) ;; i like to make stuff
+     ("https://www.youtube.com/feeds/videos.xml?channel_id=UCKwM-7sO1_Tw9EmYhKfpBBw" maker vid) ;; perkins builder brothers
+     ("https://www.youtube.com/feeds/videos.xml?channel_id=UCex87CEaoqw365i63aKxepQ" life vid) ;; ice1cube
+     ("https://www.youtube.com/feeds/videos.xml?channel_id=UCUT8RoNBTJvwW1iErP6-b-A" amongus vid) ;; disguised toast
+     ("https://www.youtube.com/feeds/videos.xml?channel_id=UCBh2UCIk9In7uf87GJU6qgg" civ vid) ;; the game mechanic
+     ("https://www.youtube.com/feeds/videos.xml?channel_id=UCqqJQ_cXSat0KIAVfIfKkVA" cooking vid) ;; kenji
+     ("https://vimeo.com/andrewrk/videos/rss" dev vid)
+     ("https://www.gobeyond.dev/rss" dev go)
+     ("https://cprss.s3.amazonaws.com/golangweekly.com.xml" dev go)
      ("https://sec.report/CIK/0001811210.rss" spac) ;; cciv
      ("https://sec.report/CIK/0001802749.rss" spac) ;; gik
      ("https://sec.report/CIK/0001807846.rss" spac) ;; fuse

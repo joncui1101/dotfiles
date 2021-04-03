@@ -37,6 +37,14 @@
   :mode (("\\.sh\\'" . sh-mode)
          ("\\^.z.*\\'" . sh-mode)))
 
+(use-package protobuf-mode
+  :preface
+  (defconst protobuf-style-work
+    '((c-basic-offset . 4)
+      (indent-tabs-mode . nil)))
+  :hook (protobuf-mode . (lambda () (c-add-style "work protobuf style" protobuf-style-work t)))
+  :mode "\\.proto\\'")
+
 (use-package smartparens
   :diminish
   :config
