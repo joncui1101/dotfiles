@@ -1,0 +1,10 @@
+font:
+  normal:
+    family: Hasklug Nerd Font
+    style: Medium
+  size: 13
+
+shell:
+  program: /usr/bin/zsh
+
+live_config_reload: true

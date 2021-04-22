@@ -8,10 +8,6 @@
   (magit-branch-read-upstream-first 'fallback)
   (magit-repository-directories '(("\~/workspace" . 1))))
 
-(use-package evil-magit
-  :requires (evil magit)
-  :hook (magit-mode . turn-off-evil-snipe-override-mode))
-
 (use-package git-gutter
   :defer 1
   :diminish
