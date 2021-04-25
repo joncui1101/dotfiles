@@ -14,9 +14,6 @@ $python\
 $line_break\
 $character"""
 
-[character]
-symbol = "➜"
-
 [cmd_duration]
 disabled = true
 
