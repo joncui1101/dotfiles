@@ -28,6 +28,8 @@
 (require 'init-code)
 (require 'init-flycheck)
 (require 'init-go)
+(require 'init-javascript)
+(require 'init-python)
 (require 'init-company)
 (require 'init-projectile)
 (require 'init-markdown)
