@@ -30,4 +30,3 @@
 
 (provide 'init-functions)
 ;;; init-functions.el ends here
-

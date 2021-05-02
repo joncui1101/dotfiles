@@ -1,0 +1,21 @@
+if [[ $# -ne 2 ]]; then
+    echo -e "Not enough arguments.\n\nUsage:\n  elfeed-sync (ul|dl) DIR"
+fi
+
+if [[ $OSTYPE != "linux"* ]]; then
+    echo "Cannot be used with macos"
+fi
+
+if ! type rclone > /dev/null; then
+    echo "Please install rclone"
+fi
+
+if [[ $(rclone listremotes) != "dropbox"* ]]; then
+    echo "Please setup rclone with a remote called dropbox"
+fi
+
+if [[ $1 == "ul" ]]; then
+    rclone copy ~/Dropbox/$2 dropbox:$2 -P
+elif [[ $1 == "dl" ]]; then
+    rclone copy dropbox:$2 ~/Dropbox/$2 -P
+fi

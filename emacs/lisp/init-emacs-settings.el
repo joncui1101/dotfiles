@@ -27,12 +27,10 @@
 
 (setq transient-directory "~/.config/cache/emacs/"
       backup-directory-alist `(("." . ,(f-expand "backups" transient-directory)))
-      url-history-file (f-expand "url/history" transient-directory)
       auto-save-list-file-prefix (f-expand "auto-save-list/.saves-" transient-directory)
       projectile-known-projects-file (f-expand "projectile-bookmarks.eld" transient-directory)
       projectile-cache-file (f-expand "projectile.cache" transient-directory)
       package-quickstart-file (f-expand "package-quickstart.el" transient-directory)
-      url-cache-directory (f-expand "url/cache" transient-directory)
       lsp-session-file (f-expand "lsp-session-v1" transient-directory))
 
 (setq-default
@@ -54,8 +52,7 @@
  inhibit-startup-screen t      ; Don't show the startup screen
  confirm-kill-emacs 'y-or-n-p  ; y and n instead of yes and no when quitting
  browse-url-browser-function '(("www.youtube.com" . jc/browse-url-vlc)
-                               ("." . jc/browse-url-firefox))
- )
+                               ("." . jc/browse-url-firefox)))
 
 (set-face-attribute 'default nil
                     :family "Hasklug Nerd Font"

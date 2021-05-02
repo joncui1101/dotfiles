@@ -5,6 +5,7 @@
 (require 'f)
 
 (defun load-env (file)
+  "Load the contents of the FILE as 'exec-path'."
   (let ((file-path (f-expand file user-emacs-directory)))
     (if (f-exists? file-path)
         (let ((paths (s-trim (f-read-text file-path))))
