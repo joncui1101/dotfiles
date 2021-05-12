@@ -25,8 +25,9 @@
 ;; Show column numbers
 (column-number-mode)
 
-(setq transient-directory "~/.config/cache/emacs/"
-      backup-directory-alist `(("." . ,(f-expand "backups" transient-directory)))
+(defvar transient-directory "~/.config/cache/emacs/")
+
+(setq backup-directory-alist `(("." . ,(f-expand "backups" transient-directory)))
       auto-save-list-file-prefix (f-expand "auto-save-list/.saves-" transient-directory)
       package-quickstart-file (f-expand "package-quickstart.el" transient-directory))
 
