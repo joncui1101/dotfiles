@@ -36,6 +36,8 @@
 (require 'init-ivy)
 ;; (require 'init-helm)
 (require 'init-elfeed)
+(require 'init-treemacs)
+(require 'init-vterm)
 
 ;; Allow access from emacsclient
 (add-hook 'after-init-hook

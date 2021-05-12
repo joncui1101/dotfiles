@@ -61,6 +61,7 @@
                     :height 130)
 
 (use-package ligature
+  :disabled
   :defer 1
   :load-path "lisp-local"
   :config
