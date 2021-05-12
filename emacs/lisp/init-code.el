@@ -13,6 +13,7 @@
   (lsp-keymap-prefix "C-l")
   (lsp-lens-enable nil)
   (lsp-modeline-diagnostics-enable nil)
+  (lsp-session-file (f-expand "lsp-session-v1" transient-directory))
   :commands (lsp lsp-deferred))
 
 (use-package lsp-ui

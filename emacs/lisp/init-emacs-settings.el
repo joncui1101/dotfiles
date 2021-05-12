@@ -28,10 +28,7 @@
 (setq transient-directory "~/.config/cache/emacs/"
       backup-directory-alist `(("." . ,(f-expand "backups" transient-directory)))
       auto-save-list-file-prefix (f-expand "auto-save-list/.saves-" transient-directory)
-      projectile-known-projects-file (f-expand "projectile-bookmarks.eld" transient-directory)
-      projectile-cache-file (f-expand "projectile.cache" transient-directory)
-      package-quickstart-file (f-expand "package-quickstart.el" transient-directory)
-      lsp-session-file (f-expand "lsp-session-v1" transient-directory))
+      package-quickstart-file (f-expand "package-quickstart.el" transient-directory))
 
 (setq-default
  tab-width 4                   ; Set default tab width to 4 spaces

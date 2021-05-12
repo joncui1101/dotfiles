@@ -3,6 +3,8 @@
 ;;; Code:
 (use-package treemacs
   :defer t
+  :custom
+  (treemacs-persist-file (f-expand "treemacs-persist" transient-directory))
   :bind (:map global-map
               ("C-x t t" . treemacs)))
 

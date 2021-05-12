@@ -18,6 +18,8 @@
   (projectile-indexing-method 'native)
   (projectile-project-root-functions '(projectile-root-local projectile-root-bottom-up projectile-root-top-down-recurring))
   (projectile-completion-system 'ivy)
+  (projectile-known-projects-file (f-expand "projectile-bookmarks.eld" transient-directory))
+  (projectile-cache-file (f-expand "projectile.cache" transient-directory))
   ;; (projectile-completion-system 'helm)
   :config
   (pcase system-type
