@@ -6,5 +6,7 @@
   :config
   (yas-reload-all))
 
+(use-package yasnippet-snippets)
+
 (provide 'init-yasnippet)
-;;; init-yassnippet.el ends here
+;;; init-yasnippet.el ends here
