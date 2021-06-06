@@ -37,7 +37,7 @@ fi
 
 if command -v pyenv &> /dev/null
 then
-    eval "$(pyenv init -)"
+    eval "$(pyenv init --path)"
     [ -s $PYENV_ROOT/completions/pyenv.zsh ] && source $PYENV_ROOT/completions/pyenv.zsh
 fi
 
