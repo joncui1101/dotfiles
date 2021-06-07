@@ -38,6 +38,7 @@
 (require 'init-elfeed)
 (require 'init-treemacs)
 (require 'init-vterm)
+(require 'init-yasnippet)
 
 ;; Allow access from emacsclient
 (add-hook 'after-init-hook

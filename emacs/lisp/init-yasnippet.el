@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 (use-package yasnippet
-  :hook (prog-mode . yas-minor-mode)
+  :hook ((prog-mode text-mode) . yas-minor-mode)
   :config
   (yas-reload-all))
 
