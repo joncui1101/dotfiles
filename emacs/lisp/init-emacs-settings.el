@@ -56,7 +56,7 @@
  inbibit-startup-message t     ; Don't show the startup message
  inhibit-startup-screen t      ; Don't show the startup screen
  confirm-kill-emacs 'y-or-n-p  ; y and n instead of yes and no when quitting
- browse-url-browser-function '(("www.youtube.com" . jc/browse-url-vlc)
+ browse-url-handlers '(("www.youtube.com" . jc/browse-url-vlc)
                                ("." . jc/browse-url-firefox)))
 
 (set-face-attribute 'default nil
