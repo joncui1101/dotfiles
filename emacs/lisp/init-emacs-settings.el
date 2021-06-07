@@ -7,6 +7,8 @@
 (setq-default custom-file (f-expand "custom.el" user-emacs-directory))
 (load custom-file t)
 
+(defvar transient-directory "~/.config/cache/emacs/")
+
 ;; Add $PATH to exec-path
 (use-package init-env
   :load-path "lisp"
@@ -31,8 +33,6 @@
 
 ;; Show column numbers
 (column-number-mode)
-
-(defvar transient-directory "~/.config/cache/emacs/")
 
 (setq backup-directory-alist `(("." . ,(f-expand "backups" transient-directory)))
       auto-save-list-file-prefix (f-expand "auto-save-list/.saves-" transient-directory)

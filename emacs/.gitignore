@@ -59,3 +59,6 @@ flycheck_*.el
 /env-file
 
 package-quickstart.el
+
+# compiled elisp files
+/eln-cache
