@@ -35,6 +35,7 @@
 (column-number-mode)
 
 (setq backup-directory-alist `(("." . ,(f-expand "backups" transient-directory)))
+      url-configuration-directory (f-expand "url" transient-directory)
       auto-save-list-file-prefix (f-expand "auto-save-list/.saves-" transient-directory)
       package-quickstart-file (f-expand "package-quickstart.el" transient-directory))
 
