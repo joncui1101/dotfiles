@@ -32,7 +32,9 @@
 
 (use-package sh-script
   :mode (("\\.sh\\'" . sh-mode)
-         ("\\^.z.*\\'" . sh-mode)))
+         ("\\^.z.*\\'" . sh-mode)
+         ("\\^zsh.*\\'" . sh-mode)
+         ("\\zprofile\\'" . sh-mode)))
 
 (use-package protobuf-mode
   :preface

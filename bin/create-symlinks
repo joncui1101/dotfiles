@@ -35,3 +35,4 @@ ln -s $DOTDIR/starship ~/.config/starship
 ln -s $DOTDIR/zprofile ~/.config/zsh/.zprofile
 ln -s $DOTDIR/zshrc ~/.config/zsh/.zshrc
 ln -s $DOTDIR/zshenv ~/.config/zsh/.zshenv
+ln -s $DOTDIR/karabiner ~/.config/karabiner
