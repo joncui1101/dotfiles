@@ -25,6 +25,7 @@
 (require 'init-ledger)
 (require 'init-evil)
 (require 'init-version-control)
+(require 'init-lsp)
 (require 'init-code)
 (require 'init-flycheck)
 (require 'init-go)
@@ -34,9 +35,9 @@
 (require 'init-projectile)
 (require 'init-markdown)
 (require 'init-ivy)
-;; (require 'init-helm)
 (require 'init-elfeed)
 (require 'init-treemacs)
+(require 'init-treesitter)
 (require 'init-vterm)
 (require 'init-yasnippet)
 
