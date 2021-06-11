@@ -62,7 +62,7 @@
 (use-package highlight-indent-guides
   :custom
   (highlight-indent-guides-method 'bitmap)
-  :hook (((python-mode yaml-mode go-mode) . highlight-indent-guides-mode)))
+  :hook (((prog-mode) . highlight-indent-guides-mode)))
 
 (provide 'init-code)
 ;;; init-code.el ends here
