@@ -3,7 +3,7 @@
 ;;; Code:
 
 (use-package lsp-mode
-  :hook (((go-mode yaml-mode dockerfile-mode sh-mode python-mode) . lsp-deferred)
+  :hook (((go-mode yaml-mode dockerfile-mode sh-mode python-mode ruby-mode) . lsp-deferred)
          (lsp-mode . lsp-enable-which-key-integration))
   :custom
   (lsp-diagnostics-provider :none)
