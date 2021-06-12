@@ -30,6 +30,18 @@
   :config
   (setcdr (assq t ivy-format-functions-alist) #'ivy-format-function-line))
 
+(use-package ivy-posframe
+  :hook ivy-mode
+  :init
+  (setq ivy-posframe-display-functions-alist
+        '((swiper . ivy-posframe-display-at-window-center)
+          (counsel-projectile-switch-project . ivy-posframe-display-at-window-center)
+          (counsel-projectile-find-file . ivy-posframe-display-at-window-center)
+          (counsel-M-x . ivy-posframe-display-at-window-center)
+          (counsel-projectile . ivy-posframe-display-at-window-center)
+          (counsel-projectile-switch-to-buffer . ivy-posframe-display-at-window-center)))
+  (ivy-posframe-mode 1))
+
 (use-package lsp-ivy
   :requires (lsp-mode ivy))
 
