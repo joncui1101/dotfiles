@@ -45,12 +45,14 @@
 (use-package ivy-posframe
   :init
   (setq ivy-posframe-display-functions-alist
-        '((counsel-projectile-switch-project . ivy-posframe-display-at-window-center)
-          (counsel-projectile-find-file . ivy-posframe-display-at-window-center)
-          (counsel-M-x . ivy-posframe-display-at-window-center)
-          (counsel-projectile . ivy-posframe-display-at-window-center)
-          (counsel-projectile-switch-to-buffer . ivy-posframe-display-at-window-center))
-        ivy-posframe-min-width 115)
+        '((counsel-projectile-switch-project . ivy-posframe-display-at-frame-center)
+          (counsel-projectile-find-file . ivy-posframe-display-at-frame-center)
+          (counsel-M-x . ivy-posframe-display-at-frame-center)
+          (counsel-projectile . ivy-posframe-display-at-frame-center)
+          (counsel-projectile-switch-to-buffer . ivy-posframe-display-at-frame-center))
+        ivy-posframe-min-width 115
+        ivy-posframe-parameters '((left-fringe . 4)
+                                  (right-fringe . 4)))
   (ivy-posframe-mode 1))
 
 (use-package lsp-ivy
