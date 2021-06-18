@@ -4,8 +4,7 @@
 (use-package ivy
   :defer 1
   :diminish
-  :bind (("C-s" . swiper)
-         :map ivy-minibuffer-map
+  :bind (:map ivy-minibuffer-map
          ("C-l" . ivy-alt-done)
          ("C-j" . ivy-next-line)
          ("C-k" . ivy-previous-line)
@@ -26,20 +25,32 @@
 
 (use-package ivy-rich
   :requires ivy
-  :init (ivy-rich-mode +1)
   :config
+  (plist-put ivy-rich-display-transformers-list
+             'counsel-M-x
+             '(:columns
+               ((counsel-M-x-transformer (:width 50))
+                (ivy-rich-counsel-function-docstring (:face font-lock-doc-face)))))
+  (plist-put ivy-rich-display-transformers-list
+             'ivy-switch-buffer
+             '(:columns
+               ((ivy-switch-buffer-transformer (:width 50))
+                (ivy-rich-switch-buffer-indicators (:width 4 :face error :align right))
+                (ivy-rich-switch-buffer-major-mode (:width 12 :face warning))
+                (ivy-rich-switch-buffer-project (:width 0.18 :face success))
+                (ivy-rich-switch-buffer-path (:width (lambda (x) (ivy-rich-switch-buffer-shorten-path x (ivy-rich-minibuffer-width 0.3))))))))
+  (ivy-rich-mode +1)
   (setcdr (assq t ivy-format-functions-alist) #'ivy-format-function-line))
 
 (use-package ivy-posframe
-  :hook ivy-mode
   :init
   (setq ivy-posframe-display-functions-alist
-        '((swiper . ivy-posframe-display-at-window-center)
-          (counsel-projectile-switch-project . ivy-posframe-display-at-window-center)
+        '((counsel-projectile-switch-project . ivy-posframe-display-at-window-center)
           (counsel-projectile-find-file . ivy-posframe-display-at-window-center)
           (counsel-M-x . ivy-posframe-display-at-window-center)
           (counsel-projectile . ivy-posframe-display-at-window-center)
-          (counsel-projectile-switch-to-buffer . ivy-posframe-display-at-window-center)))
+          (counsel-projectile-switch-to-buffer . ivy-posframe-display-at-window-center))
+        ivy-posframe-min-width 115)
   (ivy-posframe-mode 1))
 
 (use-package lsp-ivy
