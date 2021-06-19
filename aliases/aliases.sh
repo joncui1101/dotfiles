@@ -1,16 +1,17 @@
 # Source necessary functions
-source $DOTDIR/aliases/dir_aliases.sh
-source $DOTDIR/aliases/vim_aliases.sh
-source $DOTDIR/aliases/git_aliases.sh
+source $DOTDIR/aliases/dir.sh
+source $DOTDIR/aliases/vim.sh
+source $DOTDIR/aliases/git.sh
+source $DOTDIR/aliases/misc.sh
 if [[ -d $WS/dotfiles ]]; then
     source $WS/dotfiles/work_aliases.sh
 fi
 
 
 if [[ $OSTYPE == *linux* ]]; then
-    source $DOTDIR/aliases/fed_aliases.sh
+    source $DOTDIR/aliases/fed.sh
 else
-    source $DOTDIR/aliases/mac_aliases.sh
+    source $DOTDIR/aliases/mac.sh
 fi
 
 # CLI Aliases

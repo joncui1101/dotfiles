@@ -15,3 +15,12 @@ alias hideF='defaults write com.apple.finder AppleShowAllFiles -bool false && ki
 # Alias to open in finder
 alias o='open '
 alias oo='open .'
+
+# [O]pen [F]ile
+of() {
+    local fi=`fd --type f --exact-depth 1 . ~/Documents ~/Desktop ~/Downloads | cut -d"/" -f4,5 | fzf --height=40% --header='[open:file]'`
+
+    if [[ $fi ]]; then
+        open ~/$fi
+    fi
+}
