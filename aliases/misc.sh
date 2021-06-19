@@ -8,11 +8,12 @@ kp() {
     fi
 }
 
+# [F]ind [P]ath
 fp() {
     local loc=`echo $PATH | tr ":" "\n" | fzf --header='[find:path]'`
 
     if [[ -d $loc ]]; then
-        rg --files $loc | rev | cut -d"/" -f1 | rev | eval "fzf --header='[find:exe] => $loc'"
+        rg --files $loc | rev | cut -d"/" -f1 | rev | fzf --header="[find:exe] => $loc"
         fp
     fi
 }
