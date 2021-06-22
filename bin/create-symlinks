@@ -6,11 +6,17 @@ if [[ ! -d ~/.config/zsh ]]; then
     mkdir -p ~/.config/zsh
 fi
 
+if [[ $XDG_CONFIG_HOME == "" && ! -f ~/.zshenv ]]; then
+    printf "Need to create .zshenv in the home directory\n"
+    echo '. $HOME/.config/zsh/.zshenv' > $HOME/.zshenv
+fi
+
 printf "Cleanup existing files\n"
 rm ~/.config/emacs
 rm ~/.config/git
 rm ~/.config/ideavim
 rm ~/.config/kitty
+rm ~/.config/alacritty
 rm ~/.config/nvim
 rm ~/.config/starship
 rm ~/.config/zsh/.zprofile
@@ -34,6 +40,7 @@ ln -s $DOTDIR/emacs ~/.config/emacs
 ln -s $DOTDIR/git ~/.config/git
 ln -s $DOTDIR/ideavim ~/.config/ideavim
 ln -s $DOTDIR/kitty ~/.config/kitty
+ln -s $DOTDIR/alacritty ~/.config/alacritty
 ln -s $DOTDIR/nvim ~/.config/nvim
 ln -s $DOTDIR/starship ~/.config/starship
 ln -s $DOTDIR/zprofile ~/.config/zsh/.zprofile

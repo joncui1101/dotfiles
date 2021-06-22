@@ -9,6 +9,7 @@
 
 (defvar transient-directory "~/.config/cache/emacs/")
 
+
 ;; Add $PATH to exec-path
 (use-package init-env
   :load-path "lisp"
@@ -58,7 +59,8 @@
  inhibit-startup-screen t      ; Don't show the startup screen
  confirm-kill-emacs 'y-or-n-p  ; y and n instead of yes and no when quitting
  browse-url-handlers '(("www.youtube.com" . jc/browse-url-vlc)
-                               ("." . jc/browse-url-firefox)))
+                       ("." . jc/browse-url-firefox))
+ org-directory "~/workspace/personal/notes")
 
 (set-face-attribute 'default nil
                     :family "Hasklug Nerd Font"
