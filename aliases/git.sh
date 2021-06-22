@@ -26,3 +26,8 @@ alias gst='g stash '
 alias gsa='g stash apply '
 alias gbt='g br -u '
 alias gd='g diff -w --color --word-diff'
+
+# [G]it [D]elete [B]ranches
+gdb() {
+    git for-each-ref --count=30 --sort=-committerdate refs/heads/ --format="%(refname:short)" | rg -v -e "develop|master" | fzf -m --header='[delete:branches]' | xargs git branch -D
+}
