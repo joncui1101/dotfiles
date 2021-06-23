@@ -12,14 +12,11 @@ export RUSTUP_HOME=$XDG_CONFIG_HOME/rustup
 export GOPATH=$XDG_CONFIG_HOME/go
 export GOBIN=$GOPATH/bin
 
-export NVM_DIR=$XDG_CONFIG_HOME/nvm
 export NPM_CONFIG_USERCONFIG=$XDG_CONFIG_HOME/npm/.npmrc
 export NPM_CONFIG_CACHE=$XDG_CONFIG_HOME/npm
 
-export PYENV_ROOT=$XDG_CONFIG_HOME/pyenv
-
 export DOTDIR=$PWS/dotfiles
-export PATH=/usr/local/opt/mysql@5.7/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/sbin:/usr/local/bin:$CARGO_HOME/bin:$GOBIN:$DOTDIR/bin:$PYENV_ROOT/bin
+export PATH=/usr/local/opt/mysql@5.7/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/sbin:/usr/local/bin:$CARGO_HOME/bin:$GOBIN:$DOTDIR/bin
 
 export LEDGER=$PWS/ledgers
 export LEDGER_FILE=$LEDGER/index.journal
