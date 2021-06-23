@@ -24,16 +24,17 @@ WORKENV=$WS/dotfiles/workenv.zsh
 [ -s $WORKENV ] && source $WORKENV
 
 if [[ $OSTYPE == darwin* ]]; then
-    [ -f "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.zsh ] && source "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.zsh
+    [ -s "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.zsh ] && source "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.zsh
 elif [[ $OSTYPE == *linux* ]]; then
-    [ -f /usr/share/fzf/completion.zsh ] && source /usr/share/fzf/completion.zsh
-    [ -f /usr/share/fzf/key-bindings.zsh ] && source /usr/share/fzf/key-bindings.zsh
+    [ -s /usr/share/fzf/completion.zsh ] && source /usr/share/fzf/completion.zsh
+    [ -s /usr/share/fzf/key-bindings.zsh ] && source /usr/share/fzf/key-bindings.zsh
+    [ -s /opt/asdf-vm/asdf.sh ] && source /opt/asdf-vm/asdf.sh
 fi
 
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-# kitty + complete setup zsh | source /dev/stdin
+if command -v kitty &> /dev/null
+then
+    kitty + complete setup zsh | source /dev/stdin
+fi
 
 if command -v pyenv &> /dev/null
 then
@@ -47,7 +48,7 @@ then
     eval "$(starship init zsh)"
 fi
 
-if [[ ! -f $DOTDIR/emacs/env-file || `cat $DOTDIR/emacs/env-file` != $PATH ]]; then
+if [[ ! -s $DOTDIR/emacs/env-file || `cat $DOTDIR/emacs/env-file` != $PATH ]]; then
     echo "Updating 'env-file'"
     echo $PATH > $DOTDIR/emacs/env-file
 fi

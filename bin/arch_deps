@@ -1,0 +1,1 @@
+sudo pacman -S neovim npm bluez bluez-utils vlc rclone adobe-source-han-sans-tw-fonts alacritty zsh fd exa firefox fzf ripgrep starship 
