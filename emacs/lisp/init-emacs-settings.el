@@ -17,10 +17,7 @@
   (load-env "env-file")
   (if (and (fboundp 'native-comp-available-p)
            (native-comp-available-p))
-      (progn
-        (message "Native comp is available")
-        (setq comp-deferred-compilation t)
-        (setq comp-speed 3))
+      (message "Native comp is available")
     (message "Native comp is *not* available")))
 
 ;; Turn on visual line mode

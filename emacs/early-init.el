@@ -8,8 +8,7 @@
 
 ;;; Code:
 
-(setq package-enable-at-startup t
-      package-quickstart t
+(setq package-quickstart t
       frame-inhibit-implied-resize t)
 
 ;; Adjust garbage collection thresholds during startup, and thereafter

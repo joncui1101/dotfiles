@@ -2,9 +2,9 @@
 ;;; Commentary:
 ;;; Code:
 (use-package yasnippet
-  :hook ((prog-mode text-mode) . yas-minor-mode)
+  :hook ((prog-mode text-mode org-mode) . yas-minor-mode)
   :bind (:map yas-minor-mode-map
-              ("S-<tab>" . yas-expand))
+              ("C-l" . yas-expand))
   :config
   (yas-reload-all))
 

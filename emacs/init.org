@@ -1,0 +1,38 @@
+#+TITLE: Emacs Configuration
+#+PROPERTY: header-args:emacs-lisp :tangle init.el
+
+* Startup Performance
+
+#+begin_src emacs-lisp
+  (setq gc-cons-threshold (* 50 1000 1000))
+
+  (add-hook 'emacs-startup-hook
+            (lambda () (setq gc-cons-threshold (* 2 1000 1000))))
+
+  (add-hook 'emacs-startup-hook
+            (lambda ()
+              (message "*** Emacs loaded in %s with %d garbage collections."
+                       (format "%.2f seconds"
+                               (float-time
+                                (time-subtract after-init-time before-init-time)))
+                       gcs-done)))
+#+end_src
+
+* Native Compilation
+#+begin_src emacs-lisp
+  (if (and (fboundp 'native-comp-available-p)
+           (native-comp-available-p))
+      (message "Native comp is available")
+    (message "Native comp is *not* available"))
+#+end_src
+
+* Initial UI Setup
+Prevent frame from resizing implicitly and maximize frames by default. Removes toolbar, scrollbar and menubar.
+#+begin_src emacs-lisp
+  (setq frame-inhibit-implied-resize t)
+  (add-to-list 'initial-frame-alist '(fullscreen . maximized))
+
+  (tool-bar-mode -1)
+  (scroll-bar-mode -1)
+  (menu-bar-mode -1)
+#+end_src
