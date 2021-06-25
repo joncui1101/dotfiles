@@ -27,7 +27,7 @@
   :diminish
   :config
   (require 'smartparens-config)
-  :hook (prog-mode . smartparens-mode))
+  :hook ((org-mode prog-mode) . smartparens-mode))
 
 (use-package display-line-numbers
   :preface
@@ -44,6 +44,10 @@
   :custom
   (highlight-indent-guides-method 'bitmap)
   :hook (((prog-mode) . highlight-indent-guides-mode)))
+
+(use-package emacs-lisp
+  :ensure nil
+  :hook (emacs-lisp-mode . electric-indent-mode))
 
 (provide 'init-code)
 ;;; init-code.el ends here

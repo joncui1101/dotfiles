@@ -3,11 +3,9 @@
 
 * Startup Performance
 
+Make startup faster by reducing the frequency of garbage collection and then use a hook to measure Emacs startup time.
 #+begin_src emacs-lisp
   (setq gc-cons-threshold (* 50 1000 1000))
-
-  (add-hook 'emacs-startup-hook
-            (lambda () (setq gc-cons-threshold (* 2 1000 1000))))
 
   (add-hook 'emacs-startup-hook
             (lambda ()
@@ -19,6 +17,8 @@
 #+end_src
 
 * Native Compilation
+
+Show if native comp is available.
 #+begin_src emacs-lisp
   (if (and (fboundp 'native-comp-available-p)
            (native-comp-available-p))
@@ -26,8 +26,67 @@
     (message "Native comp is *not* available"))
 #+end_src
 
-* Initial UI Setup
-Prevent frame from resizing implicitly and maximize frames by default. Removes toolbar, scrollbar and menubar.
+* User Information
+#+begin_src emacs-lisp
+  (setq-default user-full-name "Jonathan Cui"
+                user-mail-address "joncui1101@gmail.com")
+#+end_src
+
+* Package Management
+
+Set up ELPA, MELPA, and Org package repositories and load =use-package= to manage package configuration.
+#+begin_src emacs-lisp 
+  (require 'package) 
+
+  (setq package-archives '(("melpa" . "https://melpa.org/packages/") 
+                           ("gnu" . "https://elpa.gnu.org/packages/")))
+  (unless package--initialized
+    (package-initialize))
+
+  (unless (package-installed-p 'use-package)
+    (package-refresh-contents)
+    (package-install 'use-package))
+
+  (require 'use-package)
+
+  (setq use-package-always-ensure t)
+#+end_src
+
+Install f package
+#+begin_src emacs-lisp 
+  (unless (package-installed-p 'f) 
+    (package-refresh-contents) 
+    (package-install 'f))
+
+  (require 'f)
+#+end_src
+
+* Custom File
+
+Keep custom changes in its own file.
+#+begin_src emacs-lisp
+  (setq-default custom-file (f-expand "custom.el" user-emacs-directory))
+  (load custom-file t)
+#+end_src
+
+
+* Keep Emacs Directory Clean
+
+Move transient files into a separate directory (~/.config/cache/emacs)
+#+begin_src emacs-lisp
+  (defvar transient-directory "~/.config/cache/emacs/")
+
+  (setq backup-directory-alist `(("." . ,(f-expand "backups" transient-directory)))
+        url-configuration-directory (f-expand "url" transient-directory)
+        auto-save-list-file-prefix (f-expand "auto-save-list/.saves-" transient-directory)
+        package-quickstart-file (f-expand "package-quickstart.el" transient-directory))
+#+end_src
+
+* General Configuration
+
+** User Interface
+
+Prevent frame from resizing implicitly. Maximize frames by default. Removes toolbar, scrollbar and menubar.
 #+begin_src emacs-lisp
   (setq frame-inhibit-implied-resize t)
   (add-to-list 'initial-frame-alist '(fullscreen . maximized))
@@ -36,3 +95,65 @@ Prevent frame from resizing implicitly and maximize frames by default. Removes t
   (scroll-bar-mode -1)
   (menu-bar-mode -1)
 #+end_src
+
+** Theme
+
+Set the theme using doom-themes. Currently using doom-vibrant.
+#+begin_src emacs-lisp
+  (use-package doom-themes
+    :config
+    (setq doom-themes-enable-bold t
+          doom-themes-enable-italic t)
+    (load-theme 'doom-vibrant t)
+    (doom-themes-visual-bell-config))
+#+end_src
+
+** Mode Line
+
+Setup the modeline using doom-modeline.
+#+begin_src emacs-lisp
+  (use-package doom-modeline
+    :hook (after-init . doom-modeline-init)
+    :custom-face
+    (mode-line ((t (:height 120))))
+    (mode-line-inactive ((t (:height 120))))
+    :custom
+    (doom-modeline-env-enable-python nil)
+    (doom-modeline-lsp t)
+    (doom-modeline-modal-icon nil)
+    (doom-modeline-vcs-max-length 50))
+#+end_src
+
+** Fonts
+
+Using Hasklug [[https://github.com/ryanoasis/nerd-fonts][Nerd Font]]
+#+begin_src emacs-lisp
+(set-face-attribute 'default nil
+                    :family "Hasklug Nerd Font"
+                    :weight 'normal
+                    :width 'normal
+                    :height 130)
+
+#+end_src
+
+Enable Ligatures
+#+begin_src emacs-lisp
+  (use-package ligature
+    :defer 1
+    :load-path "lisp-local"
+    :config
+    (ligature-set-ligatures 't '("www"))
+    (ligature-set-ligatures 'prog-mode '("www" "**" "***" "**/" "*>" "*/" "\\\\" "\\\\\\" "{-" "::"
+                                         ":::" ":=" "!!" "!=" "!==" "-}" "----" "-->" "->" "->>"
+                                         "-<" "-<<" "-~" "#{" "#[" "##" "###" "####" "#(" "#?" "#_"
+                                         "#_(" ".-" ".=" ".." "..<" "..." "?=" "??" ";;" "/*" "/**"
+                                         "/=" "/==" "/>" "//" "///" "&&" "||" "||=" "|=" "|>" "^=" "$>"
+                                         "++" "+++" "+>" "=:=" "==" "===" "==>" "=>" "=>>" "<="
+                                         "=<<" "=/=" ">-" ">=" ">=>" ">>" ">>-" ">>=" ">>>" "<*"
+                                         "<*>" "<|" "<|>" "<$" "<$>" "<!--" "<-" "<--" "<->" "<+"
+                                         "<+>" "<=" "<==" "<=>" "<=<" "<>" "<<" "<<-" "<<=" "<<<"
+                                         "<~" "<~~" "</" "</>" "~@" "~-" "~>" "~~" "~~>" "%%"))
+    (global-ligature-mode t))
+#+end_src
+
+
