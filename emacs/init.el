@@ -39,6 +39,7 @@
 (require 'init-treemacs)
 (require 'init-treesitter)
 (require 'init-vterm)
+(require 'init-org)
 (require 'init-yasnippet)
 
 ;; Allow access from emacsclient

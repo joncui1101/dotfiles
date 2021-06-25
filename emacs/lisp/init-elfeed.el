@@ -46,7 +46,7 @@
      ("https://eng.uber.com/feed/" dev)
      ("https://codeascraft.com/atom" dev)
      ("https://instagram-engineering.com/feed" dev)
-     ("https://planet.emacslife.com/atom.xml" dev emacs)
+     ("https://planet.emacslife.com/atom.xml" emacs)
      ("https://github.blog/feed" dev)
      ("https://blog.golang.org/feeds/posts/default" dev go)
      ("https://developer.squareup.com/blog/rss.xml" dev)
