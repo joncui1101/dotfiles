@@ -1,4 +1,5 @@
 #+TITLE: Emacs Configuration
+#+AUTHOR: Jonathan Cui
 #+PROPERTY: header-args:emacs-lisp :tangle init.el
 
 * Startup Performance
@@ -69,7 +70,6 @@ Keep custom changes in its own file.
   (load custom-file t)
 #+end_src
 
-
 * Keep Emacs Directory Clean
 
 Move transient files into a separate directory (~/.config/cache/emacs)
@@ -81,6 +81,23 @@ Move transient files into a separate directory (~/.config/cache/emacs)
         auto-save-list-file-prefix (f-expand "auto-save-list/.saves-" transient-directory)
         package-quickstart-file (f-expand "package-quickstart.el" transient-directory))
 #+end_src
+
+* Load Environment Variables
+
+Custom function to load environment variables from a file.
+#+begin_src emacs-lisp
+  (defun jc/load-env (file)
+    "Load the contents of the FILE as 'exec-path'."
+    (let ((file-path (f-expand file user-emacs-directory)))
+      (if (f-exists? file-path)
+          (let ((paths (s-trim (f-read-text file-path))))
+            (setenv "PATH" paths)
+            (dolist (path (s-split ":" paths))
+              (add-to-list 'exec-path path))))))
+
+  (jc/load-env "env-file")
+#+end_src
+
 
 * General Configuration
 
@@ -156,4 +173,38 @@ Enable Ligatures
     (global-ligature-mode t))
 #+end_src
 
+* Org Mode
+
+** Org Configuration
+
+Set up Org Mode with a baseline configuration.
+#+begin_src  emacs-lisp
+  (defun jc/org-mode-setup ()
+    (org-indent-mode)
+    ;; (variable-pitch-mode 1)
+    (auto-fill-mode 0)
+    (setq evil-auto-indent nil))
+
+  (use-package org
+    :defer t
+    :hook (org-mode . jc/org-mode-setup)
+    :bind (:map org-mode-map
+                ("C-<tab>" . org-indent-block))
+    :init
+    (setq org-directory "~/workspace/personal/notes"
+          org-default-notes-file (f-expand "Inbox")))
+#+end_src
+
+** Evil Bindings for Org Mode
+
+#+begin_src emacs-lisp
+  (use-package evil-org
+    :after org
+    :hook ((org-mode . evil-org-mode)
+           (org-agenda-mode . evil-org-mode)
+           (evil-org-mode . (lambda () (evil-org-set-key-theme '(navigation todo insert textobjects additional)))))
+    :config
+    (require 'evil-org-agenda)
+    (evil-org-agenda-set-keys))
+#+end_src
 
