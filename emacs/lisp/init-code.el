@@ -49,5 +49,8 @@
   :ensure nil
   :hook (emacs-lisp-mode . electric-indent-mode))
 
+(require 'f)
+(setenv "ASDF_DATA_DIR" (f-expand "~/.config/asdf"))
+
 (provide 'init-code)
 ;;; init-code.el ends here
