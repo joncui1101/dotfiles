@@ -4,7 +4,8 @@
 (use-package vterm
   :commands vterm
   :custom
-  (vterm-max-scrollback 10000))
+  (vterm-max-scrollback 10000)
+  (vterm-shell "/usr/bin/zsh"))
 
 (provide 'init-vterm)
 ;;; init-vterm.el ends here

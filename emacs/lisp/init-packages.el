@@ -21,15 +21,9 @@
 (require 'use-package)
 (setq use-package-always-ensure t)
 
-(use-package diminish
-  :diminish auto-revert-mode
-  :diminish eldoc-mode
-  :diminish visual-line-mode)
-
 (use-package delight
   :delight
   (emacs-lisp-mode "elisp"))
-
 
 (provide 'init-packages)
 ;;; init-packages.el ends here

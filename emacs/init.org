@@ -1,13 +1,12 @@
 #+TITLE: Emacs Configuration
+#+AUTHOR: Jonathan Cui
 #+PROPERTY: header-args:emacs-lisp :tangle init.el
 
 * Startup Performance
 
+Make startup faster by reducing the frequency of garbage collection and then use a hook to measure Emacs startup time.
 #+begin_src emacs-lisp
   (setq gc-cons-threshold (* 50 1000 1000))
-
-  (add-hook 'emacs-startup-hook
-            (lambda () (setq gc-cons-threshold (* 2 1000 1000))))
 
   (add-hook 'emacs-startup-hook
             (lambda ()
@@ -19,6 +18,8 @@
 #+end_src
 
 * Native Compilation
+
+Show if native comp is available.
 #+begin_src emacs-lisp
   (if (and (fboundp 'native-comp-available-p)
            (native-comp-available-p))
@@ -26,13 +27,306 @@
     (message "Native comp is *not* available"))
 #+end_src
 
-* Initial UI Setup
-Prevent frame from resizing implicitly and maximize frames by default. Removes toolbar, scrollbar and menubar.
+* User Information
+#+begin_src emacs-lisp
+  (setq-default user-full-name "Jonathan Cui"
+                user-mail-address "joncui1101@gmail.com")
+#+end_src
+
+* Package Management
+
+Set up ELPA, MELPA, and Org package repositories and load =use-package= to manage package configuration.
+#+begin_src emacs-lisp 
+  (require 'package) 
+
+  (setq package-archives '(("melpa" . "https://melpa.org/packages/") 
+                           ("gnu" . "https://elpa.gnu.org/packages/")))
+  (unless package--initialized
+    (package-initialize))
+
+  (unless (package-installed-p 'use-package)
+    (package-refresh-contents)
+    (package-install 'use-package))
+
+  (require 'use-package)
+
+  (setq use-package-always-ensure t)
+#+end_src
+
+Install f package
+#+begin_src emacs-lisp 
+  (unless (package-installed-p 'f) 
+    (package-refresh-contents) 
+    (package-install 'f))
+
+  (require 'f)
+#+end_src
+
+* Custom File
+
+Keep custom changes in its own file.
+#+begin_src emacs-lisp
+  (setq-default custom-file (f-expand "custom.el" user-emacs-directory))
+  (load custom-file t)
+#+end_src
+
+* Keep Emacs Directory Clean
+
+Move transient files into a separate directory (~/.config/cache/emacs)
+#+begin_src emacs-lisp
+  (defvar transient-directory "~/.config/cache/emacs/")
+
+  (setq backup-directory-alist `(("." . ,(f-expand "backups" transient-directory)))
+        url-configuration-directory (f-expand "url" transient-directory)
+        auto-save-list-file-prefix (f-expand "auto-save-list/.saves-" transient-directory)
+        package-quickstart-file (f-expand "package-quickstart.el" transient-directory))
+#+end_src
+
+* Load Environment Variables
+
+Custom function to load environment variables from a file.
+#+begin_src emacs-lisp
+  (defun jc/load-env (file)
+    "Load the contents of the FILE as 'exec-path'."
+    (let ((file-path (f-expand file user-emacs-directory)))
+      (if (f-exists? file-path)
+          (let ((paths (s-trim (f-read-text file-path))))
+            (setenv "PATH" paths)
+            (dolist (path (s-split ":" paths))
+              (add-to-list 'exec-path path))))))
+
+  (jc/load-env "env-file")
+#+end_src
+
+
+* General Configuration
+
+** User Interface
+
+Prevent frame from resizing implicitly. Maximize frames by default. Removes toolbar, scrollbar and menubar.
 #+begin_src emacs-lisp
   (setq frame-inhibit-implied-resize t)
   (add-to-list 'initial-frame-alist '(fullscreen . maximized))
 
+  ;; Remove tool bar
   (tool-bar-mode -1)
+
+  ;; Remove scroll bar
   (scroll-bar-mode -1)
+
+  ;; Remove menu bar
   (menu-bar-mode -1)
+
+  ;; Turn on visual line mode
+  (global-visual-line-mode t)
+
+  ;; Turn off blinking cursor
+  (blink-cursor-mode 0)
+
+  ;; See matching pairs of parantheses and other characters
+  (show-paren-mode 1)
+
+  ;; Show column numbers
+  (column-number-mode)
+#+end_src
+
+** Theme
+
+Set the theme using doom-themes. Currently using doom-vibrant.
+#+begin_src emacs-lisp
+  (use-package doom-themes
+    :config
+    (setq doom-themes-enable-bold t
+          doom-themes-enable-italic t)
+    (load-theme 'doom-vibrant t)
+    (doom-themes-visual-bell-config))
+#+end_src
+
+** Mode Line
+
+Setup the modeline using doom-modeline.
+#+begin_src emacs-lisp
+  (use-package doom-modeline
+    :hook (after-init . doom-modeline-init)
+    :custom-face
+    (mode-line ((t (:height 120))))
+    (mode-line-inactive ((t (:height 120))))
+    :custom
+    (doom-modeline-env-enable-python nil)
+    (doom-modeline-lsp t)
+    (doom-modeline-modal-icon nil)
+    (doom-modeline-vcs-max-length 50))
+#+end_src
+
+** Fonts
+
+Using Hasklug [[https://github.com/ryanoasis/nerd-fonts][Nerd Font]]
+#+begin_src emacs-lisp
+(set-face-attribute 'default nil
+                    :family "Hasklug Nerd Font"
+                    :weight 'normal
+                    :width 'normal
+                    :height 130)
+
+#+end_src
+
+Enable Ligatures
+#+begin_src emacs-lisp
+  (use-package ligature
+    :defer 1
+    :load-path "lisp-local"
+    :config
+    (ligature-set-ligatures 't '("www"))
+    (ligature-set-ligatures 'prog-mode '("www" "**" "***" "**/" "*>" "*/" "\\\\" "\\\\\\" "{-" "::"
+                                         ":::" ":=" "!!" "!=" "!==" "-}" "----" "-->" "->" "->>"
+                                         "-<" "-<<" "-~" "#{" "#[" "##" "###" "####" "#(" "#?" "#_"
+                                         "#_(" ".-" ".=" ".." "..<" "..." "?=" "??" ";;" "/*" "/**"
+                                         "/=" "/==" "/>" "//" "///" "&&" "||" "||=" "|=" "|>" "^=" "$>"
+                                         "++" "+++" "+>" "=:=" "==" "===" "==>" "=>" "=>>" "<="
+                                         "=<<" "=/=" ">-" ">=" ">=>" ">>" ">>-" ">>=" ">>>" "<*"
+                                         "<*>" "<|" "<|>" "<$" "<$>" "<!--" "<-" "<--" "<->" "<+"
+                                         "<+>" "<=" "<==" "<=>" "<=<" "<>" "<<" "<<-" "<<=" "<<<"
+                                         "<~" "<~~" "</" "</>" "~@" "~-" "~>" "~~" "~~>" "%%"))
+    (global-ligature-mode t))
+#+end_src
+
+* Org Mode
+
+** Org Configuration
+
+Set up Org Mode with a baseline configuration.
+#+begin_src  emacs-lisp
+  (defun jc/org-mode-setup ()
+    (org-indent-mode)
+    ;; (variable-pitch-mode 1)
+    (auto-fill-mode 0)
+    (setq evil-auto-indent nil))
+
+  (use-package org
+    :defer t
+    :hook (org-mode . jc/org-mode-setup)
+    :bind (:map org-mode-map
+                ("C-<tab>" . org-indent-block))
+    :init
+    (setq org-directory "~/workspace/personal/notes"
+          org-default-notes-file (f-expand "Inbox")))
+#+end_src
+
+** Evil Bindings for Org Mode
+
+#+begin_src emacs-lisp
+  (use-package evil-org
+    :after org
+    :hook ((org-mode . evil-org-mode)
+           (org-agenda-mode . evil-org-mode)
+           (evil-org-mode . (lambda () (evil-org-set-key-theme '(navigation todo insert textobjects additional)))))
+    :config
+    (require 'evil-org-agenda)
+    (evil-org-agenda-set-keys))
+#+end_src
+
+* Completion System
+
+** Ivy
+
+Currently using Ivy for completions.
+#+begin_src emacs-lisp
+  (use-package ivy
+    :defer 1
+    :bind (:map ivy-minibuffer-map
+                ("C-l" . ivy-alt-done)
+                ("C-j" . ivy-next-line)
+                ("C-k" . ivy-previous-line)
+                :map ivy-switch-buffer-map
+                ("C-d" . ivy-switch-buffer-kill)
+                ("C-k" . ivy-previous-line)
+                :map ivy-reverse-i-search-map
+                ("C-k" . ivy-previous-line)
+                ("C-d" . ivy-reverse-i-search-kill))
+    :init
+    (ivy-mode +1)
+    :custom
+    (enable-recursive-minibuffers t)
+    (ivy-count-format "(%d/%d) ")
+    (ivy-re-builders-alist '((t . ivy--regex-ignore-order)))
+    (ivy-use-virtual-buffers t)
+    (ivy-wrap t))
+
+  (use-package counsel
+    :requires ivy
+    :init
+    (counsel-mode +1)
+    :bind (("C-x b" . counsel-ibuffer)
+           ("M-c" . quick-calc)
+           :map minibuffer-local-map
+           ("C-r" . 'counsel-minibuffer-history))
+    :custom
+    (ivy-initial-inputs-alist nil))
+#+end_src
+
+** Ivy Extensions
+
+Extensions to improve ivy. ivy-rich provides a more friendly interface. ivy-posframe provides functionality to use a posframe.
+#+begin_src emacs-lisp
+  (use-package ivy-rich
+    :requires ivy
+    :config
+    (plist-put ivy-rich-display-transformers-list
+               'counsel-M-x
+               '(:columns
+                 ((counsel-M-x-transformer (:width 50))
+                  (ivy-rich-counsel-function-docstring (:face font-lock-doc-face)))))
+    (plist-put ivy-rich-display-transformers-list
+               'ivy-switch-buffer
+               '(:columns
+                 ((ivy-switch-buffer-transformer (:width 50))
+                  (ivy-rich-switch-buffer-indicators (:width 4 :face error :align right))
+                  (ivy-rich-switch-buffer-major-mode (:width 12 :face warning))
+                  (ivy-rich-switch-buffer-project (:width 0.18 :face success))
+                  (ivy-rich-switch-buffer-path (:width (lambda (x) (ivy-rich-switch-buffer-shorten-path x (ivy-rich-minibuffer-width 0.3))))))))
+    (ivy-rich-mode +1)
+    (setcdr (assq t ivy-format-functions-alist) #'ivy-format-function-line))
+
+  (use-package ivy-posframe
+    :init
+    (setq ivy-posframe-display-functions-alist
+          '((counsel-projectile-switch-project . ivy-posframe-display-at-frame-center)
+            (counsel-projectile-find-file . ivy-posframe-display-at-frame-center)
+            (counsel-M-x . ivy-posframe-display-at-frame-center)
+            (counsel-projectile . ivy-posframe-display-at-frame-center)
+            (counsel-projectile-switch-to-buffer . ivy-posframe-display-at-frame-center))
+          ivy-posframe-min-width 115
+          ivy-posframe-parameters '((left-fringe . 4)
+                                    (right-fringe . 4)))
+    (ivy-posframe-mode 1))
+#+end_src
+
+** Projectile Integration
+
+Integrate Ivy with Projectile.
+#+begin_src emacs-lisp
+  (use-package counsel-projectile
+    :requires (counsel projectile)
+    :init
+    (counsel-projectile-mode 1)
+    :custom
+    (counsel-projectile-find-file-matcher 'ivy--re-filter))
+#+end_src
+
+** LSP Integration
+
+Integrate Ivy with LSP.
+#+begin_src emacs-lisp
+  (use-package lsp-ivy
+    :requires (lsp-mode ivy))
+#+end_src
+
+** Company
+#+begin_src emacs-lisp
+  (use-package company
+    :defer 1
+    :config (global-company-mode 1)
+    :custom
+    (company-idle-delay 0)
+    (company-minimum-prefix-length 1))
 #+end_src
