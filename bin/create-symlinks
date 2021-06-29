@@ -30,10 +30,6 @@ if [[ $OSTYPE == darwin* ]]; then
     rm ~/.config/hammerspoon
     defaults write org.hammerspoon.Hammerspoon MJConfigFile "~/.config/hammerspoon/init.lua"
     ln -s $DOTDIR/hammerspoon ~/.config/hammerspoon
-
-    printf "Linking karabiner\n"
-    rm ~/.config/karabiner
-    ln -s $DOTDIR/karabiner ~/.config/karabiner
 fi
 
 ln -s $DOTDIR/emacs ~/.config/emacs
