@@ -1,3 +1,6 @@
+ZSHRC=$WS/dotfiles/zshrc
+[ -s $ZSHRC ] && source $ZSHRC
+
 autoload -U promptinit && promptinit
 
 # You may need to manually set your language environment
@@ -19,9 +22,6 @@ for config_file ($DOTDIR/zsh/*.zsh*); do
     source $config_file
 done
 unset config_file
-
-WORKENV=$WS/dotfiles/workenv.zsh
-[ -s $WORKENV ] && source $WORKENV
 
 if [[ $OSTYPE == darwin* ]]; then
     [ -s "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.zsh ] && source "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.zsh
@@ -52,3 +52,6 @@ if [[ ! -s $DOTDIR/emacs/env-file || `cat $DOTDIR/emacs/env-file` != $PATH ]]; t
     echo "Updating 'env-file'"
     echo $PATH > $DOTDIR/emacs/env-file
 fi
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"

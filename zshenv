@@ -1,3 +1,6 @@
+ENVFILE=$WS/dotfiles/zshenv
+[ -s $ENVFILE ] && source $ENVFILE
+
 export XDG_CONFIG_HOME=$HOME/.config
 export XDG_DATA_HOME=$XDG_CONFIG_HOME/local/share
 export XDG_CACHE_HOME=$XDG_CONFIG_HOME/cache

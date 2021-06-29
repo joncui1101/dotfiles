@@ -3,9 +3,6 @@ source $DOTDIR/aliases/dir.sh
 source $DOTDIR/aliases/vim.sh
 source $DOTDIR/aliases/git.sh
 source $DOTDIR/aliases/misc.sh
-if [[ -d $WS/dotfiles ]]; then
-    source $WS/dotfiles/work_aliases.sh
-fi
 
 
 if [[ $OSTYPE == *linux* ]]; then
