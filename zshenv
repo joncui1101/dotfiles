@@ -19,7 +19,10 @@ export NPM_CONFIG_USERCONFIG=$XDG_CONFIG_HOME/npm/.npmrc
 export NPM_CONFIG_CACHE=$XDG_CONFIG_HOME/npm
 
 export DOTDIR=$PWS/dotfiles
-export PATH=/usr/local/opt/mysql@5.7/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/sbin:/usr/local/bin:$CARGO_HOME/bin:$GOBIN:$DOTDIR/bin
+export PATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/sbin:/usr/local/bin:$GOBIN:$DOTDIR/bin
+if [[ $OSTYPE == darwin* && ! "$PATH" == */usr/local/opt/fzf/bin* ]]; then
+    export PATH="$PATH:/usr/local/opt/fzf/bin"
+fi
 
 export LEDGER=$PWS/ledgers
 export LEDGER_FILE=$LEDGER/index.journal

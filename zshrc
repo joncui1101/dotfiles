@@ -42,7 +42,6 @@ then
     [ -s $PYENV_ROOT/completions/pyenv.zsh ] && source $PYENV_ROOT/completions/pyenv.zsh
 fi
 
-
 if command -v starship &> /dev/null
 then
     eval "$(starship init zsh)"
@@ -52,6 +51,3 @@ if [[ ! -s $DOTDIR/emacs/env-file || `cat $DOTDIR/emacs/env-file` != $PATH ]]; t
     echo "Updating 'env-file'"
     echo $PATH > $DOTDIR/emacs/env-file
 fi
-
-# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="$PATH:$HOME/.rvm/bin"
