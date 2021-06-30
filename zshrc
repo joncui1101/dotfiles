@@ -1,4 +1,4 @@
-ZSHRC=$WS/dotfiles/zshrc
+ZSHRC=$WS/dotfiles/zsh/zshrc
 [ -s $ZSHRC ] && source $ZSHRC
 
 autoload -U promptinit && promptinit

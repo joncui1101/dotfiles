@@ -21,6 +21,11 @@
 
 ;; Load configs for specific features and modes
 
+(if (f-exists-p "~/workspace/work/dotfiles/emacs/init-work.el")
+  (progn
+    (add-to-list 'load-path (expand-file-name "~/workspace/work/dotfiles/emacs"))
+    (require 'init-work)))
+
 (require 'init-dired)
 (require 'init-ledger)
 (require 'init-evil)
@@ -31,6 +36,7 @@
 (require 'init-go)
 (require 'init-javascript)
 (require 'init-python)
+(require 'init-ruby)
 (require 'init-company)
 (require 'init-projectile)
 (require 'init-markdown)

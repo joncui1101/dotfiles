@@ -1,13 +1,13 @@
-ENVFILE=$WS/dotfiles/zshenv
+export WS=$HOME/workspace/work
+export PWS=$HOME/workspace/personal
+
+ENVFILE=$WS/dotfiles/zsh/zshenv
 [ -s $ENVFILE ] && source $ENVFILE
 
 export XDG_CONFIG_HOME=$HOME/.config
 export XDG_DATA_HOME=$XDG_CONFIG_HOME/local/share
 export XDG_CACHE_HOME=$XDG_CONFIG_HOME/cache
 export ZDOTDIR=$XDG_CONFIG_HOME/zsh
-
-export WS=$HOME/workspace/work
-export PWS=$HOME/workspace/personal
 
 export CARGO_HOME=$XDG_CONFIG_HOME/cargo
 export RUSTUP_HOME=$XDG_CONFIG_HOME/rustup

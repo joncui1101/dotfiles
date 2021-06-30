@@ -22,11 +22,9 @@
   (projectile-cache-file (f-expand "projectile.cache" transient-directory))
   ;; (projectile-completion-system 'helm)
   :config
-  (pcase system-type
-    ('darwin (setq projectile-project-search-path '("~/workspace/work/" "~/workspace/personal")))
-    ('windows-nt (message "Windows not available"))
-    ('gnu/linux (setq projectile-project-search-path '("~/workspace/personal"))))
-  )
+  (if (boundp 'jc/work-env-project-paths)
+      (setq projectile-project-search-path jc/work-env-project-paths)
+    (setq projectile-project-search-path '("~/workspace/personal"))))
 
 (provide 'init-projectile)
 ;;; init-projectile.el ends here
