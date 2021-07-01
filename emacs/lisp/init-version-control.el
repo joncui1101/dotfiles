@@ -4,9 +4,11 @@
 
 (use-package magit
   :defer 1
-  :custom
-  (magit-branch-read-upstream-first 'fallback)
-  (magit-repository-directories '(("\~/workspace" . 1))))
+  :config
+  (setq magit-branch-read-upstream-first 'fallback)
+  (if (boundp 'jc/magit-repository-directories)
+      (setq magit-repository-directories jc/magit-repository-directories)
+    (setq magit-repository-directories '(("~/workspace" . 2)))))
 
 (use-package git-gutter
   :defer 1

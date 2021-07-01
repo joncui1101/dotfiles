@@ -22,8 +22,8 @@
   (projectile-cache-file (f-expand "projectile.cache" transient-directory))
   ;; (projectile-completion-system 'helm)
   :config
-  (if (boundp 'jc/work-env-project-paths)
-      (setq projectile-project-search-path jc/work-env-project-paths)
+  (if (boundp 'jc/projectile-project-search-path)
+      (setq projectile-project-search-path projectile-project-search-path)
     (setq projectile-project-search-path '("~/workspace/personal"))))
 
 (provide 'init-projectile)

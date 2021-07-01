@@ -98,7 +98,6 @@ Custom function to load environment variables from a file.
   (jc/load-env "env-file")
 #+end_src
 
-
 * General Configuration
 
 ** User Interface
@@ -158,16 +157,22 @@ Setup the modeline using doom-modeline.
     (doom-modeline-vcs-max-length 50))
 #+end_src
 
+Use delight to rename emacs-lisp-mode
+#+begin_src emacs-lisp
+  (use-package delight
+    :delight
+    (emacs-lisp-mode "elisp"))
+#+end_src
+
 ** Fonts
 
 Using Hasklug [[https://github.com/ryanoasis/nerd-fonts][Nerd Font]]
 #+begin_src emacs-lisp
-(set-face-attribute 'default nil
-                    :family "Hasklug Nerd Font"
-                    :weight 'normal
-                    :width 'normal
-                    :height 130)
-
+  (set-face-attribute 'default nil
+                      :family "Hasklug Nerd Font"
+                      :weight 'normal
+                      :width 'normal
+                      :height 130)
 #+end_src
 
 Enable Ligatures
@@ -330,3 +335,91 @@ Integrate Ivy with LSP.
     (company-idle-delay 0)
     (company-minimum-prefix-length 1))
 #+end_src
+
+* Development
+
+** Version Control
+
+*** Magit
+#+begin_src emacs-lisp
+  (use-package magit
+    :defer 1
+    :config
+    (setq magit-branch-read-upstream-first 'fallback)
+    (if (boundp 'jc/magit-repository-directories)
+        (setq magit-repository-directories jc/magit-repository-directories)
+      (setq magit-repository-directories '(("~/workspace" . 2)))))
+#+end_src
+
+*** Git Gutter
+#+begin_src emacs-lisp
+  (use-package git-gutter
+    :defer 1
+    :diminish
+    :config (global-git-gutter-mode +1)
+    :custom
+    (git-gutter:update-interval 2))
+#+end_src
+
+
+** Projectile
+#+begin_src emacs-lisp
+  (use-package projectile
+    :defer 1
+    :diminish
+    :init
+    (projectile-mode 1)
+    :bind (:map projectile-mode-map
+                ("C-c p" . projectile-command-map))
+    :config
+    (add-to-list 'projectile-globally-ignored-directories "vendor")
+    (add-to-list 'projectile-globally-ignored-directories ".github")
+    :custom
+    (projectile-enable-caching t)
+    (projectile-require-project-root t)
+    (projectile-indexing-method 'native)
+    (projectile-project-root-functions '(projectile-root-local projectile-root-bottom-up projectile-root-top-down-recurring))
+    (projectile-completion-system 'ivy)
+    (projectile-known-projects-file (f-expand "projectile-bookmarks.eld" transient-directory))
+    (projectile-cache-file (f-expand "projectile.cache" transient-directory))
+    ;; (projectile-completion-system 'helm)
+    :config
+    (if (boundp 'jc/projectile-project-search-path)
+        (setq projectile-project-search-path projectile-project-search-path)
+      (setq projectile-project-search-path '("~/workspace/personal"))))
+#+end_src
+
+
+** Languages
+
+*** Golang
+
+*** Python
+Currently using pyenv to set python version.
+#+begin_src emacs-lisp
+  (use-package python-mode
+    :delight '(:eval (format " py[%s]" (pyenv-mode-version)))
+    :hook (python-mode . (lambda () (modify-syntax-entry ?_ "w" python-mode-syntax-table))))
+
+  (use-package pyenv-mode
+    :custom
+    (pyenv-mode-mode-line-format nil)
+    :preface
+    (defun jc/projectile-pyenv-mode-set ()
+      "Set pyenv version matching project name."
+      (let ((pyenv-version-path (f-expand ".python-version" (projectile-project-root))))
+        (if (f-exists? pyenv-version-path)
+            (progn
+              (pyenv-mode-set (car (s-lines (s-trim (f-read-text pyenv-version-path)))))
+              (setq flycheck-python-flake8-executable (s-concat (pyenv-mode-full-path (pyenv-mode-version)) "/bin/python3")))
+          (pyenv-mode-unset))))
+    :hook
+    (python-mode . pyenv-mode)
+    (projectile-after-switch-project . jc/projectile-pyenv-mode-set))
+#+end_src
+
+*** Ruby
+
+*** Bash
+
+*** YAML
