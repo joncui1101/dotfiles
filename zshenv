@@ -38,10 +38,12 @@ export LESSHISTFILE='-'
 
 export MANPAGER='nvim +Man!'
 export MANWIDTH=999
-#export JAVA_HOME=`/usr/libexec/java_home -v 1.8.0_92`
 
-export ASDF_DATA_DIR=$XDG_CONFIG_HOME/asdf
-export ASDF_CONFIG_FILE=$ASDF_DATA_DIR/asdfrc
-export ASDF_DEFAULT_TOOL_VERSIONS_FILENAME=$ASDF_DATA_DIR/.tool-versions
+if command -v asdf &> /dev/null
+then
+    export ASDF_DATA_DIR=$XDG_CONFIG_HOME/asdf
+    export ASDF_CONFIG_FILE=$ASDF_DATA_DIR/asdfrc
+    export ASDF_DEFAULT_TOOL_VERSIONS_FILENAME=$ASDF_DATA_DIR/.tool-versions
+fi
 
 skip_global_compinit=1
