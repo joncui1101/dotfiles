@@ -1,6 +1,11 @@
 ;;; init-ivy.el --- Setup ivy -*- lexical-binding: t -*-
 ;;; Commentary:
 ;;; Code:
+(defun jc/search-specific-glob (glob)
+  "Search in the project files given the GLOB (specific file type)."
+  (interactive "sGlob?: ")
+  (counsel-projectile-rg (concat "--glob " glob)))
+
 (use-package ivy
   :defer 1
   :diminish
@@ -74,6 +79,7 @@
   :requires (counsel projectile)
   :init
   (counsel-projectile-mode 1)
+  :bind (("C-c p s f" . jc/search-specific-glob))
   :custom
   (counsel-projectile-find-file-matcher 'ivy--re-filter))
 

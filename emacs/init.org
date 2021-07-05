@@ -361,7 +361,6 @@ Integrate Ivy with LSP.
     (git-gutter:update-interval 2))
 #+end_src
 
-
 ** Projectile
 #+begin_src emacs-lisp
   (use-package projectile
@@ -388,7 +387,6 @@ Integrate Ivy with LSP.
         (setq projectile-project-search-path projectile-project-search-path)
       (setq projectile-project-search-path '("~/workspace/personal"))))
 #+end_src
-
 
 ** Languages
 
