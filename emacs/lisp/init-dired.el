@@ -8,17 +8,16 @@
 (use-package dired
   :ensure nil
   :commands (dired dired-jump)
+  :hooks (dired-load . dired-collapse-mode)
   :bind (("C-x C-j" . dired-jump)
          :map dired-mode-map
          ([remap dired-find-file] . dired-single-buffer)
          ([remap dired-mouse-find-file-other-window] . dired-single-buffer-mouse)
          ([remap dired-up-directory] . dired-single-up-directory)))
 
-(use-package dired-single
-  :requires dired)
+(use-package dired-single)
 
-(use-package dired-collapse
-  :defer 1)
+(use-package dired-collapse)
 
 (provide 'init-dired)
 ;;; init-dired.el ends here

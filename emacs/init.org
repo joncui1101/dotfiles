@@ -3,7 +3,6 @@
 #+PROPERTY: header-args:emacs-lisp :tangle init.el
 
 * Startup Performance
-
 Make startup faster by reducing the frequency of garbage collection and then use a hook to measure Emacs startup time.
 #+begin_src emacs-lisp
   (setq gc-cons-threshold (* 50 1000 1000))
@@ -18,7 +17,6 @@ Make startup faster by reducing the frequency of garbage collection and then use
 #+end_src
 
 * Native Compilation
-
 Show if native comp is available.
 #+begin_src emacs-lisp
   (if (and (fboundp 'native-comp-available-p)
@@ -34,7 +32,6 @@ Show if native comp is available.
 #+end_src
 
 * Package Management
-
 Set up ELPA, MELPA, and Org package repositories and load =use-package= to manage package configuration.
 #+begin_src emacs-lisp 
   (require 'package) 
@@ -63,7 +60,6 @@ Install f package
 #+end_src
 
 * Custom File
-
 Keep custom changes in its own file.
 #+begin_src emacs-lisp
   (setq-default custom-file (f-expand "custom.el" user-emacs-directory))
@@ -71,7 +67,6 @@ Keep custom changes in its own file.
 #+end_src
 
 * Keep Emacs Directory Clean
-
 Move transient files into a separate directory (~/.config/cache/emacs)
 #+begin_src emacs-lisp
   (defvar transient-directory "~/.config/cache/emacs/")
@@ -80,10 +75,14 @@ Move transient files into a separate directory (~/.config/cache/emacs)
         url-configuration-directory (f-expand "url" transient-directory)
         auto-save-list-file-prefix (f-expand "auto-save-list/.saves-" transient-directory)
         package-quickstart-file (f-expand "package-quickstart.el" transient-directory))
+
+  (setq-default backup-by-copying t ; Use copying to create backup files.
+                create-lockfiles nil ; Disable lockfiles.
+                delete-old-versions t ; Deletes excess backup files silently.
+                load-prefer-newer t) ; Load newest version of a file.
 #+end_src
 
 * Load Environment Variables
-
 Custom function to load environment variables from a file.
 #+begin_src emacs-lisp
   (defun jc/load-env (file)
@@ -98,10 +97,62 @@ Custom function to load environment variables from a file.
   (jc/load-env "env-file")
 #+end_src
 
+* Key Bindings
+** Which Key
+#+begin_src emacs-lisp
+  (use-package which-key
+    :defer 1
+    :diminish
+    :init
+    (which-key-mode)
+    :custom
+    (which-key-idle-delay 0.3))
+#+end_src
+** Evil Mode
+#+begin_src emacs-lisp
+  (use-package evil
+    :init
+    (setq evil-want-integration t)
+    (setq evil-want-keybinding nil)
+    (setq evil-respect-visual-line-mode t)
+    :custom
+    (evil-symbol-word-search t)
+    :config
+    (evil-mode 1))
+
+  (use-package evil-ledger
+    :requires (evil ledger-mode)
+    :hook (ledger-mode . evil-ledger-mode)
+    :custom
+    (evil-ledger-sort-key "S"))
+
+  (use-package evil-surround
+    :defer 1
+    :config
+    (global-evil-surround-mode 1))
+
+  (use-package evil-snipe
+    :defer 1
+    :diminish evil-snipe-local-mode
+    :requires evil
+    :config
+    (evil-snipe-mode 1)
+    (evil-snipe-override-mode 1)
+    :custom
+    (evil-snipe-scope 'buffer)
+    (evil-snipe-repeat-scope 'buffer)
+    (evil-snipe-spillover-scope 'whole-buffer))
+
+  (use-package evil-collection
+    :defer 1
+    :requires evil
+    :config
+    (evil-collection-init)
+    :custom
+    (evil-collection-setup-minibuffer t))
+#+end_src
 * General Configuration
-
 ** User Interface
-
 Prevent frame from resizing implicitly. Maximize frames by default. Removes toolbar, scrollbar and menubar.
 #+begin_src emacs-lisp
   (setq frame-inhibit-implied-resize t)
@@ -127,10 +178,13 @@ Prevent frame from resizing implicitly. Maximize frames by default. Removes tool
 
   ;; Show column numbers
   (column-number-mode)
+
+  (setq-default confirm-kill-emacs 'y-or-n-p' ; y or n instead of yes or no when quitting.
+                inhibit-scratch-message nil ; Start with a blank canvas.
+                inhibit-startup-screen t) ; Do not show the startup screen.
 #+end_src
 
 ** Theme
-
 Set the theme using doom-themes. Currently using doom-vibrant.
 #+begin_src emacs-lisp
   (use-package doom-themes
@@ -142,7 +196,6 @@ Set the theme using doom-themes. Currently using doom-vibrant.
 #+end_src
 
 ** Mode Line
-
 Setup the modeline using doom-modeline.
 #+begin_src emacs-lisp
   (use-package doom-modeline
@@ -165,7 +218,6 @@ Use delight to rename emacs-lisp-mode
 #+end_src
 
 ** Fonts
-
 Using Hasklug [[https://github.com/ryanoasis/nerd-fonts][Nerd Font]]
 #+begin_src emacs-lisp
   (set-face-attribute 'default nil
@@ -195,10 +247,25 @@ Enable Ligatures
     (global-ligature-mode t))
 #+end_src
 
+* Editing Configuration
+Default tab width to 2 spaces.
+#+begin_src emacs-lisp
+  (setq-default tab-width 2
+                evil-shift-width tab-width)
+#+end_src
+
+Use spaces instead of tabs for indentation.
+#+begin_src emacs-lisp
+  (setq-default indent-tabs-mode nil)
+#+end_src
+
+Backspace erases a tab instead of 1 space at a time.
+#+begin_src emacs-lisp
+  (setq-default backward-delete-char-untabify-method 'hungry)
+#+end_src
+
 * Org Mode
-
 ** Org Configuration
-
 Set up Org Mode with a baseline configuration.
 #+begin_src  emacs-lisp
   (defun jc/org-mode-setup ()
@@ -218,7 +285,6 @@ Set up Org Mode with a baseline configuration.
 #+end_src
 
 ** Evil Bindings for Org Mode
-
 #+begin_src emacs-lisp
   (use-package evil-org
     :after org
@@ -231,9 +297,7 @@ Set up Org Mode with a baseline configuration.
 #+end_src
 
 * Completion System
-
 ** Ivy
-
 Currently using Ivy for completions.
 #+begin_src emacs-lisp
   (use-package ivy
@@ -270,7 +334,6 @@ Currently using Ivy for completions.
 #+end_src
 
 ** Ivy Extensions
-
 Extensions to improve ivy. ivy-rich provides a more friendly interface. ivy-posframe provides functionality to use a posframe.
 #+begin_src emacs-lisp
   (use-package ivy-rich
@@ -307,6 +370,12 @@ Extensions to improve ivy. ivy-rich provides a more friendly interface. ivy-posf
 #+end_src
 
 ** Projectile Integration
+#+begin_src emacs-lisp
+  (defun jc/search-specific-glob (glob)
+    "Search in the project files given the GLOB (specific file type)."
+    (interactive "sGlob?: ")
+    (counsel-projectile-rg (concat "--glob " glob)))
+#+end_src
 
 Integrate Ivy with Projectile.
 #+begin_src emacs-lisp
@@ -314,12 +383,12 @@ Integrate Ivy with Projectile.
     :requires (counsel projectile)
     :init
     (counsel-projectile-mode 1)
+    :bind(("C-c p s f" . jc/search-specific-glob))
     :custom
     (counsel-projectile-find-file-matcher 'ivy--re-filter))
 #+end_src
 
 ** LSP Integration
-
 Integrate Ivy with LSP.
 #+begin_src emacs-lisp
   (use-package lsp-ivy
@@ -337,9 +406,58 @@ Integrate Ivy with LSP.
 #+end_src
 
 * Development
+** Productivity
+*** Snippets
+#+begin_src emacs-lisp
+  (use-package yasnippet
+    :hook ((prog-mode text-mode org-mode) . yas-minor-mode)
+    :bind (:map yas-minor-mode-map
+                ("C-l" . yas-expand))
+    :config
+    (yas-reload-all))
 
+  (unless (package-installed-p 'yasnippet-snippets)
+    (package-refresh-contents)
+    (package-install 'yasnippet-snippets))
+#+end_src
+*** Line Numbers
+Display line numbers for certain modes. Set line numbers to be relative.
+#+begin_src emacs-lisp
+  (defun jc/line-numbers ()
+    (display-line-numbers-mode 1)
+    (setq display-line-numbers 'relative))
+
+  (use-package display-line-numbers
+    :hook (((prog-mode text-mode) . jc/line-numbers)))
+#+end_src
+*** Parenthesis
+#+begin_src emacs-lisp
+  (use-package smartparens
+    :diminish
+    :config
+    (require 'smartparens-config)
+    :hook ((org-mode prog-mode) . smartparens-mode))
+#+end_src
+*** Highlight Lines
+#+begin_src emacs-lisp
+  (use-package hl-line
+    :ensure nil
+    :hook ((prog-mode text-mode dired-mode) . hl-line-mode))
+#+end_src
+*** Highlight Indent Guides
+#+begin_src emacs-lisp
+  (use-package highlight-indent-guides
+    :custom
+    (highlight-indent-guides-method 'bitmap)
+    :hook (((prog-mode) . highlight-indent-guides-mode)))
+#+end_src
+*** ASDF
+Sets the "ASDF_DATA_DIR" environment variable if we are using asdf.
+#+begin_src emacs-lisp
+  (if (executable-find "asdf")
+      (setenv "ASDF_DATA_DIR" (f-expand "~/.config/asdf")))
+#+end_src
 ** Version Control
-
 *** Magit
 #+begin_src emacs-lisp
   (use-package magit
@@ -361,7 +479,7 @@ Integrate Ivy with LSP.
     (git-gutter:update-interval 2))
 #+end_src
 
-** Projectile
+** Project Management
 #+begin_src emacs-lisp
   (use-package projectile
     :defer 1
@@ -381,7 +499,6 @@ Integrate Ivy with LSP.
     (projectile-completion-system 'ivy)
     (projectile-known-projects-file (f-expand "projectile-bookmarks.eld" transient-directory))
     (projectile-cache-file (f-expand "projectile.cache" transient-directory))
-    ;; (projectile-completion-system 'helm)
     :config
     (if (boundp 'jc/projectile-project-search-path)
         (setq projectile-project-search-path projectile-project-search-path)
@@ -389,9 +506,29 @@ Integrate Ivy with LSP.
 #+end_src
 
 ** Languages
+*** Language Server
+#+begin_src emacs-lisp
+  (use-package lsp-mode
+    :hook (((go-mode yaml-mode dockerfile-mode sh-mode python-mode ruby-mode) . lsp-deferred)
+           (lsp-mode . lsp-enable-which-key-integration))
+    :custom
+    (lsp-diagnostics-provider :none)
+    (lsp-enable-file-watchers nil)
+    (lsp-headerline-breadcrumb-enable t)
+    (lsp-headerline-breadcrumb-enable-diagnostics nil)
+    (lsp-keymap-prefix "C-l")
+    (lsp-lens-enable nil)
+    (lsp-modeline-diagnostics-enable nil)
+    (lsp-session-file (f-expand "lsp-session-v1" transient-directory))
+    :commands (lsp lsp-deferred))
 
+  (use-package lsp-ui
+    :commands lsp-ui-mode
+    :config
+    (setq lsp-ui-sideline-show-code-actions t
+          lsp-ui-sideline-show-diagnostics t))
+#+end_src
 *** Golang
-
 *** Python
 Currently using pyenv to set python version.
 #+begin_src emacs-lisp
@@ -417,7 +554,222 @@ Currently using pyenv to set python version.
 #+end_src
 
 *** Ruby
-
 *** Bash
-
 *** YAML
+#+begin_src emacs-lisp
+  (use-package yaml-mode
+    :mode "\\.ya?ml\\'"
+    :bind (:map yaml-mode-map
+                ("\C-m" . newline-and-indent)))
+#+end_src
+*** Docker
+#+begin_src emacs-lisp
+  (use-package dockerfile-mode
+    :mode "Dockerfile\\(?:\\.?.*\\)?\\'")
+#+end_src
+*** Shell
+#+begin_src emacs-lisp
+  (use-package sh-script
+    :mode (("\\.sh\\'" . sh-mode)
+           ("\\^.z.*\\'" . sh-mode)
+           ("\\^zsh.*\\'" . sh-mode)
+           ("\\zprofile\\'" . sh-mode)))
+#+end_src
+*** Protobuf
+#+begin_src emacs-lisp
+  (use-package protobuf-mode
+    :preface
+    (defconst protobuf-style-work
+      '((c-basic-offset . 4)
+        (indent-tabs-mode . nil)))
+    :hook (protobuf-mode . (lambda () (c-add-style "work protobuf style" protobuf-style-work t)))
+    :mode "\\.proto\\'")
+#+end_src
+*** Emacs Lisp
+#+begin_src emacs-lisp
+  (use-package emacs-lisp
+    :ensure nil
+    :hook (emacs-lisp-mode . electric-indent-mode))
+#+end_src
+* File Browsing
+** Treemacs
+#+begin_src emacs-lisp
+  (use-package treemacs
+    :defer t
+    :custom
+    (treemacs-persist-file (f-expand "treemacs-persist" transient-directory))
+    :bind (:map global-map
+                ("C-x t t" . treemacs)))
+
+  (use-package treemacs-evil
+    :after (treemacs evil))
+
+  (use-package treemacs-projectile
+    :after (treemacs projectile))
+
+  (use-package treemacs-icons-dired
+    :after (treemacs dired)
+    :config (treemacs-icons-dired-mode))
+
+  (use-package treemacs-magit
+    :after (treemacs magit))
+#+end_src
+** Dired
+
+#+begin_src emacs-lisp
+  (setq-default dired-use-ls-dired nil)
+
+  (use-package all-the-icons-dired
+    :hook (dired-mode . all-the-icons-dired-mode))
+
+  (use-package dired
+    :ensure nil
+    :commands (dired dired-jump)
+    :hooks (dired-load . dired-collapse-mode)
+    :bind (("C-x C-j" . dired-jump)
+           :map dired-mode-map
+           ([remap dired-find-file] . dired-single-buffer)
+           ([remap dired-mouse-find-file-other-window] . dired-single-buffer-mouse)
+           ([remap dired-up-directory] . dired-single-up-directory)))
+
+  (use-package dired-single)
+
+  (use-package dired-collapse)
+#+end_src
+
+** Open Links
+Functions and settings to open certain links with applications.
+#+begin_src emacs-lisp
+  (defun jc/browse-url-firefox (url &optional _new-window)
+    "Open URL in firefox."
+    (interactive (browse-url-interactive-arg "URL: "))
+    (pcase system-type
+      ('darwin (start-process (concat "open " url) nil "open" "-a" "firefox" url))
+      ('windows-nt (message "Windows not available"))
+      ('gnu/linux (start-process (concat "firefox " url) nil "firefox" url))))
+
+  (defun jc/browse-url-vlc (url &optional _new-window)
+    "Open URL in vlc."
+    (interactive (browse-url-interactive-arg "URL: "))
+    (pcase system-type
+      ('darwin (start-process (concat "open " url) nil "open" "-a" "vlc" url "--args" "--video-on-top"))
+      ('windows-nt (message "Windows not available"))
+      ('gnu/linux (start-process (concat "vlc " url) nil "vlc" url "--video-on-top"))))
+
+  (setq-default browse-url-handlers '(("www.youtube.com" . jc/browse-url-vlc)
+                                      ("." . jc/browse-url-firefox)))
+#+end_src
+
+* Applications
+** Finance
+#+begin_src emacs-lisp
+  (use-package ledger-mode
+    :mode "\\.journal\\'"
+    :bind ((:map ledger-mode-map
+                 ("C-x C-s" . jc/ledger-save-buffer))
+           ([remap evil-write] . jc/ledger-evil-write))
+    :preface
+    (defun jc/ledger-save-buffer ()
+      "Automatically clean the ledger buffer at each save."
+      (interactive)
+      (ledger-mode-clean-buffer)
+      (save-buffer))
+    (defun jc/ledger-evil-write ()
+      "Automatically clean the ledger buffer at each save."
+      (interactive)
+      (ledger-mode-clean-buffer)
+      (evil-write nil nil))
+    :custom
+    (ledger-binary-path "hledger")
+    (ledger-mode-should-check-version nil)
+    (ledger-init-file-name "")
+    (ledger-default-date-format "%m/%d")
+    (ledger-post-amount-alignment-at :decimal)
+    (ledger-highlight-xact-under-point nil))
+
+  (use-package company-ledger
+    :requires company
+    :init
+    (add-to-list 'company-backends 'company-ledger))
+#+end_src
+** RSS
+#+begin_src emacs-lisp
+  (use-package elfeed
+    :preface
+    (defun jc/elfeed-load-db-and-open ()
+      "Wrapper to load the elfeed db from disk before opening"
+      (interactive)
+      (elfeed)
+      (elfeed-db-load)
+      (elfeed-search-update--force)
+      (elfeed-update))
+    (defun jc/elfeed-save-db-and-bury ()
+      "Wrapper to save the elfeed db to disk before burying buffer"
+      (interactive)
+      (elfeed-db-save)
+      (kill-buffer (current-buffer)))
+    (defun jc/elfeed-evil-collection-remap (_mode _mode-keymaps &rest _rest)
+      (evil-collection-define-key 'normal 'elfeed-search-mode-map
+        (kbd "RET") 'elfeed-search-browse-url
+        (kbd "S-<return>") 'elfeed-search-show-entry
+        "q" 'jc/elfeed-save-db-and-bury
+        "Q" 'jc/elfeed-save-db-and-bury))
+    :hook (evil-collection-setup . jc/elfeed-evil-collection-remap)
+    :bind (("C-x w" . jc/elfeed-load-db-and-open))
+    :custom
+    (elfeed-db-directory "~/.config/cache/emacs/elfeed")
+    (elfeed-feeds
+     '(("https://techcrunch.com/rss" tech)
+       ("https://lifehacker.com/rss" tech)
+       ("https://gizmodo.com/rss" tech)
+       ("http://rss.desiringgod.org/" christian)
+       ("http://amiquiettimes.wordpress.com/feed/" christian)
+       ("http://feeds.feedburner.com/HighScalability" dev)
+       ("http://feeds.dzone.com/java" dev java)
+       ("http://feeds.dzone.com/performance" dev)
+       ("https://medium.com/feed/paypal-engineering" dev)
+       ("https://martinfowler.com/feed.atom" dev)
+       ("https://www.8bitmen.com/feed/" dev)
+       ("https://netflixtechblog.com/feed" dev)
+       ("http://www.daemonology.net/hn-daily/index.rss" dev)
+       ("https://blog.codinghorror.com/rss/" dev)
+       ("http://www.allthingsdistributed.com/atom.xml" dev)
+       ("https://dave.cheney.net/feed/atom" dev go)
+       ("https://eng.uber.com/feed/" dev)
+       ("https://codeascraft.com/atom" dev)
+       ("https://instagram-engineering.com/feed" dev)
+       ("https://planet.emacslife.com/atom.xml" emacs)
+       ("https://github.blog/feed" dev)
+       ("https://blog.golang.org/feeds/posts/default" dev go)
+       ("https://developer.squareup.com/blog/rss.xml" dev)
+       ("https://stripe.com/blog/feed.rss" dev)
+       ("https://smittenkitchen.com/atom" cooking)
+       ("https://www.youtube.com/feeds/videos.xml?channel_id=UCAiiOTio8Yu69c3XnR7nQBQ" emacs vid) ;; system crafters
+       ("https://www.youtube.com/feeds/videos.xml?channel_id=UC6x7GwJxuoABSosgVXDYtTw" maker vid) ;; i like to make stuff
+       ("https://www.youtube.com/feeds/videos.xml?channel_id=UCKwM-7sO1_Tw9EmYhKfpBBw" maker vid) ;; perkins builder brothers
+       ("https://www.youtube.com/feeds/videos.xml?channel_id=UCex87CEaoqw365i63aKxepQ" life vid) ;; ice1cube
+       ("https://www.youtube.com/feeds/videos.xml?channel_id=UCUT8RoNBTJvwW1iErP6-b-A" amongus vid) ;; disguised toast
+       ("https://www.youtube.com/feeds/videos.xml?channel_id=UCBh2UCIk9In7uf87GJU6qgg" civ vid) ;; the game mechanic
+       ("https://www.youtube.com/feeds/videos.xml?channel_id=UCqqJQ_cXSat0KIAVfIfKkVA" cooking vid) ;; kenji
+       ("https://vimeo.com/andrewrk/videos/rss" dev vid)
+       ("https://www.gobeyond.dev/rss" dev go)
+       ("https://cprss.s3.amazonaws.com/golangweekly.com.xml" dev go)
+       ("https://sec.report/CIK/0001811210.rss" spac) ;; cciv
+       ("https://sec.report/CIK/0001807846.rss" spac) ;; fuse
+       ("https://sec.report/CIK/0001809987.rss" spac) ;; gsah
+       ("https://sec.report/CIK/0001794717.rss" spac) ;; scvx
+       ("https://sec.report/CIK/0001816090.rss" spac) ;; ftoc
+       ("https://sec.report/CIK/0001820630.rss" spac) ;; actc
+       ("https://sec.report/CIK/0001815086.rss" spac) ;; btwn
+       ("https://sec.report/CIK/0001829426.rss" spac) ;; fpac
+       ("https://sec.report/CIK/0001818873.rss" spac) ;; ipof
+       ("https://sec.report/CIK/0001823575.rss" spac) ;; lnfa
+       ("https://sec.report/CIK/0001811882.rss" spac) ;; psth
+       ("https://world.hey.com/joaoqalves/feed.atom" dev)
+       ))
+    (elfeed-search-filter "+unread ")
+    (elfeed-search-title-max-width 100))
+#+end_src
+
+
+
