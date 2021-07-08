@@ -153,6 +153,7 @@
 (column-number-mode)
 
 (setq-default confirm-kill-emacs 'y-or-n-p ; y or n instead of yes or no when quitting.
+              split-height-threshold 90 ; Increase height threshold from 80 to 90 so split screens will favor horizontal splits
               initial-scratch-message nil ; Start with a blank canvas.
               inhibit-startup-screen t) ; Do not show the startup screen.
 
@@ -234,7 +235,7 @@
   (require 'evil-org-agenda)
   (evil-org-agenda-set-keys))
 
-(defvar jc/init-org-file (s-concat (f-expand "~/workspace/personal/dotfiles/emacs") "init.org"))
+(defvar jc/init-org-file (f-expand "~/workspace/personal/dotfiles/emacs/init.org"))
 
 (defun jc/tangle-on-save ()
   (when (equal (buffer-file-name)
