@@ -4,8 +4,13 @@
 
 * Startup Performance
 Make startup faster by reducing the frequency of garbage collection and then use a hook to measure Emacs startup time.
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle early-init.el
+  (setq package-quickstart t)
+  (setq frame-inhibit-implied-resize t)
+
   (setq gc-cons-threshold (* 50 1000 1000))
+  (add-hook 'emacs-startup-hook
+            (lambda () (setq gc-cons-threshold (* 2 1000 1000))))
 
   (add-hook 'emacs-startup-hook
             (lambda ()
@@ -178,10 +183,7 @@ Custom function to load environment variables from a file.
 * General Configuration
 ** User Interface
 Prevent frame from resizing implicitly. Maximize frames by default. Removes toolbar, scrollbar and menubar.
-#+begin_src emacs-lisp
-  (setq frame-inhibit-implied-resize t)
-  (add-to-list 'initial-frame-alist '(fullscreen . maximized))
-
+#+begin_src emacs-lisp :tangle early-init.el
   ;; Remove tool bar
   (tool-bar-mode -1)
 
@@ -191,6 +193,11 @@ Prevent frame from resizing implicitly. Maximize frames by default. Removes tool
   ;; Remove menu bar
   (menu-bar-mode -1)
 
+  ;; Fullscreen on startup
+  (add-to-list 'initial-frame-alist '(fullscreen . maximized))
+#+end_src
+
+#+begin_src emacs-lisp
   ;; Turn on visual line mode
   (global-visual-line-mode t)
 
@@ -204,6 +211,7 @@ Prevent frame from resizing implicitly. Maximize frames by default. Removes tool
   (column-number-mode)
 
   (setq-default confirm-kill-emacs 'y-or-n-p ; y or n instead of yes or no when quitting.
+                split-height-threshold 90 ; Increase height threshold from 80 to 90 so split screens will favor horizontal splits
                 initial-scratch-message nil ; Start with a blank canvas.
                 inhibit-startup-screen t) ; Do not show the startup screen.
 #+end_src
@@ -334,7 +342,7 @@ Automatically tangle this config.
                  (expand-file-name jc/init-org-file))
       (let ((org-confirm-babel-evaluate nil))
         (org-babel-tangle)
-        (message "init.el tangled from init.org"))))
+        (message "early-init.el and init.el tangled from init.org"))))
 
   (add-hook 'after-save-hook 'jc/tangle-on-save)
 #+end_src

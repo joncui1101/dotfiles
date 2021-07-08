@@ -1,13 +1,3 @@
-(setq gc-cons-threshold (* 50 1000 1000))
-
-(add-hook 'emacs-startup-hook
-          (lambda ()
-            (message "*** Emacs loaded in %s with %d garbage collections."
-                     (format "%.2f seconds"
-                             (float-time
-                              (time-subtract after-init-time before-init-time)))
-                     gcs-done)))
-
 (if (and (fboundp 'native-comp-available-p)
          (native-comp-available-p))
     (message "Native comp is available")
@@ -128,18 +118,6 @@
   :custom
   (evil-collection-setup-minibuffer t))
 
-(setq frame-inhibit-implied-resize t)
-(add-to-list 'initial-frame-alist '(fullscreen . maximized))
-
-;; Remove tool bar
-(tool-bar-mode -1)
-
-;; Remove scroll bar
-(scroll-bar-mode -1)
-
-;; Remove menu bar
-(menu-bar-mode -1)
-
 ;; Turn on visual line mode
 (global-visual-line-mode t)
 
@@ -153,6 +131,7 @@
 (column-number-mode)
 
 (setq-default confirm-kill-emacs 'y-or-n-p ; y or n instead of yes or no when quitting.
+              split-height-threshold 90 ; Increase height threshold from 80 to 90 so split screens will favor horizontal splits
               initial-scratch-message nil ; Start with a blank canvas.
               inhibit-startup-screen t) ; Do not show the startup screen.
 
@@ -241,7 +220,7 @@
                (expand-file-name jc/init-org-file))
     (let ((org-confirm-babel-evaluate nil))
       (org-babel-tangle)
-      (message "init.el tangled from init.org"))))
+      (message "early-init.el and init.el tangled from init.org"))))
 
 (add-hook 'after-save-hook 'jc/tangle-on-save)
 
