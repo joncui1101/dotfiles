@@ -8,7 +8,7 @@
 (use-package dired
   :ensure nil
   :commands (dired dired-jump)
-  :hooks (dired-load . dired-collapse-mode)
+  :hook (dired-load . dired-collapse-mode)
   :bind (("C-x C-j" . dired-jump)
          :map dired-mode-map
          ([remap dired-find-file] . dired-single-buffer)

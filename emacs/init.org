@@ -31,12 +31,21 @@ Show if native comp is available.
                 user-mail-address "joncui1101@gmail.com")
 #+end_src
 
+* Server Mode
+Allow access from emacsclient
+#+begin_src emacs-lisp
+  (add-hook 'after-init-hook
+            (lambda ()
+              (require 'server)
+              (unless (server-running-p)
+                (server-start))))
+#+end_src
 * Package Management
 Set up ELPA, MELPA, and Org package repositories and load =use-package= to manage package configuration.
-#+begin_src emacs-lisp 
-  (require 'package) 
+#+begin_src emacs-lisp
+  (require 'package)
 
-  (setq package-archives '(("melpa" . "https://melpa.org/packages/") 
+  (setq package-archives '(("melpa" . "https://melpa.org/packages/")
                            ("gnu" . "https://elpa.gnu.org/packages/")))
   (unless package--initialized
     (package-initialize))
@@ -51,9 +60,9 @@ Set up ELPA, MELPA, and Org package repositories and load =use-package= to manag
 #+end_src
 
 Install f package
-#+begin_src emacs-lisp 
-  (unless (package-installed-p 'f) 
-    (package-refresh-contents) 
+#+begin_src emacs-lisp
+  (unless (package-installed-p 'f)
+    (package-refresh-contents)
     (package-install 'f))
 
   (require 'f)
@@ -66,6 +75,27 @@ Keep custom changes in its own file.
   (load custom-file t)
 #+end_src
 
+* Custom Functions
+#+begin_src emacs-lisp
+  (defun jc/reload-emacs-config ()
+    "Reload Emacs config."
+    (interactive)
+    (load-file user-init-file))
+
+  (defun jc/server-shutdown ()
+    "Save buffers, Quit, and Shutdown (kill) server."
+    (interactive)
+    (save-some-buffers)
+    (kill-emacs))
+#+end_src
+* Update Load Path
+** With Work Configs
+#+begin_src emacs-lisp
+  (if (f-exists-p "~/workspace/work/dotfiles/emacs/init-work.el")
+      (progn
+        (add-to-list 'load-path (f-expand "~/workspace/work/dotfiles/emacs"))
+        (require 'init-work)))
+#+end_src
 * Keep Emacs Directory Clean
 Move transient files into a separate directory (~/.config/cache/emacs)
 #+begin_src emacs-lisp
@@ -120,12 +150,6 @@ Custom function to load environment variables from a file.
     :config
     (evil-mode 1))
 
-  (use-package evil-ledger
-    :requires (evil ledger-mode)
-    :hook (ledger-mode . evil-ledger-mode)
-    :custom
-    (evil-ledger-sort-key "S"))
-
   (use-package evil-surround
     :defer 1
     :config
@@ -179,8 +203,8 @@ Prevent frame from resizing implicitly. Maximize frames by default. Removes tool
   ;; Show column numbers
   (column-number-mode)
 
-  (setq-default confirm-kill-emacs 'y-or-n-p' ; y or n instead of yes or no when quitting.
-                inhibit-scratch-message nil ; Start with a blank canvas.
+  (setq-default confirm-kill-emacs 'y-or-n-p ; y or n instead of yes or no when quitting.
+                initial-scratch-message nil ; Start with a blank canvas.
                 inhibit-startup-screen t) ; Do not show the startup screen.
 #+end_src
 
@@ -264,6 +288,10 @@ Backspace erases a tab instead of 1 space at a time.
   (setq-default backward-delete-char-untabify-method 'hungry)
 #+end_src
 
+Single space to end a sentence.
+#+begin_src emacs-lisp
+  (setq-default sentence-end-double-space nil)
+#+end_src
 * Org Mode
 ** Org Configuration
 Set up Org Mode with a baseline configuration.
@@ -296,6 +324,20 @@ Set up Org Mode with a baseline configuration.
     (evil-org-agenda-set-keys))
 #+end_src
 
+** Org Babel
+Automatically tangle this config
+#+begin_src emacs-lisp
+  (defvar jc/init-org-file (s-concat (f-expand "~/workspace/personal/dotfiles/emacs") "init.org"))
+
+  (defun jc/tangle-on-save ()
+    (when (equal (buffer-file-name)
+                 (expand-file-name jc/init-org-file))
+      (let ((org-confirm-babel-evaluate nil))
+        (org-babel-tangle)
+        (message "init.el tangled from init.org"))))
+
+  (add-hook 'after-save-hook 'jc/tangle-on-save)
+#+end_src
 * Completion System
 ** Ivy
 Currently using Ivy for completions.
@@ -368,33 +410,12 @@ Extensions to improve ivy. ivy-rich provides a more friendly interface. ivy-posf
                                     (right-fringe . 4)))
     (ivy-posframe-mode 1))
 #+end_src
-
-** Projectile Integration
-#+begin_src emacs-lisp
-  (defun jc/search-specific-glob (glob)
-    "Search in the project files given the GLOB (specific file type)."
-    (interactive "sGlob?: ")
-    (counsel-projectile-rg (concat "--glob " glob)))
-#+end_src
-
-Integrate Ivy with Projectile.
-#+begin_src emacs-lisp
-  (use-package counsel-projectile
-    :requires (counsel projectile)
-    :init
-    (counsel-projectile-mode 1)
-    :bind(("C-c p s f" . jc/search-specific-glob))
-    :custom
-    (counsel-projectile-find-file-matcher 'ivy--re-filter))
-#+end_src
-
 ** LSP Integration
 Integrate Ivy with LSP.
 #+begin_src emacs-lisp
   (use-package lsp-ivy
     :requires (lsp-mode ivy))
 #+end_src
-
 ** Company
 #+begin_src emacs-lisp
   (use-package company
@@ -404,7 +425,17 @@ Integrate Ivy with LSP.
     (company-idle-delay 0)
     (company-minimum-prefix-length 1))
 #+end_src
-
+** Preserve Minibuffer History
+#+begin_src emacs-lisp
+  (use-package savehist
+    :ensure nil
+    :custom
+    (savehist-file "~/.config/cache/emacs/savehist")
+    (history-length 1000)
+    (history-delete-duplicates t)
+    (savehist-save-minibuffer-history t)
+    :hook (after-init . savehist-mode))
+#+end_src
 * Development
 ** Productivity
 *** Snippets
@@ -457,6 +488,28 @@ Sets the "ASDF_DATA_DIR" environment variable if we are using asdf.
   (if (executable-find "asdf")
       (setenv "ASDF_DATA_DIR" (f-expand "~/.config/asdf")))
 #+end_src
+*** Syntax Checking
+#+begin_src emacs-lisp
+  (use-package flycheck
+    :defer t
+    :preface
+    :hook ((ledger-mode emacs-lisp-mode lsp-mode) . flycheck-mode)
+    :custom
+    (flycheck-flake8-maximum-line-length 120)
+    (flycheck-flake8-maximum-complexity 40))
+
+  (use-package flycheck-ledger
+    :requires flycheck)
+#+end_src
+*** Syntax Highlighting
+#+begin_src emacs-lisp
+  (use-package tree-sitter
+    :hook (((go-mode python-mode ruby-mode) . tree-sitter-mode)
+           (tree-sitter-after-on . tree-sitter-hl-mode)))
+
+  (use-package tree-sitter-langs
+    :after tree-sitter)
+#+end_src
 ** Version Control
 *** Magit
 #+begin_src emacs-lisp
@@ -505,6 +558,21 @@ Sets the "ASDF_DATA_DIR" environment variable if we are using asdf.
       (setq projectile-project-search-path '("~/workspace/personal"))))
 #+end_src
 
+Integrate Ivy with Projectile.
+#+begin_src emacs-lisp
+  (defun jc/search-specific-glob (glob)
+    "Search in the project files given the GLOB (specific file type)."
+    (interactive "sGlob?: ")
+    (counsel-projectile-rg (s-concat "--glob " glob)))
+
+  (use-package counsel-projectile
+    :requires (counsel projectile)
+    :init
+    (counsel-projectile-mode 1)
+    :bind (("C-c p s f" . jc/search-specific-glob))
+    :custom
+    (counsel-projectile-find-file-matcher 'ivy--re-filter))
+#+end_src
 ** Languages
 *** Language Server
 #+begin_src emacs-lisp
@@ -529,9 +597,29 @@ Sets the "ASDF_DATA_DIR" environment variable if we are using asdf.
           lsp-ui-sideline-show-diagnostics t))
 #+end_src
 *** Golang
+#+begin_src emacs-lisp
+  (defun jc/lsp-go-install-save-hooks ()
+    (add-hook 'before-save-hook #'lsp-format-buffer t t)
+    (add-hook 'before-save-hook #'lsp-organize-imports t t))
+  (use-package go-mode
+    :mode "\\.go\\'"
+    :hook
+    (go-mode . jc/lsp-go-install-save-hooks)
+    :custom
+    (gofmt-command "goimports"))
+#+end_src
 *** Python
 Currently using pyenv to set python version.
 #+begin_src emacs-lisp
+  (defun jc/projectile-pyenv-mode-set ()
+    "Set pyenv version matching project name."
+    (let ((pyenv-version-path (f-expand ".python-version" (projectile-project-root))))
+      (if (f-exists? pyenv-version-path)
+          (progn
+            (pyenv-mode-set (car (s-lines (s-trim (f-read-text pyenv-version-path)))))
+            (setq flycheck-python-flake8-executable (s-concat (pyenv-mode-full-path (pyenv-mode-version)) "/bin/python3")))
+        (pyenv-mode-unset))))
+
   (use-package python-mode
     :delight '(:eval (format " py[%s]" (pyenv-mode-version)))
     :hook (python-mode . (lambda () (modify-syntax-entry ?_ "w" python-mode-syntax-table))))
@@ -539,22 +627,41 @@ Currently using pyenv to set python version.
   (use-package pyenv-mode
     :custom
     (pyenv-mode-mode-line-format nil)
-    :preface
-    (defun jc/projectile-pyenv-mode-set ()
-      "Set pyenv version matching project name."
-      (let ((pyenv-version-path (f-expand ".python-version" (projectile-project-root))))
-        (if (f-exists? pyenv-version-path)
-            (progn
-              (pyenv-mode-set (car (s-lines (s-trim (f-read-text pyenv-version-path)))))
-              (setq flycheck-python-flake8-executable (s-concat (pyenv-mode-full-path (pyenv-mode-version)) "/bin/python3")))
-          (pyenv-mode-unset))))
     :hook
     (python-mode . pyenv-mode)
     (projectile-after-switch-project . jc/projectile-pyenv-mode-set))
 #+end_src
-
 *** Ruby
-*** Bash
+#+begin_src emacs-lisp
+  (use-package ruby-mode
+    :hook (ruby-mode . (lambda () (modify-syntax-entry ?_ "w" ruby-mode-syntax-table))))
+#+end_src
+*** Javascript
+#+begin_src emacs-lisp
+  (use-package js2-mode
+    :mode "\\.js\\'")
+#+end_src
+*** Emacs Lisp
+#+begin_src emacs-lisp
+  (use-package emacs-lisp
+    :ensure nil
+    :hook (emacs-lisp-mode . electric-indent-mode))
+#+end_src
+*** Shell
+#+begin_src emacs-lisp
+  (use-package sh-script
+    :mode (("\\.sh\\'" . sh-mode)
+           ("\\^.z.*\\'" . sh-mode)
+           ("\\^zsh.*\\'" . sh-mode)
+           ("\\zprofile\\'" . sh-mode)))
+#+end_src
+*** Markdown
+#+begin_src emacs-lisp
+  (use-package markdown-mode
+    :mode (("\\.md\\'" . gfm-mode))
+    :custom
+    (markdown-command "pandoc"))
+#+end_src
 *** YAML
 #+begin_src emacs-lisp
   (use-package yaml-mode
@@ -567,14 +674,6 @@ Currently using pyenv to set python version.
   (use-package dockerfile-mode
     :mode "Dockerfile\\(?:\\.?.*\\)?\\'")
 #+end_src
-*** Shell
-#+begin_src emacs-lisp
-  (use-package sh-script
-    :mode (("\\.sh\\'" . sh-mode)
-           ("\\^.z.*\\'" . sh-mode)
-           ("\\^zsh.*\\'" . sh-mode)
-           ("\\zprofile\\'" . sh-mode)))
-#+end_src
 *** Protobuf
 #+begin_src emacs-lisp
   (use-package protobuf-mode
@@ -584,12 +683,6 @@ Currently using pyenv to set python version.
         (indent-tabs-mode . nil)))
     :hook (protobuf-mode . (lambda () (c-add-style "work protobuf style" protobuf-style-work t)))
     :mode "\\.proto\\'")
-#+end_src
-*** Emacs Lisp
-#+begin_src emacs-lisp
-  (use-package emacs-lisp
-    :ensure nil
-    :hook (emacs-lisp-mode . electric-indent-mode))
 #+end_src
 * File Browsing
 ** Treemacs
@@ -615,7 +708,6 @@ Currently using pyenv to set python version.
     :after (treemacs magit))
 #+end_src
 ** Dired
-
 #+begin_src emacs-lisp
   (setq-default dired-use-ls-dired nil)
 
@@ -625,7 +717,7 @@ Currently using pyenv to set python version.
   (use-package dired
     :ensure nil
     :commands (dired dired-jump)
-    :hooks (dired-load . dired-collapse-mode)
+    :hook (dired-load . dired-collapse-mode)
     :bind (("C-x C-j" . dired-jump)
            :map dired-mode-map
            ([remap dired-find-file] . dired-single-buffer)
@@ -644,41 +736,41 @@ Functions and settings to open certain links with applications.
     "Open URL in firefox."
     (interactive (browse-url-interactive-arg "URL: "))
     (pcase system-type
-      ('darwin (start-process (concat "open " url) nil "open" "-a" "firefox" url))
+      ('darwin (start-process (s-concat "open " url) nil "open" "-a" "firefox" url))
       ('windows-nt (message "Windows not available"))
-      ('gnu/linux (start-process (concat "firefox " url) nil "firefox" url))))
+      ('gnu/linux (start-process (s-concat "firefox " url) nil "firefox" url))))
 
   (defun jc/browse-url-vlc (url &optional _new-window)
     "Open URL in vlc."
     (interactive (browse-url-interactive-arg "URL: "))
     (pcase system-type
-      ('darwin (start-process (concat "open " url) nil "open" "-a" "vlc" url "--args" "--video-on-top"))
+      ('darwin (start-process (s-concat "open " url) nil "open" "-a" "vlc" url "--args" "--video-on-top"))
       ('windows-nt (message "Windows not available"))
-      ('gnu/linux (start-process (concat "vlc " url) nil "vlc" url "--video-on-top"))))
+      ('gnu/linux (start-process (s-concat "vlc " url) nil "vlc" url "--video-on-top"))))
 
   (setq-default browse-url-handlers '(("www.youtube.com" . jc/browse-url-vlc)
                                       ("." . jc/browse-url-firefox)))
 #+end_src
-
 * Applications
 ** Finance
 #+begin_src emacs-lisp
+  (defun jc/ledger-save-buffer ()
+    "Automatically clean the ledger buffer at each save."
+    (interactive)
+    (ledger-mode-clean-buffer)
+    (save-buffer))
+
+  (defun jc/ledger-evil-write ()
+    "Automatically clean the ledger buffer at each save."
+    (interactive)
+    (ledger-mode-clean-buffer)
+    (evil-write nil nil))
+
   (use-package ledger-mode
     :mode "\\.journal\\'"
     :bind ((:map ledger-mode-map
                  ("C-x C-s" . jc/ledger-save-buffer))
            ([remap evil-write] . jc/ledger-evil-write))
-    :preface
-    (defun jc/ledger-save-buffer ()
-      "Automatically clean the ledger buffer at each save."
-      (interactive)
-      (ledger-mode-clean-buffer)
-      (save-buffer))
-    (defun jc/ledger-evil-write ()
-      "Automatically clean the ledger buffer at each save."
-      (interactive)
-      (ledger-mode-clean-buffer)
-      (evil-write nil nil))
     :custom
     (ledger-binary-path "hledger")
     (ledger-mode-should-check-version nil)
@@ -686,6 +778,12 @@ Functions and settings to open certain links with applications.
     (ledger-default-date-format "%m/%d")
     (ledger-post-amount-alignment-at :decimal)
     (ledger-highlight-xact-under-point nil))
+
+  (use-package evil-ledger
+    :requires (evil ledger-mode)
+    :hook (ledger-mode . evil-ledger-mode)
+    :custom
+    (evil-ledger-sort-key "S"))
 
   (use-package company-ledger
     :requires company
@@ -770,6 +868,12 @@ Functions and settings to open certain links with applications.
     (elfeed-search-filter "+unread ")
     (elfeed-search-title-max-width 100))
 #+end_src
-
-
+** Terminal
+#+begin_src emacs-lisp
+  (use-package vterm
+    :commands vterm
+    :custom
+    (vterm-max-scrollback 10000)
+    (vterm-shell "/usr/bin/zsh"))
+#+end_src
 
