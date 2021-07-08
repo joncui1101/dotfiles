@@ -77,7 +77,6 @@
 
 (use-package which-key
   :defer 1
-  :diminish
   :init
   (which-key-mode)
   :custom
@@ -94,13 +93,10 @@
   (evil-mode 1))
 
 (use-package evil-surround
-  :defer 1
   :config
   (global-evil-surround-mode 1))
 
 (use-package evil-snipe
-  :defer 1
-  :diminish evil-snipe-local-mode
   :requires evil
   :config
   (evil-snipe-mode 1)
@@ -111,7 +107,6 @@
   (evil-snipe-spillover-scope 'whole-buffer))
 
 (use-package evil-collection
-  :defer 1
   :requires evil
   :config
   (evil-collection-init)
@@ -143,7 +138,7 @@
   (doom-themes-visual-bell-config))
 
 (use-package doom-modeline
-  :hook (after-init . doom-modeline-init)
+  :hook (after-init . doom-modeline-mode)
   :custom-face
   (mode-line ((t (:height 120))))
   (mode-line-inactive ((t (:height 120))))
@@ -196,7 +191,7 @@
   (setq evil-auto-indent nil))
 
 (use-package org
-  :defer t
+  :ensure nil
   :hook (org-mode . jc/org-mode-setup)
   :bind (:map org-mode-map
               ("C-<tab>" . org-indent-block))
@@ -276,6 +271,7 @@
   (setcdr (assq t ivy-format-functions-alist) #'ivy-format-function-line))
 
 (use-package ivy-posframe
+  :requires ivy
   :init
   (setq ivy-posframe-display-functions-alist
         '((counsel-projectile-switch-project . ivy-posframe-display-at-frame-center)
@@ -319,6 +315,7 @@
   (package-install 'yasnippet-snippets))
 
 (defun jc/line-numbers ()
+  "Display line numbers for certain modes. Set line numbers to be relative."
   (display-line-numbers-mode 1)
   (setq display-line-numbers 'relative))
 
@@ -326,7 +323,6 @@
   :hook (((prog-mode text-mode) . jc/line-numbers)))
 
 (use-package smartparens
-  :diminish
   :config
   (require 'smartparens-config)
   :hook ((org-mode prog-mode) . smartparens-mode))
@@ -344,7 +340,6 @@
     (setenv "ASDF_DATA_DIR" (f-expand "~/.config/asdf")))
 
 (use-package flycheck
-  :defer t
   :preface
   :hook ((ledger-mode emacs-lisp-mode lsp-mode) . flycheck-mode)
   :custom
@@ -359,7 +354,7 @@
          (tree-sitter-after-on . tree-sitter-hl-mode)))
 
 (use-package tree-sitter-langs
-  :after tree-sitter)
+  :requires tree-sitter)
 
 (use-package magit
   :defer 1
@@ -371,14 +366,12 @@
 
 (use-package git-gutter
   :defer 1
-  :diminish
   :config (global-git-gutter-mode +1)
   :custom
   (git-gutter:update-interval 2))
 
 (use-package projectile
   :defer 1
-  :diminish
   :init
   (projectile-mode 1)
   :bind (:map projectile-mode-map
@@ -433,8 +426,10 @@
         lsp-ui-sideline-show-diagnostics t))
 
 (defun jc/lsp-go-install-save-hooks ()
+  "Set up before-save hooks to format buffer and add/delete imports."
   (add-hook 'before-save-hook #'lsp-format-buffer t t)
   (add-hook 'before-save-hook #'lsp-organize-imports t t))
+
 (use-package go-mode
   :mode "\\.go\\'"
   :hook
@@ -491,33 +486,33 @@
 (use-package dockerfile-mode
   :mode "Dockerfile\\(?:\\.?.*\\)?\\'")
 
+(defconst protobuf-style-work
+  '((c-basic-offset . 4)
+    (indent-tabs-mode . nil)))
+
 (use-package protobuf-mode
-  :preface
-  (defconst protobuf-style-work
-    '((c-basic-offset . 4)
-      (indent-tabs-mode . nil)))
   :hook (protobuf-mode . (lambda () (c-add-style "work protobuf style" protobuf-style-work t)))
   :mode "\\.proto\\'")
 
 (use-package treemacs
-  :defer t
+  :defer 1
   :custom
   (treemacs-persist-file (f-expand "treemacs-persist" transient-directory))
   :bind (:map global-map
               ("C-x t t" . treemacs)))
 
 (use-package treemacs-evil
-  :after (treemacs evil))
+  :requires (treemacs evil))
 
 (use-package treemacs-projectile
-  :after (treemacs projectile))
+  :requires (treemacs projectile))
 
 (use-package treemacs-icons-dired
-  :after (treemacs dired)
+  :requires (treemacs dired)
   :config (treemacs-icons-dired-mode))
 
 (use-package treemacs-magit
-  :after (treemacs magit))
+  :requires (treemacs magit))
 
 (setq-default dired-use-ls-dired nil)
 
@@ -593,26 +588,28 @@
   :init
   (add-to-list 'company-backends 'company-ledger))
 
+(defun jc/elfeed-load-db-and-open ()
+  "Wrapper to load the elfeed db from disk before opening"
+  (interactive)
+  (elfeed)
+  (elfeed-db-load)
+  (elfeed-search-update--force)
+  (elfeed-update))
+
+(defun jc/elfeed-save-db-and-bury ()
+  "Wrapper to save the elfeed db to disk before burying buffer"
+  (interactive)
+  (elfeed-db-save)
+  (kill-buffer (current-buffer)))
+
+(defun jc/elfeed-evil-collection-remap (_mode _mode-keymaps &rest _rest)
+  (evil-collection-define-key 'normal 'elfeed-search-mode-map
+    (kbd "RET") 'elfeed-search-browse-url
+    (kbd "S-<return>") 'elfeed-search-show-entry
+    "q" 'jc/elfeed-save-db-and-bury
+    "Q" 'jc/elfeed-save-db-and-bury))
+
 (use-package elfeed
-  :preface
-  (defun jc/elfeed-load-db-and-open ()
-    "Wrapper to load the elfeed db from disk before opening"
-    (interactive)
-    (elfeed)
-    (elfeed-db-load)
-    (elfeed-search-update--force)
-    (elfeed-update))
-  (defun jc/elfeed-save-db-and-bury ()
-    "Wrapper to save the elfeed db to disk before burying buffer"
-    (interactive)
-    (elfeed-db-save)
-    (kill-buffer (current-buffer)))
-  (defun jc/elfeed-evil-collection-remap (_mode _mode-keymaps &rest _rest)
-    (evil-collection-define-key 'normal 'elfeed-search-mode-map
-      (kbd "RET") 'elfeed-search-browse-url
-      (kbd "S-<return>") 'elfeed-search-show-entry
-      "q" 'jc/elfeed-save-db-and-bury
-      "Q" 'jc/elfeed-save-db-and-bury))
   :hook (evil-collection-setup . jc/elfeed-evil-collection-remap)
   :bind (("C-x w" . jc/elfeed-load-db-and-open))
   :custom
