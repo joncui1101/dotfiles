@@ -97,7 +97,7 @@
   (global-evil-surround-mode 1))
 
 (use-package evil-snipe
-  :requires evil
+  :after evil
   :config
   (evil-snipe-mode 1)
   (evil-snipe-override-mode 1)
@@ -107,7 +107,7 @@
   (evil-snipe-spillover-scope 'whole-buffer))
 
 (use-package evil-collection
-  :requires evil
+  :after evil
   :config
   (evil-collection-init)
   :custom
@@ -129,6 +129,9 @@
               split-height-threshold 90 ; Increase height threshold from 80 to 90 so split screens will favor horizontal splits
               initial-scratch-message nil ; Start with a blank canvas.
               inhibit-startup-screen t) ; Do not show the startup screen.
+
+;; Allow y for yes.
+(fset 'yes-or-no-p 'y-or-n-p)
 
 (use-package doom-themes
   :config
@@ -241,7 +244,7 @@
   (ivy-wrap t))
 
 (use-package counsel
-  :requires ivy
+  :after ivy
   :init
   (counsel-mode +1)
   :bind (("C-x b" . counsel-ibuffer)
@@ -252,7 +255,7 @@
   (ivy-initial-inputs-alist nil))
 
 (use-package ivy-rich
-  :requires ivy
+  :after ivy
   :config
   (plist-put ivy-rich-display-transformers-list
              'counsel-M-x
@@ -271,7 +274,7 @@
   (setcdr (assq t ivy-format-functions-alist) #'ivy-format-function-line))
 
 (use-package ivy-posframe
-  :requires ivy
+  :after ivy
   :init
   (setq ivy-posframe-display-functions-alist
         '((counsel-projectile-switch-project . ivy-posframe-display-at-frame-center)
@@ -285,7 +288,7 @@
   (ivy-posframe-mode 1))
 
 (use-package lsp-ivy
-  :requires (lsp-mode ivy))
+  :after (lsp-mode ivy))
 
 (use-package company
   :defer 1
@@ -346,15 +349,12 @@
   (flycheck-flake8-maximum-line-length 120)
   (flycheck-flake8-maximum-complexity 40))
 
-(use-package flycheck-ledger
-  :requires flycheck)
-
 (use-package tree-sitter
   :hook (((go-mode python-mode ruby-mode) . tree-sitter-mode)
          (tree-sitter-after-on . tree-sitter-hl-mode)))
 
 (use-package tree-sitter-langs
-  :requires tree-sitter)
+  :after tree-sitter)
 
 (use-package magit
   :defer 1
@@ -398,7 +398,7 @@
   (counsel-projectile-rg (s-concat "--glob " glob)))
 
 (use-package counsel-projectile
-  :requires (counsel projectile)
+  :after (counsel projectile)
   :init
   (counsel-projectile-mode 1)
   :bind (("C-c p s f" . jc/search-specific-glob))
@@ -502,17 +502,17 @@
               ("C-x t t" . treemacs)))
 
 (use-package treemacs-evil
-  :requires (treemacs evil))
+  :after (treemacs evil))
 
 (use-package treemacs-projectile
-  :requires (treemacs projectile))
+  :after (treemacs projectile))
 
 (use-package treemacs-icons-dired
-  :requires (treemacs dired)
+  :after (treemacs dired)
   :config (treemacs-icons-dired-mode))
 
 (use-package treemacs-magit
-  :requires (treemacs magit))
+  :after (treemacs magit))
 
 (setq-default dired-use-ls-dired nil)
 
@@ -578,15 +578,18 @@
   (ledger-highlight-xact-under-point nil))
 
 (use-package evil-ledger
-  :requires (evil ledger-mode)
+  :after (evil ledger-mode)
   :hook (ledger-mode . evil-ledger-mode)
   :custom
   (evil-ledger-sort-key "S"))
 
 (use-package company-ledger
-  :requires company
+  :after (company ledger-mode)
   :init
   (add-to-list 'company-backends 'company-ledger))
+
+(use-package flycheck-ledger
+  :after (flycheck ledger-mode))
 
 (defun jc/elfeed-load-db-and-open ()
   "Wrapper to load the elfeed db from disk before opening"

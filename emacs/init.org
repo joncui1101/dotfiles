@@ -159,7 +159,7 @@ Custom function to load environment variables from a file.
     (global-evil-surround-mode 1))
 
   (use-package evil-snipe
-    :requires evil
+    :after evil
     :config
     (evil-snipe-mode 1)
     (evil-snipe-override-mode 1)
@@ -169,7 +169,7 @@ Custom function to load environment variables from a file.
     (evil-snipe-spillover-scope 'whole-buffer))
 
   (use-package evil-collection
-    :requires evil
+    :after evil
     :config
     (evil-collection-init)
     :custom
@@ -209,6 +209,9 @@ Prevent frame from resizing implicitly. Maximize frames by default. Removes tool
                 split-height-threshold 90 ; Increase height threshold from 80 to 90 so split screens will favor horizontal splits
                 initial-scratch-message nil ; Start with a blank canvas.
                 inhibit-startup-screen t) ; Do not show the startup screen.
+
+  ;; Allow y for yes.
+  (fset 'yes-or-no-p 'y-or-n-p)
 #+end_src
 
 ** Theme
@@ -367,7 +370,7 @@ Currently using Ivy for completions.
     (ivy-wrap t))
 
   (use-package counsel
-    :requires ivy
+    :after ivy
     :init
     (counsel-mode +1)
     :bind (("C-x b" . counsel-ibuffer)
@@ -382,7 +385,7 @@ Currently using Ivy for completions.
 Extensions to improve ivy. ivy-rich provides a more friendly interface. ivy-posframe provides functionality to use a posframe.
 #+begin_src emacs-lisp
   (use-package ivy-rich
-    :requires ivy
+    :after ivy
     :config
     (plist-put ivy-rich-display-transformers-list
                'counsel-M-x
@@ -401,7 +404,7 @@ Extensions to improve ivy. ivy-rich provides a more friendly interface. ivy-posf
     (setcdr (assq t ivy-format-functions-alist) #'ivy-format-function-line))
 
   (use-package ivy-posframe
-    :requires ivy
+    :after ivy
     :init
     (setq ivy-posframe-display-functions-alist
           '((counsel-projectile-switch-project . ivy-posframe-display-at-frame-center)
@@ -418,7 +421,7 @@ Extensions to improve ivy. ivy-rich provides a more friendly interface. ivy-posf
 Integrate Ivy with LSP.
 #+begin_src emacs-lisp
   (use-package lsp-ivy
-    :requires (lsp-mode ivy))
+    :after (lsp-mode ivy))
 #+end_src
 ** Company
 #+begin_src emacs-lisp
@@ -500,9 +503,6 @@ Sets the "ASDF_DATA_DIR" environment variable if we are using asdf.
     :custom
     (flycheck-flake8-maximum-line-length 120)
     (flycheck-flake8-maximum-complexity 40))
-
-  (use-package flycheck-ledger
-    :requires flycheck)
 #+end_src
 *** Syntax Highlighting
 #+begin_src emacs-lisp
@@ -511,7 +511,7 @@ Sets the "ASDF_DATA_DIR" environment variable if we are using asdf.
            (tree-sitter-after-on . tree-sitter-hl-mode)))
 
   (use-package tree-sitter-langs
-    :requires tree-sitter)
+    :after tree-sitter)
 #+end_src
 ** Version Control
 *** Magit
@@ -567,7 +567,7 @@ Integrate Ivy with Projectile.
     (counsel-projectile-rg (s-concat "--glob " glob)))
 
   (use-package counsel-projectile
-    :requires (counsel projectile)
+    :after (counsel projectile)
     :init
     (counsel-projectile-mode 1)
     :bind (("C-c p s f" . jc/search-specific-glob))
@@ -698,17 +698,17 @@ Currently using pyenv to set python version.
                 ("C-x t t" . treemacs)))
 
   (use-package treemacs-evil
-    :requires (treemacs evil))
+    :after (treemacs evil))
 
   (use-package treemacs-projectile
-    :requires (treemacs projectile))
+    :after (treemacs projectile))
 
   (use-package treemacs-icons-dired
-    :requires (treemacs dired)
+    :after (treemacs dired)
     :config (treemacs-icons-dired-mode))
 
   (use-package treemacs-magit
-    :requires (treemacs magit))
+    :after (treemacs magit))
 #+end_src
 ** Dired
 #+begin_src emacs-lisp
@@ -783,15 +783,18 @@ Functions and settings to open certain links with applications.
     (ledger-highlight-xact-under-point nil))
 
   (use-package evil-ledger
-    :requires (evil ledger-mode)
+    :after (evil ledger-mode)
     :hook (ledger-mode . evil-ledger-mode)
     :custom
     (evil-ledger-sort-key "S"))
 
   (use-package company-ledger
-    :requires company
+    :after (company ledger-mode)
     :init
     (add-to-list 'company-backends 'company-ledger))
+
+  (use-package flycheck-ledger
+    :after (flycheck ledger-mode))
 #+end_src
 ** RSS
 #+begin_src emacs-lisp
