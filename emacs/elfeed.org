@@ -1,0 +1,67 @@
+* Blogs :elfeed:
+** tech :tech:
+*** https://techcrunch.com/rss
+*** https://lifehacker.com/rss 
+*** https://gizmodo.com/rss
+** christian :christian:
+*** http://amiquiettimes.wordpress.com/feed/
+*** http://rss.desiringgod.org/
+** dev :dev:
+*** http://feeds.feedburner.com/HighScalability
+*** http://feeds.dzone.com/java :java:
+*** http://feeds.dzone.com/performance
+*** https://medium.com/feed/paypal-engineering
+*** https://martinfowler.com/feed.atom
+*** https://www.8bitmen.com/feed/
+*** https://netflixtechblog.com/feed
+*** http://www.daemonology.net/hn-daily/index.rss
+*** https://blog.codinghorror.com/rss/
+*** http://www.allthingsdistributed.com/atom.xml
+*** https://dave.cheney.net/feed/atom :go:
+*** https://eng.uber.com/feed/
+*** https://codeascraft.com/atom
+*** https://instagram-engineering.com/feed
+*** https://planet.emacslife.com/atom.xml :emacs:
+*** https://github.blog/feed
+*** https://blog.golang.org/feeds/posts/default :go:
+*** https://developer.squareup.com/blog/rss.xml
+*** https://stripe.com/blog/feed.rss
+*** https://www.gobeyond.dev/rss                                       :go:
+*** https://cprss.s3.amazonaws.com/golangweekly.com.xml :go:
+** cooking :cooking:
+*** https://smittenkitchen.com/atom
+** vid :vid:
+*** https://www.youtube.com/feeds/videos.xml?channel_id=UCAiiOTio8Yu69c3XnR7nQBQ :emacs:
+system crafters
+*** https://www.youtube.com/feeds/videos.xml?channel_id=UC6x7GwJxuoABSosgVXDYtTw :maker:
+i like to make stuff
+*** https://www.youtube.com/feeds/videos.xml?channel_id=UCKwM-7sO1_Tw9EmYhKfpBBw :maker:
+perkins builder brothers
+*** https://www.youtube.com/feeds/videos.xml?channel_id=UCex87CEaoqw365i63aKxepQ :life:
+ice1cube
+*** https://www.youtube.com/feeds/videos.xml?channel_id=UCUT8RoNBTJvwW1iErP6-b-A :amongus:
+disguised toast
+*** https://www.youtube.com/feeds/videos.xml?channel_id=UCBh2UCIk9In7uf87GJU6qgg :civ:
+the game mechanic
+*** https://www.youtube.com/feeds/videos.xml?channel_id=UCqqJQ_cXSat0KIAVfIfKkVA :cooking:
+kenji
+*** https://vimeo.com/andrewrk/videos/rss :dev:
+** spac :spac:
+*** https://sec.report/CIK/0001811210.rss
+cciv
+*** https://sec.report/CIK/0001807846.rss
+fuse
+*** https://sec.report/CIK/0001809987.rss
+gsah
+*** https://sec.report/CIK/0001816090.rss
+ftoc
+*** https://sec.report/CIK/0001820630.rss
+actc
+*** https://sec.report/CIK/0001815086.rss
+btwn
+*** https://sec.report/CIK/0001829426.rss
+fpac
+*** https://sec.report/CIK/0001818873.rss
+ipof
+*** https://sec.report/CIK/0001811882.rss
+psth
