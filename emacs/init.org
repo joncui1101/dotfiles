@@ -831,11 +831,12 @@ Functions and settings to open certain links with applications.
     (elfeed-search-filter "+unread ")
     (elfeed-search-title-max-width 100))
 
-(use-package elfeed-org
-:config
-(elfeed-org)
-:custom
-(rmh-elfeed-org-files (list (concat user-emacs-directory "elfeed.org"))))
+  (use-package elfeed-org
+    :after elfeed
+    :config
+    (elfeed-org)
+    :custom
+    (rmh-elfeed-org-files (list (concat user-emacs-directory "elfeed.org"))))
 #+end_src
 ** Terminal
 #+begin_src emacs-lisp

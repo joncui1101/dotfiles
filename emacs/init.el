@@ -597,40 +597,41 @@
   :after (flycheck ledger-mode))
 
 (defun jc/elfeed-load-db-and-open ()
-    "Wrapper to load the elfeed db from disk before opening"
-    (interactive)
-    (elfeed)
-    (elfeed-db-load)
-    (elfeed-search-update--force)
-    (elfeed-update))
+  "Wrapper to load the elfeed db from disk before opening"
+  (interactive)
+  (elfeed)
+  (elfeed-db-load)
+  (elfeed-search-update--force)
+  (elfeed-update))
 
-  (defun jc/elfeed-save-db-and-bury ()
-    "Wrapper to save the elfeed db to disk before burying buffer"
-    (interactive)
-    (elfeed-db-save)
-    (kill-buffer (current-buffer)))
+(defun jc/elfeed-save-db-and-bury ()
+  "Wrapper to save the elfeed db to disk before burying buffer"
+  (interactive)
+  (elfeed-db-save)
+  (kill-buffer (current-buffer)))
 
-  (defun jc/elfeed-evil-collection-remap (_mode _mode-keymaps &rest _rest)
-    (evil-collection-define-key 'normal 'elfeed-search-mode-map
-      (kbd "RET") 'elfeed-search-browse-url
-      (kbd "S-<return>") 'elfeed-search-show-entry
-      "q" 'jc/elfeed-save-db-and-bury
-      "Q" 'jc/elfeed-save-db-and-bury))
+(defun jc/elfeed-evil-collection-remap (_mode _mode-keymaps &rest _rest)
+  (evil-collection-define-key 'normal 'elfeed-search-mode-map
+    (kbd "RET") 'elfeed-search-browse-url
+    (kbd "S-<return>") 'elfeed-search-show-entry
+    "q" 'jc/elfeed-save-db-and-bury
+    "Q" 'jc/elfeed-save-db-and-bury))
 
-  (use-package elfeed
-    :defer 2
-    :hook (evil-collection-setup . jc/elfeed-evil-collection-remap)
-    :bind (("C-x w" . jc/elfeed-load-db-and-open))
-    :custom
-    (elfeed-db-directory "~/.config/cache/emacs/elfeed")
-    (elfeed-search-filter "+unread ")
-    (elfeed-search-title-max-width 100))
+(use-package elfeed
+  :defer 2
+  :hook (evil-collection-setup . jc/elfeed-evil-collection-remap)
+  :bind (("C-x w" . jc/elfeed-load-db-and-open))
+  :custom
+  (elfeed-db-directory "~/.config/cache/emacs/elfeed")
+  (elfeed-search-filter "+unread ")
+  (elfeed-search-title-max-width 100))
 
 (use-package elfeed-org
-:config
-(elfeed-org)
-:custom
-(rmh-elfeed-org-files (list (concat user-emacs-directory "elfeed.org"))))
+  :after elfeed
+  :config
+  (elfeed-org)
+  :custom
+  (rmh-elfeed-org-files (list (concat user-emacs-directory "elfeed.org"))))
 
 (use-package vterm
   :commands vterm
