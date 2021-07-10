@@ -9,8 +9,6 @@ Make startup faster by reducing the frequency of garbage collection and then use
   (setq frame-inhibit-implied-resize t)
 
   (setq gc-cons-threshold (* 50 1000 1000))
-  (add-hook 'emacs-startup-hook
-            (lambda () (setq gc-cons-threshold (* 2 1000 1000))))
 
   (add-hook 'emacs-startup-hook
             (lambda ()
@@ -136,7 +134,7 @@ Custom function to load environment variables from a file.
 ** Which Key
 #+begin_src emacs-lisp
   (use-package which-key
-    :defer 1
+    :defer 2
     :init
     (which-key-mode)
     :custom
@@ -145,6 +143,7 @@ Custom function to load environment variables from a file.
 ** Evil Mode
 #+begin_src emacs-lisp
   (use-package evil
+    :defer 2
     :init
     (setq evil-want-integration t)
     (setq evil-want-keybinding nil)
@@ -155,6 +154,7 @@ Custom function to load environment variables from a file.
     (evil-mode 1))
 
   (use-package evil-surround
+    :after evil
     :config
     (global-evil-surround-mode 1))
 
@@ -243,6 +243,7 @@ Setup the modeline using doom-modeline.
 Use delight to rename emacs-lisp-mode
 #+begin_src emacs-lisp
   (use-package delight
+    :defer 2
     :delight
     (emacs-lisp-mode "elisp"))
 #+end_src
@@ -260,7 +261,7 @@ Using Hasklug [[https://github.com/ryanoasis/nerd-fonts][Nerd Font]]
 Enable Ligatures
 #+begin_src emacs-lisp
   (use-package ligature
-    :defer 1
+    :defer 2
     :load-path "lisp-local"
     :config
     (ligature-set-ligatures 't '("www"))
@@ -310,6 +311,7 @@ Set up Org Mode with a baseline configuration.
 
   (use-package org
     :ensure nil
+    :defer t
     :hook (org-mode . jc/org-mode-setup)
     :bind (:map org-mode-map
                 ("C-<tab>" . org-indent-block))
@@ -349,7 +351,7 @@ Automatically tangle this config.
 Currently using Ivy for completions.
 #+begin_src emacs-lisp
   (use-package ivy
-    :defer 1
+    :defer 2
     :bind (:map ivy-minibuffer-map
                 ("C-l" . ivy-alt-done)
                 ("C-j" . ivy-next-line)
@@ -426,7 +428,7 @@ Integrate Ivy with LSP.
 ** Company
 #+begin_src emacs-lisp
   (use-package company
-    :defer 1
+    :defer 2
     :config (global-company-mode 1)
     :custom
     (company-idle-delay 0)
@@ -498,7 +500,6 @@ Sets the "ASDF_DATA_DIR" environment variable if we are using asdf.
 *** Syntax Checking
 #+begin_src emacs-lisp
   (use-package flycheck
-    :preface
     :hook ((ledger-mode emacs-lisp-mode lsp-mode) . flycheck-mode)
     :custom
     (flycheck-flake8-maximum-line-length 120)
@@ -517,7 +518,7 @@ Sets the "ASDF_DATA_DIR" environment variable if we are using asdf.
 *** Magit
 #+begin_src emacs-lisp
   (use-package magit
-    :defer 1
+    :defer 2
     :config
     (setq magit-branch-read-upstream-first 'fallback)
     (if (boundp 'jc/magit-repository-directories)
@@ -528,7 +529,7 @@ Sets the "ASDF_DATA_DIR" environment variable if we are using asdf.
 *** Git Gutter
 #+begin_src emacs-lisp
   (use-package git-gutter
-    :defer 1
+    :defer 2
     :config (global-git-gutter-mode +1)
     :custom
     (git-gutter:update-interval 2))
@@ -592,7 +593,7 @@ Integrate Ivy with Projectile.
     :commands (lsp lsp-deferred))
 
   (use-package lsp-ui
-    :commands lsp-ui-mode
+    :hook (lsp-mode . lsp-ui-mode)
     :config
     (setq lsp-ui-sideline-show-code-actions t
           lsp-ui-sideline-show-diagnostics t))
@@ -624,6 +625,7 @@ Currently using pyenv to set python version.
         (pyenv-mode-unset))))
 
   (use-package python-mode
+    :defer t
     :delight '(:eval (format " py[%s]" (pyenv-mode-version)))
     :hook (python-mode . (lambda () (modify-syntax-entry ?_ "w" python-mode-syntax-table))))
 
@@ -637,6 +639,7 @@ Currently using pyenv to set python version.
 *** Ruby
 #+begin_src emacs-lisp
   (use-package ruby-mode
+    :defer t
     :hook (ruby-mode . (lambda () (modify-syntax-entry ?_ "w" ruby-mode-syntax-table))))
 #+end_src
 *** Javascript
@@ -691,7 +694,7 @@ Currently using pyenv to set python version.
 ** Treemacs
 #+begin_src emacs-lisp
   (use-package treemacs
-    :defer 1
+    :defer 2
     :custom
     (treemacs-persist-file (f-expand "treemacs-persist" transient-directory))
     :bind (:map global-map
@@ -820,6 +823,7 @@ Functions and settings to open certain links with applications.
       "Q" 'jc/elfeed-save-db-and-bury))
 
   (use-package elfeed
+    :defer 2
     :hook (evil-collection-setup . jc/elfeed-evil-collection-remap)
     :bind (("C-x w" . jc/elfeed-load-db-and-open))
     :custom

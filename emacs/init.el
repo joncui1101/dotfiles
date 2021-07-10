@@ -76,13 +76,14 @@
 (jc/load-env "env-file")
 
 (use-package which-key
-  :defer 1
+  :defer 2
   :init
   (which-key-mode)
   :custom
   (which-key-idle-delay 0.3))
 
 (use-package evil
+  :defer 2
   :init
   (setq evil-want-integration t)
   (setq evil-want-keybinding nil)
@@ -93,6 +94,7 @@
   (evil-mode 1))
 
 (use-package evil-surround
+  :after evil
   :config
   (global-evil-surround-mode 1))
 
@@ -152,6 +154,7 @@
   (doom-modeline-vcs-max-length 50))
 
 (use-package delight
+  :defer 2
   :delight
   (emacs-lisp-mode "elisp"))
 
@@ -162,7 +165,7 @@
                     :height 130)
 
 (use-package ligature
-  :defer 1
+  :defer 2
   :load-path "lisp-local"
   :config
   (ligature-set-ligatures 't '("www"))
@@ -195,6 +198,7 @@
 
 (use-package org
   :ensure nil
+  :defer t
   :hook (org-mode . jc/org-mode-setup)
   :bind (:map org-mode-map
               ("C-<tab>" . org-indent-block))
@@ -223,7 +227,7 @@
 (add-hook 'after-save-hook 'jc/tangle-on-save)
 
 (use-package ivy
-  :defer 1
+  :defer 2
   :bind (:map ivy-minibuffer-map
               ("C-l" . ivy-alt-done)
               ("C-j" . ivy-next-line)
@@ -291,7 +295,7 @@
   :after (lsp-mode ivy))
 
 (use-package company
-  :defer 1
+  :defer 2
   :config (global-company-mode 1)
   :custom
   (company-idle-delay 0)
@@ -343,7 +347,6 @@
     (setenv "ASDF_DATA_DIR" (f-expand "~/.config/asdf")))
 
 (use-package flycheck
-  :preface
   :hook ((ledger-mode emacs-lisp-mode lsp-mode) . flycheck-mode)
   :custom
   (flycheck-flake8-maximum-line-length 120)
@@ -357,7 +360,7 @@
   :after tree-sitter)
 
 (use-package magit
-  :defer 1
+  :defer 2
   :config
   (setq magit-branch-read-upstream-first 'fallback)
   (if (boundp 'jc/magit-repository-directories)
@@ -365,7 +368,7 @@
     (setq magit-repository-directories '(("~/workspace" . 2)))))
 
 (use-package git-gutter
-  :defer 1
+  :defer 2
   :config (global-git-gutter-mode +1)
   :custom
   (git-gutter:update-interval 2))
@@ -420,7 +423,7 @@
   :commands (lsp lsp-deferred))
 
 (use-package lsp-ui
-  :commands lsp-ui-mode
+  :hook (lsp-mode . lsp-ui-mode)
   :config
   (setq lsp-ui-sideline-show-code-actions t
         lsp-ui-sideline-show-diagnostics t))
@@ -447,6 +450,7 @@
       (pyenv-mode-unset))))
 
 (use-package python-mode
+  :defer t
   :delight '(:eval (format " py[%s]" (pyenv-mode-version)))
   :hook (python-mode . (lambda () (modify-syntax-entry ?_ "w" python-mode-syntax-table))))
 
@@ -458,6 +462,7 @@
   (projectile-after-switch-project . jc/projectile-pyenv-mode-set))
 
 (use-package ruby-mode
+  :defer t
   :hook (ruby-mode . (lambda () (modify-syntax-entry ?_ "w" ruby-mode-syntax-table))))
 
 (use-package js2-mode
@@ -495,7 +500,7 @@
   :mode "\\.proto\\'")
 
 (use-package treemacs
-  :defer 1
+  :defer 2
   :custom
   (treemacs-persist-file (f-expand "treemacs-persist" transient-directory))
   :bind (:map global-map
@@ -613,6 +618,7 @@
     "Q" 'jc/elfeed-save-db-and-bury))
 
 (use-package elfeed
+  :defer 2
   :hook (evil-collection-setup . jc/elfeed-evil-collection-remap)
   :bind (("C-x w" . jc/elfeed-load-db-and-open))
   :custom
