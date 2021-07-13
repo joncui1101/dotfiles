@@ -26,7 +26,7 @@
 *** https://blog.golang.org/feeds/posts/default :go:
 *** https://developer.squareup.com/blog/rss.xml
 *** https://stripe.com/blog/feed.rss
-*** https://www.gobeyond.dev/rss                                       :go:
+*** https://www.gobeyond.dev/rss :go:
 *** https://cprss.s3.amazonaws.com/golangweekly.com.xml :go:
 ** cooking :cooking:
 *** https://smittenkitchen.com/atom
